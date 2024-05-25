@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://l8llvurtljav"]
+[gd_scene load_steps=19 format=3 uid="uid://l8llvurtljav"]
 
 [ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="1_6myfn"]
 [ext_resource type="PackedScene" uid="uid://coi0xwbhi6u46" path="res://game/player/camera_rig.tscn" id="2_5p4f6"]
+[ext_resource type="PackedScene" uid="uid://i4b8ip8dk2fb" path="res://game/entities/wave_spawner.tscn" id="3_hpkie"]
+[ext_resource type="Script" path="res://resources/wave.gd" id="4_i3pi2"]
+[ext_resource type="PackedScene" uid="uid://ddhd5qtphiv5t" path="res://game/enemies/mr_placeholder.tscn" id="5_hmo02"]
+[ext_resource type="Script" path="res://game/managers/game_manager.gd" id="6_tuwt1"]
+[ext_resource type="PackedScene" uid="uid://cn8x3w11njtp5" path="res://assets/models/Hauptkoralle.gltf" id="7_nheo5"]
+[ext_resource type="PackedScene" uid="uid://b7r4d5s6guolp" path="res://game/ui/ui_layer.tscn" id="8_1c5e8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hksua"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,13 +22,50 @@ sky = SubResource("Sky_baq5b")
 tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7u5f"]
+albedo_color = Color(0.133468, 0.249341, 0.170185, 1)
 albedo_texture = ExtResource("1_6myfn")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ffnvi"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="Resource" id="Resource_38vb1"]
+script = ExtResource("4_i3pi2")
+round = 1
+enemy = ExtResource("5_hmo02")
+amount = 10
+seperation = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_uqt0g"]
-material = SubResource("StandardMaterial3D_ffnvi")
+[sub_resource type="Resource" id="Resource_h5mx7"]
+script = ExtResource("4_i3pi2")
+round = 2
+enemy = ExtResource("5_hmo02")
+amount = 10
+seperation = 1.0
+
+[sub_resource type="Resource" id="Resource_bnygh"]
+script = ExtResource("4_i3pi2")
+round = 3
+enemy = ExtResource("5_hmo02")
+amount = 10
+seperation = 1.0
+
+[sub_resource type="Resource" id="Resource_l817q"]
+script = ExtResource("4_i3pi2")
+round = 2
+enemy = ExtResource("5_hmo02")
+amount = 10
+seperation = 1.0
+
+[sub_resource type="Resource" id="Resource_b50tf"]
+script = ExtResource("4_i3pi2")
+round = 3
+enemy = ExtResource("5_hmo02")
+amount = 10
+seperation = 1.0
+
+[sub_resource type="Resource" id="Resource_n03ku"]
+script = ExtResource("4_i3pi2")
+round = 3
+enemy = ExtResource("5_hmo02")
+amount = 30
+seperation = 0.1
 
 [node name="World" type="Node3D"]
 
@@ -30,8 +73,11 @@ material = SubResource("StandardMaterial3D_ffnvi")
 environment = SubResource("Environment_mjvrr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 32, 0)
 shadow_enabled = true
+
+[node name="Hauptkoralle" parent="." instance=ExtResource("7_nheo5")]
+transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, 0, 0, 0)
 
 [node name="Placeholder" type="Node3D" parent="."]
 
@@ -41,8 +87,37 @@ use_collision = true
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_d7u5f")
 
-[node name="Coral" type="MeshInstance3D" parent="Placeholder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
-mesh = SubResource("BoxMesh_uqt0g")
-
 [node name="CameraRig" parent="." instance=ExtResource("2_5p4f6")]
+
+[node name="WaveSpawner" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_hpkie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, 0)
+target = NodePath("../Hauptkoralle")
+waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_38vb1"), SubResource("Resource_h5mx7"), SubResource("Resource_bnygh")])
+
+[node name="WaveSpawner2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_hpkie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, -31)
+target = NodePath("../Hauptkoralle")
+waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_l817q"), SubResource("Resource_b50tf")])
+
+[node name="WaveSpawner3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_hpkie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42)
+target = NodePath("../Hauptkoralle")
+waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_n03ku")])
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("6_tuwt1")
+
+[node name="RoundTimer" type="Timer" parent="GameManager"]
+unique_name_in_owner = true
+wait_time = 15.0
+one_shot = true
+
+[node name="BuildTimer" type="Timer" parent="GameManager"]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+
+[node name="UILayer" parent="." instance=ExtResource("8_1c5e8")]
+
+[connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
+[connection signal="timeout" from="GameManager/BuildTimer" to="GameManager" method="_on_build_timer_timeout"]

@@ -12,7 +12,7 @@ extends Node3D
 
 @export_group("Zoom")
 @export var can_zoom: bool = true
-@export_range(0, 100, 1) var zoom_minimum: float = 10.0
+@export_range(0, 100, 1) var zoom_minimum: float = 5.0
 @export_range(0, 100, 1) var zoom_maximum: float = 25.0
 @export_range(0, 10, 0.5) var zoom_step: float = 5.0
 @export_range(0, 10, 0.5) var zoom_speed: float = 5

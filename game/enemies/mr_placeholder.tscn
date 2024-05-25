@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddhd5qtphiv5t"]
+
+[ext_resource type="PackedScene" uid="uid://ui2u7rxqx62m" path="res://game/enemies/enemy_base.tscn" id="1_jl15a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1duv4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yccht"]
+albedo_color = Color(1, 0, 0.564706, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bm4gr"]
+material = SubResource("StandardMaterial3D_yccht")
+
+[node name="MrPlaceholder" instance=ExtResource("1_jl15a")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1duv4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_bm4gr")
