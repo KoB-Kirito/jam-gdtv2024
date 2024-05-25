@@ -21,9 +21,9 @@ func on_round_started(number: int) -> void:
 func send_wave(wave: Wave) -> void:
 	for i in wave.amount:
 		var enemy := wave.enemy.instantiate() as Enemy
-		add_child(enemy)
-		enemy.global_position = global_position
+		#enemy.global_position = global_position
 		enemy.target = target
+		add_child(enemy)
 		await get_tree().create_timer(wave.seperation).timeout
 
 

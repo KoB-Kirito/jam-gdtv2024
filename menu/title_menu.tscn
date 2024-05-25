@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd1ealdpgdnb3"]
+
+[ext_resource type="Script" path="res://menu/title_menu.gd" id="1_1vcfh"]
+[ext_resource type="FontFile" uid="uid://cxkhfcmf5mquo" path="res://assets/fonts/ProtestStrike-Regular.ttf" id="1_04xxk"]
+
+[node name="TitleMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1vcfh")
+first_level = "res://game/world.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.164, 0.238733, 0.4, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 339.0
+offset_top = 88.0
+offset_right = 674.0
+offset_bottom = 201.0
+theme_override_fonts/font = ExtResource("1_04xxk")
+theme_override_font_sizes/font_size = 75
+text = "Game Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 368.0
+offset_right = 218.0
+offset_bottom = 403.0
+theme_override_fonts/font = ExtResource("1_04xxk")
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 418.0
+offset_right = 218.0
+offset_bottom = 453.0
+theme_override_fonts/font = ExtResource("1_04xxk")
+text = "Options
+"
+
+[node name="CreditsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 468.0
+offset_right = 218.0
+offset_bottom = 503.0
+theme_override_fonts/font = ExtResource("1_04xxk")
+text = "Credits
+"
+
+[node name="QuitGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 518.0
+offset_right = 218.0
+offset_bottom = 553.0
+theme_override_fonts/font = ExtResource("1_04xxk")
+text = "Quit Game
+"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="QuitGameButton" to="." method="_on_quit_game_button_pressed"]

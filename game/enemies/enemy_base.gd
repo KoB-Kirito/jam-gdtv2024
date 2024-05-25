@@ -10,24 +10,31 @@ var is_dead: bool = false
 
 
 func _ready() -> void:
+	assert(target, "target is not set")
+	
 	Events.enemy_spawned.emit()
+	%NavigationAgent3D.set_target_position(target.global_position)
+	%NavigationAgent3D.velocity_computed.connect(Callable(_on_velocity_computed))
 
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		velocity = Vector3.ZERO
 		return
 	
-	# placeholder movement
-	if global_position.distance_squared_to(target.global_position) > 1:
-		var direction = global_position.direction_to(target.global_position)
-		velocity = direction * speed
+	if %NavigationAgent3D.is_navigation_finished():
+		return
+	
+	var next_path_position: Vector3 = %NavigationAgent3D.get_next_path_position()
+	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * speed
+	if %NavigationAgent3D.avoidance_enabled:
+		%NavigationAgent3D.set_velocity(new_velocity)
 	else:
-		velocity = Vector3.ZERO
-	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	
+		_on_velocity_computed(new_velocity)
+
+
+func _on_velocity_computed(safe_velocity: Vector3):
+	velocity = safe_velocity
 	move_and_slide()
 
 

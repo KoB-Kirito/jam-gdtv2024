@@ -1,4 +1,5 @@
 extends Node3D
+## Handles camera movement
 
 
 @export_group("Move")

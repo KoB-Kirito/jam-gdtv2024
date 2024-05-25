@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drpx64vwtj8ty"]
+
+[ext_resource type="Script" path="res://game/towers/tower_base.gd" id="1_cv73h"]
+
+[node name="TowerBase" type="Node3D"]
+script = ExtResource("1_cv73h")

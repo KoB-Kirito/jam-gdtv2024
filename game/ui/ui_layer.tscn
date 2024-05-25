@@ -1,8 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7r4d5s6guolp"]
+[gd_scene load_steps=9 format=3 uid="uid://b7r4d5s6guolp"]
 
 [ext_resource type="Script" path="res://game/ui/top_label.gd" id="1_477hd"]
 [ext_resource type="Script" path="res://game/ui/coral_health_label.gd" id="2_xm52e"]
 [ext_resource type="Script" path="res://game/ui/game_over_label.gd" id="3_fhsar"]
+[ext_resource type="Script" path="res://game/ui/tower_panel.gd" id="4_0h1iq"]
+[ext_resource type="Script" path="res://game/towers/tower.gd" id="5_o0f5a"]
+[ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="5_xfycb"]
+
+[sub_resource type="Resource" id="Resource_xavqo"]
+script = ExtResource("5_o0f5a")
+name = "Seaweed"
+description = "Blocks enemy units"
+icon = ExtResource("5_xfycb")
+
+[sub_resource type="Resource" id="Resource_uyehv"]
+script = ExtResource("5_o0f5a")
+name = "Seehorse"
+description = "Shoots at enemy units"
+icon = ExtResource("5_xfycb")
 
 [node name="UILayer" type="CanvasLayer"]
 
@@ -19,9 +34,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
+offset_left = -145.0
+offset_top = 20.0
+offset_right = 145.0
+offset_bottom = 70.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 36
 text = "Next Wave Label"
@@ -33,8 +49,10 @@ one_shot = true
 
 [node name="CoralHealthLabel" type="Label" parent="UI"]
 layout_mode = 1
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 237.0
+offset_bottom = 70.0
 theme_override_font_sizes/font_size = 36
 text = "Coral Health"
 script = ExtResource("2_xm52e")
@@ -56,3 +74,23 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 128
 text = "GAME OVER"
 script = ExtResource("3_fhsar")
+
+[node name="TowerPanel" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 120.0
+offset_bottom = -20.0
+grow_vertical = 0
+script = ExtResource("4_0h1iq")
+towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_xavqo"), SubResource("Resource_uyehv")])
+
+[node name="PlaceholderButton" type="TextureButton" parent="UI/TowerPanel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("5_xfycb")
+ignore_texture_size = true
+stretch_mode = 0

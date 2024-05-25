@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="GDTV2024"
+run/main_scene="res://menu/splash/splash_screen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Events="*res://autoloads/events.gd"
+SceneTransition="*res://autoloads/scene_transition.tscn"
 
 [display]
 
@@ -75,7 +77,20 @@ camera_home={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Objects"
+3d_physics/layer_2="Terrain"
+3d_physics/layer_3="Enemies"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[shader_globals]
+
+preview_color={
+"type": "vec4",
+"value": Vector4(0, 0, 0, 0)
+}
