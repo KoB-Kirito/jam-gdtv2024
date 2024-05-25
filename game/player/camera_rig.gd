@@ -4,6 +4,10 @@ extends Node3D
 @export_group("Move")
 @export var can_move: bool = true
 @export_range(0, 100, 1) var move_speed: float = 60.0
+@export var left_border: float = -99999.0
+@export var right_border: float = 99999.0
+@export var top_border: float = -99999.0
+@export var bottom_border: float = 99999.0
 
 @export_group("Pan")
 @export var can_pan: bool = true
@@ -23,8 +27,11 @@ var zoom_target: float
 @export_range(0, 90, 1) var rotate_step: float = 15.0
 
 
+var home_position: Vector3
+
 
 func _ready() -> void:
+	home_position = global_position
 	zoom_target = zoom_maximum
 	%Tilt.position = Vector3(0, zoom_target, zoom_target)
 
@@ -33,6 +40,16 @@ func _process(delta: float) -> void:
 	move_base(delta)
 	automatic_pan(delta)
 	zoom(delta)
+	
+	# limit position to border
+	if position.x < left_border:
+		position.x = left_border
+	elif position.x > right_border:
+		position.x = right_border
+	if position.z < top_border:
+		position.z = top_border
+	elif position.z > bottom_border:
+		position.z = bottom_border
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -44,6 +61,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# rotate
 	#TODO
+	
+	if event.is_action_pressed("camera_home"):
+		global_position = home_position
 
 
 func move_base(delta: float) -> void:

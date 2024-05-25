@@ -26,3 +26,4 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	text = "Wave " + str(current_round + 1) + " starts in " + str(round(%NextRoundTimer.time_left)) + "..."
+	modulate = Color(1 - %NextRoundTimer.time_left / %NextRoundTimer.wait_time, %NextRoundTimer.time_left / %NextRoundTimer.wait_time, 0)

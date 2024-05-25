@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7r4d5s6guolp"]
+[gd_scene load_steps=4 format=3 uid="uid://b7r4d5s6guolp"]
 
 [ext_resource type="Script" path="res://game/ui/top_label.gd" id="1_477hd"]
+[ext_resource type="Script" path="res://game/ui/coral_health_label.gd" id="2_xm52e"]
+[ext_resource type="Script" path="res://game/ui/game_over_label.gd" id="3_fhsar"]
 
 [node name="UILayer" type="CanvasLayer"]
 
@@ -28,3 +30,29 @@ script = ExtResource("1_477hd")
 [node name="NextRoundTimer" type="Timer" parent="UI/TopLabel"]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="CoralHealthLabel" type="Label" parent="UI"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 36
+text = "Coral Health"
+script = ExtResource("2_xm52e")
+
+[node name="GameOverLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 128
+text = "GAME OVER"
+script = ExtResource("3_fhsar")
