@@ -3,7 +3,7 @@ extends Node3D
 
 ## Spawned enemies will walk to this target
 @export var target: Node3D
-@export var waves: Array[Wave]
+@export var waves: Array[WaveData]
 
 
 func _ready() -> void:
@@ -18,7 +18,7 @@ func on_round_started(number: int) -> void:
 			send_wave(wave)
 
 
-func send_wave(wave: Wave) -> void:
+func send_wave(wave: WaveData) -> void:
 	for i in wave.amount:
 		var enemy := wave.enemy.instantiate() as Enemy
 		#enemy.global_position = global_position

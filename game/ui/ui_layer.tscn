@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://game/ui/coral_health_label.gd" id="2_xm52e"]
 [ext_resource type="Script" path="res://game/ui/game_over_label.gd" id="3_fhsar"]
 [ext_resource type="Script" path="res://game/ui/tower_panel.gd" id="4_0h1iq"]
-[ext_resource type="Script" path="res://game/towers/tower.gd" id="5_o0f5a"]
+[ext_resource type="Script" path="res://game/towers/resource/tower_data.gd" id="5_o0f5a"]
 [ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="5_xfycb"]
 
 [sub_resource type="Resource" id="Resource_xavqo"]

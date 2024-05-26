@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GDTV2024"
-run/main_scene="res://menu/splash/splash_screen.tscn"
+run/main_scene="res://game/world.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -92,5 +92,5 @@ renderer/rendering_method.mobile="gl_compatibility"
 
 preview_color={
 "type": "vec4",
-"value": Vector4(0, 0, 0, 0)
+"value": Vector4(0, 1, 0, 0.6)
 }

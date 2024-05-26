@@ -2,7 +2,18 @@ extends Node
 ## Handles player inputs
 
 
-var tower_is_placeable: bool = false
+const GREEN = Color("00cc00a2")
+const RED = Color("cc0000a2")
+
+
+var tower_is_placeable: bool = false:
+	set(value):
+		if value != tower_is_placeable:
+			tower_is_placeable = value
+			if tower_is_placeable:
+				RenderingServer.global_shader_parameter_set("preview_color", GREEN)
+			else:
+				RenderingServer.global_shader_parameter_set("preview_color", RED)
 
 
 func _ready() -> void:
@@ -11,11 +22,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var mouse_position_3d := get_mouse_position_on_terrain()
+	
 	#TODO: Check for entering units
+	
 	if mouse_position_3d < Vector3.INF: #and mouse_position_3d != %TowerPlacer.transform.origin:
 		%TowerPlacer.transform.origin = mouse_position_3d
 		%TowerPlacer.show()
-		if %TowerPlacer.placement_check():
+		if %TowerPlacer.check_placement():
 			tower_is_placeable = true
 		else:
 			tower_is_placeable = false

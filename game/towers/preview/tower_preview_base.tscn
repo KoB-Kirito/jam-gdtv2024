@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b51tc8xoo7usd"]
+
+[ext_resource type="Script" path="res://game/towers/preview/tower_preview_base.gd" id="1_u72uy"]
+
+[node name="TowerPreview" type="Node3D"]
+script = ExtResource("1_u72uy")

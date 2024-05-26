@@ -1,5 +1,5 @@
 extends Resource
-class_name Wave
+class_name WaveData
 
 
 ## Spawns on that round

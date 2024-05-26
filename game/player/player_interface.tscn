@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://1bj00urgbi5u"]
 
 [ext_resource type="Script" path="res://game/player/player_interface.gd" id="1_yx3k1"]
-[ext_resource type="Script" path="res://game/player/tower_placer.gd" id="2_24npb"]
-[ext_resource type="Shader" path="res://game/towers/building_preview.gdshader" id="3_op4vu"]
+[ext_resource type="Script" path="res://game/towers/preview/tower_preview_base.gd" id="2_24npb"]
+[ext_resource type="Shader" path="res://game/towers/preview/building_preview.gdshader" id="3_op4vu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hoiwu"]
 render_priority = 0
