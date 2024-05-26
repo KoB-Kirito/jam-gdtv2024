@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="GDTV2024"
+config/tags=PackedStringArray("jam")
 run/main_scene="res://game/world.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -82,6 +83,8 @@ camera_home={
 3d_physics/layer_1="Objects"
 3d_physics/layer_2="Terrain"
 3d_physics/layer_3="Enemies"
+3d_physics/layer_4="Hubs"
+3d_physics/layer_5="Towers"
 
 [rendering]
 

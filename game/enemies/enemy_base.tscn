@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://c2ocwx4wxj1q6" path="res://game/components/healthbar_component.tscn" id="2_4qw5l"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ol7cd"]
-radius = 5.0
+radius = 10.0
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 15
 script = ExtResource("1_f8b1y")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -31,6 +31,9 @@ one_shot = true
 [node name="HealthbarComponent" parent="." instance=ExtResource("2_4qw5l")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="snd_attack" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="TowerDetector" to="." method="_on_tower_detector_body_entered"]
 [connection signal="timeout" from="TowerDetector/AttackWindupTimer" to="." method="_on_attack_windup_timer_timeout"]

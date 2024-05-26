@@ -13,7 +13,7 @@ signal health_changed(new_health: float)
 
 @export_group("Attack")
 @export var damage: float = 1.0
-@export var attack_range: float = 1.0
+@export var attack_range: float = 1.5
 ## Time it takes for the animation to "hit"
 @export var attack_windup: float = 0.5
 ## Time after attack until it attacks again
@@ -43,6 +43,29 @@ func _physics_process(delta: float) -> void:
 	
 	if %NavigationAgent3D.is_navigation_finished():
 		return
+	
+	# check target
+	if not is_instance_valid(current_target):
+		# get new target
+		current_target = null
+		target_in_range = false
+		var to_remove: Array[int] = []
+		for i in tower_in_range.size():
+			if not is_instance_valid(tower_in_range[i]):
+				to_remove.append(i)
+				continue
+			current_target = tower_in_range[i]
+			break
+		
+		to_remove.reverse()
+		for i in to_remove:
+			tower_in_range.remove_at(i)
+		
+		# reset to default target if no tower is in range
+		if current_target == null:
+			current_target = target
+		
+		%NavigationAgent3D.set_target_position(current_target.global_position)
 	
 	# attack target if close enough
 	if global_position.distance_to(current_target.global_position) < attack_range:
@@ -83,7 +106,7 @@ func die() -> void:
 
 
 func _on_tower_detector_body_entered(body: Node3D) -> void:
-	if body is Tower:
+	if body is Tower and body.can_be_damaged:
 		tower_in_range.append(body)
 		if current_target == target:
 			current_target = body
@@ -93,27 +116,10 @@ func _on_tower_detector_body_entered(body: Node3D) -> void:
 func _on_attack_windup_timer_timeout() -> void:
 	# check target
 	if not is_instance_valid(current_target):
-		# get new target
-		current_target = null
-		target_in_range = false
-		var to_remove: Array[int] = []
-		for i in tower_in_range.size():
-			if not is_instance_valid(tower_in_range[i]):
-				to_remove.append(i)
-				continue
-			current_target = tower_in_range[i]
-			break
-		
-		to_remove.reverse()
-		for i in to_remove:
-			tower_in_range.remove_at(i)
-		
-		# reset to default target if no tower is in range
-		if current_target == null:
-			current_target = target
 		return
 	
-	#TODO: play hit sound
+	%snd_attack.play()
+	
 	current_target.take_damage(damage)
 	%AttackCooldownTimer.start(attack_cooldown)
 

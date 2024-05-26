@@ -1,11 +1,10 @@
 extends Node
 
 
+@export var coral_health: int = 100
+
 var current_round: int = 0
-
 var current_enemy_count: int = 0
-
-var coral_health: int = 10
 
 
 func _ready() -> void:
@@ -16,7 +15,7 @@ func _ready() -> void:
 	
 	# start game
 	start_build_phase()
-	Events.coral_health_changed.emit(10)
+	Events.coral_health_changed.emit(coral_health)
 
 
 func on_enemy_died() -> void:
@@ -41,16 +40,7 @@ func start_next_round() -> void:
 
 func _on_death_zone_body_entered(body: Node3D) -> void:
 	print_debug("Enemy reached coral")
-	Events.enemy_died.emit()
-	body.queue_free()
-	
-	coral_health -= 1
-	if coral_health <= 0:
-		coral_health = 0
-		#TODO
-		print_debug("GAME OVER")
-		Events.game_over.emit()
-	Events.coral_health_changed.emit(coral_health)
+	#TODO: warn player
 
 
 func _on_round_timer_timeout() -> void:
@@ -60,3 +50,13 @@ func _on_round_timer_timeout() -> void:
 
 func _on_build_timer_timeout() -> void:
 	start_next_round()
+
+
+func _on_base_took_damage(amount: Variant) -> void:
+	coral_health -= amount
+	if coral_health <= 0:
+		coral_health = 0
+		#TODO
+		print_debug("GAME OVER")
+		Events.game_over.emit()
+	Events.coral_health_changed.emit(coral_health)

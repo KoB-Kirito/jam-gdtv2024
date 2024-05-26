@@ -20,6 +20,7 @@ var tower_is_placeable: bool = false:
 
 
 func _ready() -> void:
+	RenderingServer.global_shader_parameter_set("preview_color", RED)
 	Events.ui_tower_selected.connect(on_tower_selected)
 
 
@@ -46,9 +47,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if mouse_button_event and mouse_button_event.is_pressed():
 		if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
 			# left click
-			print("left click")
 			if tower_is_placeable:
 				place_tower()
+		
+		elif mouse_button_event.button_index == MOUSE_BUTTON_RIGHT:
+			if not current_tower == null:
+				cancel_placement()
 
 
 func place_tower() -> void:
@@ -65,6 +69,12 @@ func place_tower() -> void:
 	
 	tower_is_placeable = false
 
+
+func cancel_placement() -> void:
+	tower_preview.queue_free()
+	tower_preview = null
+	current_tower = null
+	tower_is_placeable = false
 
 
 func on_tower_selected(tower: TowerData) -> void:

@@ -1,0 +1,3 @@
+extends TowerPreview
+class_name CoralHubPreview
+

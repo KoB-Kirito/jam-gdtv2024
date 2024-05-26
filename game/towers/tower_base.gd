@@ -1,6 +1,10 @@
-extends Node3D
+extends StaticBody3D
 class_name Tower
 
+
+signal health_changed(new_health: float)
+
+@export var can_be_damaged: bool = true
 
 @export var max_health: float = 10.0
 @onready var health: float = max_health
@@ -8,11 +12,10 @@ class_name Tower
 
 func take_damage(amount: float) -> void:
 	health -= amount
+	health_changed.emit(health)
 	if health <= 0:
 		die()
 		return
-	
-	
 
 
 func die() -> void:
