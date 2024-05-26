@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://t3mlwy4n1618"]
+
+[ext_resource type="PackedScene" uid="uid://drpx64vwtj8ty" path="res://game/towers/tower_base.tscn" id="1_j2x5x"]
+[ext_resource type="Script" path="res://game/towers/test_tower.gd" id="2_d5641"]
+
+[node name="TestTower" instance=ExtResource("1_j2x5x")]
+script = ExtResource("2_d5641")
