@@ -1,23 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7r4d5s6guolp"]
+[gd_scene load_steps=18 format=3 uid="uid://b7r4d5s6guolp"]
 
 [ext_resource type="Script" path="res://game/ui/top_label.gd" id="1_477hd"]
 [ext_resource type="Script" path="res://game/ui/coral_health_label.gd" id="2_xm52e"]
 [ext_resource type="Script" path="res://game/ui/game_over_label.gd" id="3_fhsar"]
 [ext_resource type="Script" path="res://game/ui/tower_panel.gd" id="4_0h1iq"]
 [ext_resource type="Script" path="res://game/towers/resource/tower_data.gd" id="5_o0f5a"]
-[ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="5_xfycb"]
+[ext_resource type="Texture2D" uid="uid://e8xwwm1y323e" path="res://game/towers/icons/coral_hub_icon_active.png" id="6_cktv7"]
+[ext_resource type="Texture2D" uid="uid://cs3iburmkhxlj" path="res://game/towers/icons/coral_hub_icon.png" id="6_dwjeh"]
+[ext_resource type="Texture2D" uid="uid://bat16pts3mdal" path="res://game/towers/icons/coral_hub_icon_hover.png" id="7_blwwf"]
+[ext_resource type="PackedScene" uid="uid://ctmbreysvihjo" path="res://game/towers/preview/coral_hub_preview.tscn" id="7_w7ayi"]
+[ext_resource type="Texture2D" uid="uid://nkw7qt6p042c" path="res://game/towers/icons/sea_urchin_icon.png" id="8_siiuq"]
+[ext_resource type="PackedScene" uid="uid://deq3at8el7ycu" path="res://game/towers/preview/sea_urchin_preview.tscn" id="9_dbvo8"]
+[ext_resource type="PackedScene" uid="uid://drdpxo65tcqob" path="res://game/towers/coral_hub.tscn" id="10_urm36"]
+[ext_resource type="Texture2D" uid="uid://bfwsq3kfw17ld" path="res://game/towers/icons/sea_urchin_icon_active.png" id="11_b7ydl"]
+[ext_resource type="Texture2D" uid="uid://bt318d0d31k2r" path="res://game/towers/icons/sea_urchin_icon_hover.png" id="12_jpbhn"]
+[ext_resource type="PackedScene" uid="uid://dojjcw8633wvn" path="res://game/towers/sea_urchin.tscn" id="15_ihiys"]
 
-[sub_resource type="Resource" id="Resource_xavqo"]
+[sub_resource type="Resource" id="Resource_ca1id"]
 script = ExtResource("5_o0f5a")
-name = "Seaweed"
-description = "Blocks enemy units"
-icon = ExtResource("5_xfycb")
+name = "Coral Hub"
+description = "Serves as a hub for your units. You can only build units in range of the hub. One hub can only server three units."
+normal = ExtResource("6_dwjeh")
+hover = ExtResource("7_blwwf")
+active = ExtResource("6_cktv7")
+preview_scene = ExtResource("7_w7ayi")
+scene = ExtResource("10_urm36")
 
-[sub_resource type="Resource" id="Resource_uyehv"]
+[sub_resource type="Resource" id="Resource_a6hyf"]
 script = ExtResource("5_o0f5a")
-name = "Seehorse"
-description = "Shoots at enemy units"
-icon = ExtResource("5_xfycb")
+name = "Sea Urchin"
+description = "Is tough and hurts enemies that come too close."
+normal = ExtResource("8_siiuq")
+hover = ExtResource("12_jpbhn")
+active = ExtResource("11_b7ydl")
+preview_scene = ExtResource("9_dbvo8")
+scene = ExtResource("15_ihiys")
 
 [node name="UILayer" type="CanvasLayer"]
 
@@ -28,6 +45,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="TopLabel" type="Label" parent="UI"]
 layout_mode = 1
@@ -86,11 +104,11 @@ offset_right = 120.0
 offset_bottom = -20.0
 grow_vertical = 0
 script = ExtResource("4_0h1iq")
-towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_xavqo"), SubResource("Resource_uyehv")])
+towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_ca1id"), SubResource("Resource_a6hyf")])
 
 [node name="PlaceholderButton" type="TextureButton" parent="UI/TowerPanel"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture_normal = ExtResource("5_xfycb")
+texture_normal = ExtResource("6_dwjeh")
 ignore_texture_size = true
 stretch_mode = 0

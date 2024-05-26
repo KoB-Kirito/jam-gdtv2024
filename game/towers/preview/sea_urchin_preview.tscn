@@ -1,16 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://tuuh2twyadwu"]
+[gd_scene load_steps=6 format=3 uid="uid://deq3at8el7ycu"]
 
+[ext_resource type="PackedScene" uid="uid://b51tc8xoo7usd" path="res://game/towers/preview/tower_preview_base.tscn" id="1_jrq0j"]
 [ext_resource type="Shader" path="res://game/towers/preview/building_preview.gdshader" id="1_x8ulm"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e65gn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ly42a"]
 render_priority = 0
 shader = ExtResource("1_x8ulm")
 
-[sub_resource type="SphereMesh" id="SphereMesh_hdxh0"]
-material = SubResource("ShaderMaterial_e65gn")
+[sub_resource type="SphereMesh" id="SphereMesh_j0jcn"]
+material = SubResource("ShaderMaterial_ly42a")
 
-[node name="SeaUrchinPreview"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7dcs1"]
+height = 1.0
+
+[node name="SeaUrchinPreview" instance=ExtResource("1_jrq0j")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("SphereMesh_hdxh0")
+mesh = SubResource("SphereMesh_j0jcn")
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609751, 0)
+shape = SubResource("CylinderShape3D_7dcs1")

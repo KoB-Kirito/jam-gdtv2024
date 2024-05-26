@@ -1,35 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://1bj00urgbi5u"]
+[gd_scene load_steps=2 format=3 uid="uid://1bj00urgbi5u"]
 
 [ext_resource type="Script" path="res://game/player/player_interface.gd" id="1_yx3k1"]
-[ext_resource type="Script" path="res://game/towers/preview/tower_preview_base.gd" id="2_24npb"]
-[ext_resource type="Shader" path="res://game/towers/preview/building_preview.gdshader" id="3_op4vu"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hoiwu"]
-render_priority = 0
-shader = ExtResource("3_op4vu")
-
-[sub_resource type="BoxMesh" id="BoxMesh_d7w2x"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_e25qp"]
 
 [node name="PlayerInterface" type="Node"]
 script = ExtResource("1_yx3k1")
-
-[node name="TowerPlacer" type="Node3D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_24npb")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TowerPlacer"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-material_override = SubResource("ShaderMaterial_hoiwu")
-mesh = SubResource("BoxMesh_d7w2x")
-
-[node name="Area3D" type="Area3D" parent="TowerPlacer"]
-unique_name_in_owner = true
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TowerPlacer/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-shape = SubResource("BoxShape3D_e25qp")
