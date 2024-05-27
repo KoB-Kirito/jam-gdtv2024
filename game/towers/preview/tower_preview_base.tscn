@@ -7,3 +7,8 @@
 script = ExtResource("1_u72uy")
 
 [node name="HubDetector" parent="." instance=ExtResource("2_s4e0e")]
+unique_name_in_owner = true
+
+[node name="BlockedDetector" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_mask = 31

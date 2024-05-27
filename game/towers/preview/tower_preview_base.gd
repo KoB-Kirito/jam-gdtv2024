@@ -1,53 +1,48 @@
-@tool
 extends Node3D
 class_name TowerPreview
 
 
-var area_3d: Area3D
-var hub_detector: Area3D
+var hubs_in_range: Array[CoralHub]
 
 
 func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
+	%HubDetector.body_entered.connect(on_hub_detector_body_entered)
+	%HubDetector.body_exited.connect(on_hub_detector_body_exited)
+
+
+func on_hub_detector_body_entered(body: Node3D) -> void:
+	print("body entered hub detector: ", body)
 	
-	area_3d = get_node("Area3D")
-	hub_detector = get_node("HubDetector")
+	if body is CoralHub:
+		hubs_in_range.append(body)
+
+
+func on_hub_detector_body_exited(body: Node3D) -> void:
+	if body is CoralHub:
+		hubs_in_range.erase(body)
 
 
 func check_placement() -> bool:
 	# check if area is blocked
-	if area_3d.has_overlapping_bodies():
+	if %BlockedDetector.has_overlapping_bodies():
 		return false
 	
 	#TODO: Check if floor is planar via raycast
 	
-	# check if a hub is nearby
-	if hub_detector.has_overlapping_bodies():
-		if self is CoralHubPreview:
-			return false
-		else:
+	# don't allow hubs nearby other hubs
+	if self is CoralHubPreview:
+		return hubs_in_range.size() == 0
+	
+	# allow towers only near hubs that have connections left
+	for hub in hubs_in_range:
+		if hub.free_connections > 0:
 			return true
-		
-	else:
-		if self is CoralHubPreview:
-			return true
-		else:
-			return false
+	return false
 
 
-#region Editor-Only
-func _get_configuration_warnings() -> PackedStringArray:
-	if get_node_or_null("Area3D") == null:
-		return ["Preview needs an Area3D that defines the collision area to check"]
-	if get_node_or_null("HubDetector") == null:
-		return ["Preview needs an Area3D that defines the collision area to check"]
-	return []
-
-func _notification(what: int) -> void:
-	if not Engine.is_editor_hint():
-		return
-	match what:
-		NOTIFICATION_EDITOR_PRE_SAVE, NOTIFICATION_CHILD_ORDER_CHANGED:
-			update_configuration_warnings()
-#endregion
+func get_nearest_available_hub() -> CoralHub:
+	for hub in hubs_in_range:
+		if hub.free_connections > 0:
+			return hub
+	
+	return null

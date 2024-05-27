@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b51tc8xoo7usd" path="res://game/towers/preview/tower_preview_base.tscn" id="1_8r8ot"]
 [ext_resource type="Shader" path="res://game/towers/preview/building_preview.gdshader" id="2_05yt0"]
 [ext_resource type="Script" path="res://game/towers/preview/coral_hub_preview.gd" id="2_llnrk"]
+[ext_resource type="TorusMesh" uid="uid://b5bw0v6oxtubo" path="res://game/towers/resource/hub_range_indicator.tres" id="4_6yes1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mkt5e"]
 render_priority = 0
@@ -12,17 +13,11 @@ shader = ExtResource("2_05yt0")
 material = SubResource("ShaderMaterial_mkt5e")
 height = 0.5
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_wafnk"]
+radius = 11.0
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_kan50"]
 height = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3y34n"]
-render_priority = 0
-shader = ExtResource("2_05yt0")
-
-[sub_resource type="TorusMesh" id="TorusMesh_cg30t"]
-material = SubResource("ShaderMaterial_3y34n")
-inner_radius = 4.9
-outer_radius = 5.0
 
 [node name="CoralHubPreview" instance=ExtResource("1_8r8ot")]
 script = ExtResource("2_llnrk")
@@ -31,12 +26,12 @@ script = ExtResource("2_llnrk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 mesh = SubResource("CylinderMesh_jg15j")
 
-[node name="Area3D" type="Area3D" parent="." index="1"]
+[node name="RangeIndicator" type="MeshInstance3D" parent="." index="1"]
+mesh = ExtResource("4_6yes1")
+
+[node name="ExtendedRange" type="CollisionShape3D" parent="HubDetector" index="1"]
+shape = SubResource("SphereShape3D_wafnk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockedDetector" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-collision_mask = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("CylinderShape3D_kan50")
-
-[node name="RangeIndicator" type="MeshInstance3D" parent="." index="2"]
-mesh = SubResource("TorusMesh_cg30t")

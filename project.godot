@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 Events="*res://autoloads/events.gd"
 SceneTransition="*res://autoloads/scene_transition.tscn"
+Globals="*res://autoloads/globals.gd"
 
 [display]
 
@@ -85,6 +86,7 @@ camera_home={
 3d_physics/layer_3="Enemies"
 3d_physics/layer_4="Hubs"
 3d_physics/layer_5="Towers"
+3d_physics/layer_6="HubBlocker"
 
 [rendering]
 

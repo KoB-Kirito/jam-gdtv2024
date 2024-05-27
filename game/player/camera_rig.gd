@@ -10,6 +10,10 @@ extends Node3D
 @export var top_border: float = -99999.0
 @export var bottom_border: float = 99999.0
 
+@export_group("Drag")
+@export var can_drag: bool = true
+@export_range(0, 1, 0.01) var drag_speed: float = 0.05
+
 @export_group("Pan")
 @export var can_pan: bool = true
 @export_range(0, 100, 1) var pan_margin: float = 60.0
@@ -60,9 +64,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action("camera_zoom_out"):
 		zoom_target = clampf(zoom_target + zoom_step, zoom_minimum, zoom_maximum)
 	
+	# drag via mouse
+	if can_drag:
+		var mouse_motion := event as InputEventMouseMotion
+		if mouse_motion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+			position.x -= mouse_motion.relative.x * drag_speed
+			position.z -= mouse_motion.relative.y * drag_speed
+	
 	# rotate
 	#TODO
 	
+	# back to base
 	if event.is_action_pressed("camera_home"):
 		global_position = home_position
 

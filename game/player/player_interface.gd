@@ -2,10 +2,6 @@ extends Node
 ## Handles player inputs
 
 
-const GREEN = Color("00cc00a2")
-const RED = Color("cc0000a2")
-
-
 var current_tower: TowerData
 var tower_preview: TowerPreview
 
@@ -14,13 +10,13 @@ var tower_is_placeable: bool = false:
 		if value != tower_is_placeable:
 			tower_is_placeable = value
 			if tower_is_placeable:
-				RenderingServer.global_shader_parameter_set("preview_color", GREEN)
+				RenderingServer.global_shader_parameter_set("preview_color", Globals.GREEN)
 			else:
-				RenderingServer.global_shader_parameter_set("preview_color", RED)
+				RenderingServer.global_shader_parameter_set("preview_color", Globals.RED)
 
 
 func _ready() -> void:
-	RenderingServer.global_shader_parameter_set("preview_color", RED)
+	RenderingServer.global_shader_parameter_set("preview_color", Globals.RED)
 	Events.ui_tower_selected.connect(on_tower_selected)
 
 
@@ -56,18 +52,25 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func place_tower() -> void:
-	var location = tower_preview.global_position
+	tower_is_placeable = false
 	
-	tower_preview.queue_free()
-	tower_preview = null
+	var build_location = tower_preview.global_position
+	var hub = tower_preview.get_nearest_available_hub()
 	
 	var tower: Tower = current_tower.scene.instantiate()
-	current_tower = null
+	
+	# keep building if shift is held
+	if not Input.is_key_pressed(KEY_SHIFT):
+		tower_preview.queue_free()
+		tower_preview = null
+		current_tower = null
+		Events.build_mode_exited.emit()
 	
 	add_child(tower)
-	tower.global_position = location
+	tower.global_position = build_location
 	
-	tower_is_placeable = false
+	if not tower is CoralHub:
+		hub.connect_tower(tower)
 
 
 func cancel_placement() -> void:
@@ -75,6 +78,8 @@ func cancel_placement() -> void:
 	tower_preview = null
 	current_tower = null
 	tower_is_placeable = false
+	
+	Events.build_mode_exited.emit()
 
 
 func on_tower_selected(tower: TowerData) -> void:
@@ -85,6 +90,8 @@ func on_tower_selected(tower: TowerData) -> void:
 	current_tower = tower
 	tower_preview = current_tower.preview_scene.instantiate()
 	add_child(tower_preview)
+	
+	Events.build_mode_entered.emit()
 
 
 ## Returns the mouse position projected on terrain in 3d space, or Vector3.INF if not on terrain

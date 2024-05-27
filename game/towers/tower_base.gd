@@ -3,6 +3,7 @@ class_name Tower
 
 
 signal health_changed(new_health: float)
+signal died
 
 @export var can_be_damaged: bool = true
 
@@ -20,4 +21,5 @@ func take_damage(amount: float) -> void:
 
 func die() -> void:
 	#TODO: Animation, etc
+	died.emit()
 	queue_free()

@@ -112,7 +112,7 @@ one_shot = true
 
 [node name="BuildTimer" type="Timer" parent="GameManager"]
 unique_name_in_owner = true
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -144,15 +144,19 @@ collision_mask = 4
 shape = SubResource("CylinderShape3D_iiswb")
 
 [node name="CameraRig" parent="." instance=ExtResource("2_5p4f6")]
-left_border = -50.0
-right_border = 50.0
-top_border = -50.0
-bottom_border = 50.0
+left_border = -25.0
+right_border = 40.0
+top_border = -60.0
+bottom_border = 10.0
+pan_margin = 40.0
+zoom_minimum = 8.0
+zoom_maximum = 30.0
+zoom_step = 2.0
+zoom_speed = 2.0
 can_rotate = false
 
 [node name="StaticCamera" type="Camera3D" parent="."]
 transform = Transform3D(0.997564, -0.0604109, 0.0348782, 0, 0.5, 0.866025, -0.0697565, -0.863916, 0.498782, 20, 50, 30)
-current = true
 
 [node name="WaveSpawners" type="Node3D" parent="."]
 

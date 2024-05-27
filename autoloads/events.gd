@@ -13,3 +13,6 @@ signal enemy_died
 signal coral_health_changed(new_health: int)
 
 signal ui_tower_selected(tower: TowerData)
+
+signal build_mode_entered
+signal build_mode_exited
