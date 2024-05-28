@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="3_o6wdl"]
 [ext_resource type="PackedScene" uid="uid://c2ocwx4wxj1q6" path="res://game/components/healthbar_component.tscn" id="4_yxmsc"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ml77c"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ojtw8"]
 albedo_color = Color(0.979337, 0, 0.182688, 1)
 albedo_texture = ExtResource("3_o6wdl")
@@ -16,19 +18,22 @@ material = SubResource("StandardMaterial3D_ojtw8")
 height = 1.0
 radius = 2.5
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ml77c"]
-
 [node name="SeaUrchin" instance=ExtResource("1_nu5na")]
 script = ExtResource("2_oo1nm")
 damage = 1.0
 interval = 2.0
 max_health = 30.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_ml77c")
+
+[node name="Model" type="MeshInstance3D" parent="." index="1"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_g85h2")
 
-[node name="DamageArea" type="Area3D" parent="." index="1"]
+[node name="DamageArea" type="Area3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_mask = 4
 
@@ -39,12 +44,8 @@ shape = SubResource("CylinderShape3D_3ocp7")
 unique_name_in_owner = true
 wait_time = 2.0
 
-[node name="Healthbar" parent="." index="2" instance=ExtResource("4_yxmsc")]
+[node name="Healthbar" parent="." index="3" instance=ExtResource("4_yxmsc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("SphereShape3D_ml77c")
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]

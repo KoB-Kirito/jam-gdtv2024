@@ -67,13 +67,15 @@ func _physics_process(delta: float) -> void:
 		
 		%NavigationAgent3D.set_target_position(current_target.global_position)
 	
-	# attack target if close enough
-	if global_position.distance_to(current_target.global_position) < attack_range:
-		if not target_in_range:
-			target_in_range = true
-			attack_current_target()
+	# don't move if attacking
+	if target_in_range:
 		return
-	target_in_range = false
+	
+	# fallback
+	if global_position.distance_to(current_target.global_position) < attack_range:
+		target_in_range = true
+		attack_current_target()
+		return
 	
 	# move to target
 	var next_path_position: Vector3 = %NavigationAgent3D.get_next_path_position()
@@ -85,7 +87,12 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_velocity_computed(safe_velocity: Vector3):
+	# don't move if attacking
+	if target_in_range:
+		return
+	
 	velocity = safe_velocity
+	look_at(global_position + velocity)
 	move_and_slide()
 
 
@@ -107,9 +114,11 @@ func die() -> void:
 
 func _on_tower_detector_body_entered(body: Node3D) -> void:
 	if body is Tower and body.can_be_damaged:
+		print("test")
 		tower_in_range.append(body)
 		if current_target == target:
 			current_target = body
+			target_in_range = false
 			%NavigationAgent3D.set_target_position(current_target.global_position)
 
 
@@ -128,5 +137,16 @@ func _on_attack_cooldown_timer_timeout() -> void:
 	attack_current_target()
 
 func attack_current_target() -> void:
-	#TODO: play animation
+	#TODO: play windup sound?
+	if %AnimationPlayer.has_animation(&"attack"):
+		%AnimationPlayer.play(&"attack")
+	else:
+		push_warning(name, " is missing attack animation")
+	
 	%AttackWindupTimer.start(attack_windup)
+
+
+func _on_attack_range_detector_body_entered(body: Node3D) -> void:
+	if body == current_target:
+		target_in_range = true
+		attack_current_target()

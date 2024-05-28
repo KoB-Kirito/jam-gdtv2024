@@ -3,4 +3,6 @@
 [ext_resource type="Script" path="res://game/towers/tower_base.gd" id="1_cv73h"]
 
 [node name="TowerBase" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 31
 script = ExtResource("1_cv73h")

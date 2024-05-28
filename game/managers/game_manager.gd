@@ -60,3 +60,10 @@ func _on_base_took_damage(amount: Variant) -> void:
 		print_debug("GAME OVER")
 		Events.game_over.emit()
 	Events.coral_health_changed.emit(coral_health)
+
+
+func _on_warning_zone_body_entered(body: Node3D) -> void:
+	if body is Enemy:
+		#TODO: Warn player
+		print_debug("Enemy is near coral")
+		pass

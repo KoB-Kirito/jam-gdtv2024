@@ -14,6 +14,15 @@ func _ready() -> void:
 
 
 func _on_damage_timer_timeout() -> void:
+	if not enemies_in_range:
+		return
+	
+	# animation
+	var tween = create_tween()
+	tween.tween_property(%Model, "scale", Vector3(3.0, 3.0, 3.0), 0.6).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(%Model, "scale", Vector3(1.0, 1.0, 1.0), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	
+	# damage
 	for enemy: Enemy in enemies_in_range:
 		enemy.take_damage(damage)
 

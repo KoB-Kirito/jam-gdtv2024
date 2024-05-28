@@ -10,6 +10,15 @@ size = Vector3(10, 10, 24)
 
 [node name="Level_v3" instance=ExtResource("1_uld2e")]
 
+[node name="Muschel_gedreht03" parent="." index="34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Muschel_halb03" parent="." index="37"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+
+[node name="Muschel_halb_klein02" parent="." index="39"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 2)
+
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="42"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 45.5267, 51.5834)
 
