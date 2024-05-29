@@ -66,7 +66,6 @@ radius = 0.2
 neighbor_distance = 10.0
 max_neighbors = 20
 time_horizon_agents = 2.0
-debug_enabled = true
 debug_path_custom_point_size = 0.0
 
 [node name="HealthbarComponent" parent="." index="4"]

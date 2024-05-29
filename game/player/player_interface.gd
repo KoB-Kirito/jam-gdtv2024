@@ -53,6 +53,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func place_tower() -> void:
 	tower_is_placeable = false
+	Globals.resource -= current_tower.cost
 	
 	var build_location = tower_preview.global_position
 	var hub = tower_preview.get_nearest_available_hub()

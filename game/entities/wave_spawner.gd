@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func on_round_started(number: int) -> void:
 	for wave in waves:
-		if wave.round == number:
+		if wave.wave == number:
 			send_wave(wave)
 
 

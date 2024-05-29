@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c72djrv4lq7h0"]
+
+[ext_resource type="Shader" path="res://game/environment/caustics.gdshader" id="1_r34om"]
+
+[sub_resource type="Gradient" id="Gradient_gmao0"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bf67t"]
+gradient = SubResource("Gradient_gmao0")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_r34om")
+shader_parameter/travel_length = 4.0
+shader_parameter/travel_speed = 2.0
+shader_parameter/sharpness = 0.9
+shader_parameter/color_ramp = SubResource("GradientTexture1D_bf67t")

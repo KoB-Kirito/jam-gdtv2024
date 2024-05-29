@@ -2,6 +2,7 @@ extends Node
 
 
 @export var coral_health: int = 100
+@export var starting_resources: int = 10
 
 var current_round: int = 0
 var current_enemy_count: int = 0
@@ -11,9 +12,12 @@ func _ready() -> void:
 	Events.enemy_spawned.connect(func(): current_enemy_count += 1)
 	Events.enemy_died.connect(on_enemy_died)
 	
+	Events.waste_collected.connect(on_waste_collected)
+	
 	await get_tree().process_frame # wait one frame for ui to connect signals
 	
 	# start game
+	Globals.resource = starting_resources
 	start_build_phase()
 	Events.coral_health_changed.emit(coral_health)
 
@@ -67,3 +71,7 @@ func _on_warning_zone_body_entered(body: Node3D) -> void:
 		#TODO: Warn player
 		print_debug("Enemy is near coral")
 		pass
+
+
+func on_waste_collected(value: int) -> void:
+	Globals.resource += value

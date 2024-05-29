@@ -1,6 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dw0lscykjubsr"]
+[gd_scene load_steps=8 format=3 uid="uid://dw0lscykjubsr"]
 
 [ext_resource type="PackedScene" uid="uid://dw6a6lljw65kb" path="res://assets/models/terrain/Level_v3.gltf" id="1_uld2e"]
+[ext_resource type="Shader" path="res://game/environment/caustics.gdshader" id="2_glrow"]
+
+[sub_resource type="Gradient" id="Gradient_eiut3"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5qgoa"]
+gradient = SubResource("Gradient_eiut3")
+width = 2048
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eh5s8"]
+render_priority = 0
+shader = ExtResource("2_glrow")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_5qgoa")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lkc5k"]
 size = Vector3(10, 10, 48)
@@ -10,14 +22,138 @@ size = Vector3(10, 10, 24)
 
 [node name="Level_v3" instance=ExtResource("1_uld2e")]
 
+[node name="Felswand" parent="." index="0"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade" parent="." index="1"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade_001" parent="." index="2"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade_002" parent="." index="3"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade_003" parent="." index="4"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade_004" parent="." index="5"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade_005" parent="." index="6"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade_006" parent="." index="7"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade_007" parent="." index="8"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Barrikade_008" parent="." index="9"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Felswand" parent="." index="10"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Seetang_Ranke_Schlucht" parent="." index="11"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Steine_Begrenzung" parent="." index="12"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras" parent="." index="13"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_001" parent="." index="14"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_002" parent="." index="15"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_003" parent="." index="16"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_004" parent="." index="17"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_005" parent="." index="18"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_Koralle_bunt" parent="." index="19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_Koralle_bunt_001" parent="." index="20"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_Koralle_bunt_002" parent="." index="21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_Koralle_bunt_003" parent="." index="22"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_Koralle_bunt_004" parent="." index="23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_Koralle_bunt_005" parent="." index="24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_Koralle_tuerkis" parent="." index="25"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_Koralle_tuerkis_001" parent="." index="26"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_rot" parent="." index="27"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_rot_001" parent="." index="28"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_rot_002" parent="." index="29"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Gras_rot_003" parent="." index="30"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Muschel_aufgeklappt" parent="." index="31"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Muschel_gedreht" parent="." index="32"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Muschel_gedreht01" parent="." index="33"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
 [node name="Muschel_gedreht03" parent="." index="34"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Muschel_halb01" parent="." index="35"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Muschel_halb02" parent="." index="36"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
 
 [node name="Muschel_halb03" parent="." index="37"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Muschel_halb_klein01" parent="." index="38"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
 
 [node name="Muschel_halb_klein02" parent="." index="39"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 2)
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Schlucht" parent="." index="40"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
+
+[node name="Sandboden_001" parent="." index="41"]
+material_overlay = SubResource("ShaderMaterial_eh5s8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="42"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 45.5267, 51.5834)

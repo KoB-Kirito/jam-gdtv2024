@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cewgvmusqjfh7"]
+
+[ext_resource type="PackedScene" uid="uid://dimlmiosp62lc" path="res://assets/models/Hauptkoralle.gltf" id="1_r0fti"]
+[ext_resource type="Material" uid="uid://c72djrv4lq7h0" path="res://game/environment/caustics.tres" id="2_o3jot"]
+
+[node name="Hauptkoralle" instance=ExtResource("1_r0fti")]
+
+[node name="Circle_010" parent="." index="0"]
+material_overlay = ExtResource("2_o3jot")

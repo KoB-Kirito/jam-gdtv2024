@@ -87,6 +87,7 @@ camera_home={
 3d_physics/layer_4="Hubs"
 3d_physics/layer_5="Towers"
 3d_physics/layer_6="HubBlocker"
+3d_physics/layer_7="Waste"
 
 [rendering]
 

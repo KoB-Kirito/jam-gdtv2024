@@ -16,3 +16,6 @@ signal ui_tower_selected(tower: TowerData)
 
 signal build_mode_entered
 signal build_mode_exited
+
+signal waste_collected(value: int)
+signal resource_changed(new_value: int)
