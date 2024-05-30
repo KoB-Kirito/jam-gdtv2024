@@ -1,38 +1,389 @@
-[gd_scene load_steps=38 format=3 uid="uid://l8llvurtljav"]
+[gd_scene load_steps=62 format=3 uid="uid://l8llvurtljav"]
 
 [ext_resource type="PackedScene" uid="uid://coi0xwbhi6u46" path="res://game/player/camera_rig.tscn" id="2_5p4f6"]
+[ext_resource type="PackedScene" uid="uid://d3qf40fcfvhc" path="res://game/cutscene/dialog.tscn" id="2_8us54"]
 [ext_resource type="PackedScene" uid="uid://1bj00urgbi5u" path="res://game/player/player_interface.tscn" id="2_roycu"]
+[ext_resource type="PackedScene" uid="uid://bdrenewe4topk" path="res://game/cutscene/cutscene_base.tscn" id="2_ujfu0"]
 [ext_resource type="PackedScene" uid="uid://i4b8ip8dk2fb" path="res://game/entities/wave_spawner.tscn" id="3_hpkie"]
 [ext_resource type="Script" path="res://game/entities/resource/wave_data.gd" id="4_i3pi2"]
+[ext_resource type="Script" path="res://game/cutscene/waste_camera_3d.gd" id="4_l7idg"]
 [ext_resource type="PackedScene" uid="uid://dw0lscykjubsr" path="res://game/terrain.tscn" id="4_osr67"]
+[ext_resource type="Script" path="res://game/cutscene/dialog_data.gd" id="4_v66uw"]
 [ext_resource type="PackedScene" uid="uid://ddhd5qtphiv5t" path="res://game/enemies/plunger/plunger.tscn" id="5_hmo02"]
+[ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="5_lg4q7"]
 [ext_resource type="Script" path="res://game/base.gd" id="5_lwu0s"]
+[ext_resource type="Texture2D" uid="uid://dql5lumxykjmt" path="res://game/towers/icons/Fish.jpg" id="6_3wyou"]
 [ext_resource type="PackedScene" uid="uid://cewgvmusqjfh7" path="res://game/environment/hauptkoralle.tscn" id="6_bw7sv"]
 [ext_resource type="Script" path="res://game/managers/game_manager.gd" id="6_tuwt1"]
 [ext_resource type="PackedScene" uid="uid://b7r4d5s6guolp" path="res://game/ui/ui_layer.tscn" id="8_1c5e8"]
 [ext_resource type="PackedScene" uid="uid://fy8tnppujugi" path="res://game/waste/waste_bottle.tscn" id="11_6txyw"]
-[ext_resource type="Script" path="res://game/waste_spawner.gd" id="12_6cekn"]
+[ext_resource type="Script" path="res://game/managers/waste_manager.gd" id="12_6cekn"]
 [ext_resource type="Shader" path="res://game/environment/bubble.gdshader" id="13_qkb78"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hksua"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="Resource" id="Resource_fxpov"]
+script = ExtResource("4_v66uw")
+text = "Protect the mighty coral!
+It is the last coral, bla bla bla...
+Exposition, epic story, bla bla bla..."
 
-[sub_resource type="Sky" id="Sky_baq5b"]
-sky_material = SubResource("ProceduralSkyMaterial_hksua")
+[sub_resource type="Animation" id="Animation_h0qrt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraPivot/Camera3D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[sub_resource type="Environment" id="Environment_mjvrr"]
-background_mode = 2
-sky = SubResource("Sky_baq5b")
-tonemap_mode = 2
+[sub_resource type="Animation" id="Animation_h7cjd"]
+resource_name = "cutscene"
+length = 12.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraPivot/Camera3D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6, 8, 10, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.0472, 0), Vector3(0, 2.0944, 0), Vector3(0, 3.14159, 0), Vector3(0, 4.18879, 0), Vector3(0, 5.23599, 0), Vector3(0, 6.28319, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0, false],
+"method": &"show_dialog"
+}, {
+"args": [],
+"method": &"close_dialog"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../UILayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"hide"
+}, {
+"args": [],
+"method": &"show"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../PlayerInterface/CameraRig")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(12),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"center_on_coral"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fm0fq"]
+_data = {
+"RESET": SubResource("Animation_h0qrt"),
+"cutscene": SubResource("Animation_h7cjd")
+}
+
+[sub_resource type="Resource" id="Resource_50km6"]
+script = ExtResource("4_v66uw")
+text = "Collect waste to gather reputation. With it you can place units to defend the coral.
+The nasty humans always through enough away, just keep an eye open."
+
+[sub_resource type="Animation" id="Animation_i1xck"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WasteCamera3D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WasteCamera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-35.8694, 20.017, 60.8963)]
+}
+
+[sub_resource type="Animation" id="Animation_cf86y"]
+resource_name = "cutscene"
+length = 12.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WasteCamera3D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WasteCamera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-35.8694, 20.017, 60.8963), Vector3(-12.2619, 4.82372, 34.4618)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0, false],
+"method": &"show_dialog"
+}, {
+"args": [],
+"method": &"close_dialog"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dojoa"]
+_data = {
+"RESET": SubResource("Animation_i1xck"),
+"cutscene": SubResource("Animation_cf86y")
+}
+
+[sub_resource type="Environment" id="Environment_frlvu"]
+background_mode = 1
+background_color = Color(0.215686, 0.580392, 0.952941, 1)
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.281697, 0.557213, 0.885378, 1)
-fog_density = 0.5
-fog_sky_affect = 0.0
-fog_depth_curve = 0.594604
-fog_depth_begin = 20.0
-fog_depth_end = 150.0
+fog_light_color = Color(0.215686, 0.580392, 0.952941, 1)
+fog_density = 1.0
+fog_depth_curve = 2.82843
+
+[sub_resource type="Resource" id="Resource_fp2j3"]
+script = ExtResource("4_v66uw")
+image = ExtResource("5_lg4q7")
+text = "Test - Text with icon.
+You have to click to close this. It will be followed by another dialog.
+"
+
+[sub_resource type="Resource" id="Resource_1yx07"]
+script = ExtResource("4_v66uw")
+image = ExtResource("6_3wyou")
+text = "This is another dialog box in the same cutscene.
+This one can't be closed by clicking because the game is not paused."
+
+[sub_resource type="Animation" id="Animation_2pnon"]
+resource_name = "cutscene"
+length = 8.0
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.025, 0.2, 8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [0, true],
+"method": &"show_dialog"
+}, {
+"args": [1, false],
+"method": &"show_dialog"
+}, {
+"args": [],
+"method": &"close_dialog"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../UILayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"hide"
+}, {
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugflx"]
+_data = {
+"cutscene": SubResource("Animation_2pnon")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vu0t2"]
+size = Vector3(57.9507, 1, 19.9331)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4c76j"]
+size = Vector3(17.1547, 1, 20.8312)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s8q8j"]
+size = Vector3(60.4, 1, 14.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_747s5"]
+size = Vector3(23.0206, 1, 54.4637)
+
+[sub_resource type="Resource" id="Resource_38vb1"]
+script = ExtResource("4_i3pi2")
+wave = 1
+enemy = ExtResource("5_hmo02")
+amount = 1
+seperation = 0.5
+
+[sub_resource type="Resource" id="Resource_h5mx7"]
+script = ExtResource("4_i3pi2")
+wave = 2
+enemy = ExtResource("5_hmo02")
+amount = 10
+seperation = 2.0
+
+[sub_resource type="Resource" id="Resource_bnygh"]
+script = ExtResource("4_i3pi2")
+wave = 3
+enemy = ExtResource("5_hmo02")
+amount = 10
+seperation = 2.0
+
+[sub_resource type="Resource" id="Resource_jsccg"]
+script = ExtResource("4_i3pi2")
+wave = 4
+enemy = ExtResource("5_hmo02")
+amount = 20
+seperation = 1.0
+
+[sub_resource type="Resource" id="Resource_ewssn"]
+script = ExtResource("4_i3pi2")
+wave = 5
+enemy = ExtResource("5_hmo02")
+amount = 20
+seperation = 1.0
+
+[sub_resource type="Resource" id="Resource_ctve6"]
+script = ExtResource("4_i3pi2")
+wave = 6
+enemy = ExtResource("5_hmo02")
+amount = 20
+seperation = 1.0
+
+[sub_resource type="Resource" id="Resource_l817q"]
+script = ExtResource("4_i3pi2")
+wave = 2
+enemy = ExtResource("5_hmo02")
+amount = 10
+seperation = 2.0
+
+[sub_resource type="Resource" id="Resource_b50tf"]
+script = ExtResource("4_i3pi2")
+wave = 3
+enemy = ExtResource("5_hmo02")
+amount = 20
+seperation = 1.0
+
+[sub_resource type="Resource" id="Resource_n03ku"]
+script = ExtResource("4_i3pi2")
+wave = 3
+enemy = ExtResource("5_hmo02")
+amount = 30
+seperation = 2.0
+
+[sub_resource type="Resource" id="Resource_ngd6t"]
+script = ExtResource("4_i3pi2")
+wave = 5
+enemy = ExtResource("5_hmo02")
+amount = 30
+seperation = 0.5
+
+[sub_resource type="Resource" id="Resource_wyvxs"]
+script = ExtResource("4_i3pi2")
+wave = 6
+enemy = ExtResource("5_hmo02")
+amount = 40
+seperation = 0.5
+
+[sub_resource type="Resource" id="Resource_ic2s7"]
+script = ExtResource("4_i3pi2")
+wave = 7
+enemy = ExtResource("5_hmo02")
+amount = 50
+seperation = 0.2
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hrw7g"]
 vertices = PackedVector3Array(-33.7934, 0.380463, -67.2014, -3.29337, 0.380463, -67.4514, -3.04337, 0.380463, -69.7014, -35.5434, 0.380463, -100.451, -39.0434, 0.380463, -142.451, -39.0434, 0.380463, -100.701, -35.5434, 0.380463, -100.451, -39.0434, 0.380463, -142.451, -35.5434, 0.380463, -100.451, -3.04337, 0.380463, -69.7014, 44.2066, 0.380463, -69.7014, 44.4566, 0.380463, -142.451, 45.9566, 0.380463, -69.4514, 45.9566, 0.380463, -63.7014, 49.9566, 0.380463, -63.4514, 49.9566, 0.380463, -52.9514, 84.9566, 0.380463, -33.2014, 89.4566, 0.380463, -35.2014, 49.9566, 0.380463, -63.4514, 44.4566, 0.380463, -142.451, 44.2066, 0.380463, -69.7014, 45.9566, 0.380463, -69.4514, 49.9566, 0.380463, -63.4514, 89.4566, 0.380463, -35.2014, 96.7066, 0.380463, -36.7014, 96.7066, 0.380463, -142.451, 44.4566, 0.380463, -142.451, 45.9566, 0.380463, -69.4514, 99.4566, 0.380463, -35.2014, 100.457, 0.380463, -30.7014, 175.707, 0.380463, -31.2014, 98.2066, 0.380463, -36.4514, 99.4566, 0.380463, -35.2014, 175.707, 0.380463, -31.2014, 96.7066, 0.380463, -36.7014, 98.2066, 0.380463, -36.4514, 175.707, 0.380463, -31.2014, 175.707, 0.380463, -142.451, 96.7066, 0.380463, -142.451, -91.2934, 24.3805, -99.7014, -91.2934, 24.3805, 49.5486, -77.5434, 24.3805, 49.5486, -77.5434, 24.3805, -99.7014, -76.5434, 24.6305, -78.9514, -42.5434, 24.6305, -78.9514, -43.5434, 24.6305, -99.7014, -76.5434, 24.6305, -99.7014, -39.0434, 0.380463, -76.7014, -35.5434, 0.380463, -76.7014, -36.7934, 0.380463, -99.4514, -39.0434, 0.380463, -99.4514, -76.5434, 24.6305, -59.4514, -41.5434, 24.6305, -59.4514, -42.5434, 24.6305, -78.9514, -76.5434, 24.6305, -78.9514, -39.0434, 0.380463, -58.9514, -34.5434, 0.380463, -58.9514, -35.5434, 0.380463, -76.7014, -39.0434, 0.380463, -76.7014, 23.9566, 10.8805, -59.4514, 24.2066, 10.8805, -68.7014, -2.29337, 10.8805, -68.7014, -2.29337, 10.8805, -59.4514, 24.2066, 10.8805, -68.7014, 23.9566, 10.8805, -59.4514, 25.7066, 10.8805, -59.2014, 44.9566, 10.8805, -62.9514, 44.9566, 10.8805, -68.7014, 48.9566, 10.8805, -53.4514, 48.9566, 10.8805, -62.7014, 44.9566, 10.8805, -62.9514, 25.7066, 10.8805, -59.2014, 25.7066, 10.8805, -53.4514, -33.2934, 0.380463, -58.7014, -3.29337, 0.380463, -58.9514, -3.29337, 0.380463, -67.4514, -33.7934, 0.380463, -67.2014, -76.5434, 24.6305, -39.9514, -40.5434, 24.6305, -39.9514, -41.5434, 24.6305, -59.4514, -76.5434, 24.6305, -59.4514, -39.0434, 0.380463, -41.4514, -33.5434, 0.380463, -41.4514, -34.5434, 0.380463, -58.9514, -39.0434, 0.380463, -58.9514, 36.2066, 0.380463, 24.5486, 37.9566, 0.380463, 24.2986, 38.2066, 0.380463, 23.5486, 24.9566, 0.380463, 29.0486, 36.2066, 0.380463, 24.5486, 38.2066, 0.380463, 23.5486, 21.7066, 0.380463, 29.5486, -34.5434, 0.380463, 32.0486, 21.7066, 0.380463, 29.5486, 38.2066, 0.380463, 23.5486, 38.2066, 0.380463, -52.4514, 24.9566, 0.380463, -52.4514, -31.2934, 0.380463, -21.7014, 24.9566, 0.380463, -52.4514, 24.7066, 0.380463, -58.4514, -3.04337, 0.380463, -58.4514, -3.04337, 0.380463, -58.4514, -3.29337, 0.380463, -58.9514, -33.2934, 0.380463, -58.7014, -3.04337, 0.380463, -58.4514, -33.2934, 0.380463, -58.7014, -31.2934, 0.380463, -21.7014, 24.9566, 0.380463, -52.4514, 83.9566, 0.380463, -32.2014, 84.9566, 0.380463, -33.2014, 49.9566, 0.380463, -52.9514, 49.4566, 0.380463, -52.4514, 38.2066, 0.380463, 23.5486, 73.7066, 0.380463, 8.29861, 72.7066, 0.380463, 0.548615, 77.2066, 0.380463, -14.2014, 83.9566, 0.380463, -32.2014, 49.4566, 0.380463, -52.4514, 38.2066, 0.380463, 23.5486, 72.7066, 0.380463, 0.548615, 77.2066, 0.380463, -14.2014, 49.4566, 0.380463, -52.4514, 38.2066, 0.380463, -52.4514, -32.5434, 0.380463, -26.2014, -33.5434, 0.380463, -41.4514, -39.0434, 0.380463, -41.4514, -39.0434, 0.380463, -7.45139, -33.5434, 0.380463, -7.45139, -40.5434, 24.6305, -8.95139, -39.7934, 24.6305, -28.2014, -40.5434, 24.6305, -39.9514, -76.5434, 24.6305, -39.9514, -76.5434, 24.6305, -8.95139, 96.2066, 0.630463, -30.2014, 96.7066, 0.630463, -29.2014, 98.7066, 0.630463, -29.2014, 97.9566, 0.630463, -34.2014, 89.4566, 0.630463, -28.4514, 94.9566, 0.630463, -30.2014, 91.4566, 0.630463, -32.4514, 94.9566, 0.630463, -30.2014, 96.2066, 0.630463, -30.2014, 97.9566, 0.630463, -34.2014, 91.4566, 0.630463, -32.4514, 84.4566, 0.630463, -27.2014, 83.7066, 0.630463, -24.2014, 89.4566, 0.630463, -28.4514, 91.4566, 0.630463, -32.4514, 101.457, 0.380463, -25.2014, 175.707, 0.380463, -25.4514, 175.707, 0.380463, -31.2014, 100.457, 0.380463, -30.7014, 98.2066, 0.630463, -16.7014, 97.2066, 0.630463, -10.4514, 98.4566, 0.630463, -12.2014, 99.7066, 0.630463, -18.2014, 96.7066, 0.630463, -29.2014, 98.2066, 0.630463, -16.7014, 99.7066, 0.630463, -18.2014, 98.7066, 0.630463, -29.2014, 92.4566, 0.380463, -4.20139, 95.9566, 0.380463, -9.45139, 97.2066, 0.380463, -15.4514, 95.7066, 0.380463, -28.9514, 88.9566, 0.380463, -26.9514, 83.4566, 0.380463, -22.4514, 78.4566, 0.380463, -4.95139, 92.4566, 0.380463, -4.20139, 97.2066, 0.380463, -15.4514, 93.4566, 16.6305, -27.2014, 93.4566, 16.6305, -26.7014, 95.4566, 16.6305, -26.7014, 92.9566, 16.8805, -25.7014, 96.4566, 16.8805, -25.2014, 96.2066, 16.8805, -25.7014, 102.207, 0.380463, -21.4514, 175.707, 0.380463, -21.4514, 175.707, 0.380463, -25.4514, 101.457, 0.380463, -25.2014, 92.7066, 17.1305, -24.4514, 93.2066, 17.1305, -23.9514, 97.2066, 17.1305, -23.9514, 92.2066, 17.3805, -22.9514, 98.2066, 17.3805, -22.4514, 96.9566, 17.3805, -22.9514, 91.9566, 17.6305, -21.7014, 99.2066, 17.6305, -20.9514, 98.9566, 17.6305, -21.4514, 175.707, 0.380463, -14.9514, 175.707, 0.380463, -21.4514, 102.207, 0.380463, -21.4514, 101.957, 0.380463, -15.2014, 91.2066, 17.8805, -20.2014, 99.9566, 17.8805, -19.7014, 93.2066, 17.8805, -20.4514, 91.2066, 18.1305, -18.9514, 100.207, 18.1305, -18.2014, 99.7066, 18.1305, -18.7014, 92.4566, 18.3805, -17.2014, 98.4566, 18.3805, -16.9514, 97.9566, 18.3805, -17.4514, 90.9566, 18.3805, -17.7014, 90.2066, 18.6305, -16.2014, 96.4566, 18.6305, -15.7014, 96.2066, 18.6305, -16.2014, 175.707, 0.380463, -14.9514, 101.957, 0.380463, -15.2014, 101.957, 0.380463, -13.7014, 175.707, 0.380463, -14.9514, 101.957, 0.380463, -13.7014, 101.207, 0.380463, -11.9514, 175.707, 0.380463, -14.9514, 101.207, 0.380463, -11.9514, 91.2066, 0.380463, 2.79861, 81.4566, 0.380463, 10.7986, 80.2066, 0.380463, 11.0486, 80.2066, 0.380463, 98.7986, 84.9566, 0.380463, 8.29861, 81.4566, 0.380463, 10.7986, 80.2066, 0.380463, 98.7986, 175.707, 0.380463, -14.9514, 91.2066, 0.380463, 2.79861, 84.9566, 0.380463, 8.29861, 80.2066, 0.380463, 98.7986, 175.707, 0.380463, 98.7986, 90.2066, 18.8805, -14.9514, 94.7066, 18.8805, -14.4514, 94.2066, 18.8805, -14.9514, 90.9566, 19.1305, -13.2014, 92.7066, 19.1305, -13.2014, 92.4566, 19.1305, -13.7014, 90.2066, 19.1305, -13.7014, 89.4566, 19.3805, -12.2014, 90.9566, 19.3805, -11.9514, 90.4566, 19.3805, -12.4514, -41.5434, 24.6305, 10.0486, -40.5434, 24.6305, -8.95139, -76.5434, 24.6305, -8.95139, -76.5434, 24.6305, 10.0486, -34.5434, 0.380463, 9.79861, -33.5434, 0.380463, -7.45139, -39.0434, 0.380463, -7.45139, -39.0434, 0.380463, 9.79861, 75.4566, 0.380463, 5.04861, 75.9566, 0.380463, 7.79861, 79.4566, 0.380463, 9.54861, 88.4566, 0.380463, 2.29861, 92.4566, 0.380463, -4.20139, 78.4566, 0.380463, -4.95139, 38.2066, 0.380463, 23.5486, 37.9566, 0.380463, 24.2986, 38.4566, 0.380463, 24.7986, 74.4566, 0.380463, 9.04861, 73.7066, 0.380463, 8.29861, 76.2066, 0.380463, 10.0486, 74.4566, 0.380463, 9.04861, 38.4566, 0.380463, 24.7986, 80.2066, 0.380463, 11.0486, 76.2066, 0.380463, 10.0486, 38.4566, 0.380463, 24.7986, 38.2066, 0.380463, 33.0486, 80.2066, 0.380463, 11.0486, 35.2066, 0.380463, 37.5486, 28.7066, 0.380463, 42.7986, 28.7066, 0.380463, 98.7986, 80.2066, 0.380463, 98.7986, 80.2066, 0.380463, 11.0486, 38.2066, 0.380463, 33.0486, 35.2066, 0.380463, 37.5486, -39.0434, 0.380463, 9.79861, -39.0434, 0.380463, 32.0486, -35.7934, 0.380463, 32.0486, -34.5434, 0.380463, 9.79861, -42.5434, 24.6305, 29.0486, -41.5434, 24.6305, 10.0486, -76.5434, 24.6305, 10.0486, -76.5434, 24.6305, 29.0486, -76.5434, 24.6305, 29.0486, -76.5434, 24.6305, 49.5486, -43.5434, 24.6305, 49.5486, -42.5434, 24.6305, 29.0486, -38.0434, 0.380463, 49.2986, -36.7934, 0.380463, 49.2986, -36.5434, 0.380463, 46.5486, -36.5434, 0.380463, 42.2986, -38.2934, 0.380463, 42.2986, 11.7066, 0.380463, 42.5486, -35.0434, 0.380463, 42.2986, -35.5434, 0.380463, 50.2986, -38.0434, 0.380463, 99.7986, 11.7066, 0.380463, 99.0486, -35.5434, 0.380463, 50.2986, -38.0434, 0.380463, 50.5486, -38.0434, 0.380463, 99.7986, 11.7066, 0.380463, 99.0486, 28.7066, 0.380463, 98.7986, 28.7066, 0.380463, 42.7986, 11.7066, 0.380463, 42.5486)
@@ -47,81 +398,6 @@ height = 12.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_iiswb"]
 radius = 5.0
-
-[sub_resource type="Resource" id="Resource_38vb1"]
-script = ExtResource("4_i3pi2")
-wave = 1
-enemy = ExtResource("5_hmo02")
-amount = 1
-seperation = 0.5
-
-[sub_resource type="Resource" id="Resource_h5mx7"]
-script = ExtResource("4_i3pi2")
-wave = 2
-enemy = ExtResource("5_hmo02")
-amount = 10
-seperation = 1.0
-
-[sub_resource type="Resource" id="Resource_bnygh"]
-script = ExtResource("4_i3pi2")
-wave = 3
-enemy = ExtResource("5_hmo02")
-amount = 10
-seperation = 1.0
-
-[sub_resource type="Resource" id="Resource_jsccg"]
-script = ExtResource("4_i3pi2")
-wave = 4
-enemy = ExtResource("5_hmo02")
-amount = 40
-seperation = 2.0
-
-[sub_resource type="Resource" id="Resource_ewssn"]
-script = ExtResource("4_i3pi2")
-wave = 5
-enemy = ExtResource("5_hmo02")
-amount = 30
-seperation = 0.1
-
-[sub_resource type="Resource" id="Resource_ctve6"]
-script = ExtResource("4_i3pi2")
-wave = 6
-enemy = ExtResource("5_hmo02")
-amount = 1000
-seperation = 5.0
-
-[sub_resource type="Resource" id="Resource_l817q"]
-script = ExtResource("4_i3pi2")
-wave = 2
-enemy = ExtResource("5_hmo02")
-amount = 10
-seperation = 1.0
-
-[sub_resource type="Resource" id="Resource_b50tf"]
-script = ExtResource("4_i3pi2")
-wave = 3
-enemy = ExtResource("5_hmo02")
-amount = 10
-seperation = 1.0
-
-[sub_resource type="Resource" id="Resource_n03ku"]
-script = ExtResource("4_i3pi2")
-wave = 3
-enemy = ExtResource("5_hmo02")
-amount = 30
-seperation = 0.1
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vu0t2"]
-size = Vector3(57.9507, 1, 19.9331)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4c76j"]
-size = Vector3(17.1547, 1, 20.8312)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_s8q8j"]
-size = Vector3(60.4, 1, 14.6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_747s5"]
-size = Vector3(23.0206, 1, 54.4637)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ij08r"]
 emission_shape = 3
@@ -147,14 +423,40 @@ height = 0.2
 radial_segments = 16
 rings = 8
 
+[sub_resource type="Gradient" id="Gradient_a1k6s"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.0528634, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.472278, 0.796174, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yg31h"]
+gradient = SubResource("Gradient_a1k6s")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_48tno"]
+panorama = SubResource("GradientTexture2D_yg31h")
+
+[sub_resource type="Sky" id="Sky_5031j"]
+sky_material = SubResource("PanoramaSkyMaterial_48tno")
+
+[sub_resource type="Environment" id="Environment_mjvrr"]
+background_mode = 2
+sky = SubResource("Sky_5031j")
+tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.281697, 0.557213, 0.885378, 1)
+fog_density = 0.5
+fog_sky_affect = 0.0
+fog_depth_curve = 0.594604
+fog_depth_begin = 20.0
+fog_depth_end = 150.0
+
 [node name="World" type="Node3D"]
 
-[node name="UILayer" parent="." instance=ExtResource("8_1c5e8")]
-
-[node name="PlayerInterface" parent="." instance=ExtResource("2_roycu")]
-
-[node name="GameManager" type="Node" parent="."]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("cutscenes_parent")]
 script = ExtResource("6_tuwt1")
+cutscenes_parent = NodePath("../Cutscenes")
 
 [node name="RoundTimer" type="Timer" parent="GameManager"]
 unique_name_in_owner = true
@@ -166,43 +468,105 @@ unique_name_in_owner = true
 wait_time = 20.0
 one_shot = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_mjvrr")
+[node name="Cutscenes" type="Node" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-light_color = Color(0.59221, 0.726099, 1, 1)
-light_energy = 0.6
-shadow_enabled = true
+[node name="Intro" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+notes = "Eine Cutscene-Szene.
+Wichtig ist Level, das entscheidet wann die cutscene abgespielt wird.
+Dialoge die man in der Cutscene verwenden will kommen auch hier rein."
+dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_fxpov")])
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_hrw7g")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro"]
+libraries = {
+"": SubResource("AnimationLibrary_fm0fq")
+}
 
-[node name="Level_v3" parent="NavigationRegion3D" instance=ExtResource("4_osr67")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 85.2358, -36.1, -29.0508)
+[node name="CameraPivot" type="Node3D" parent="Cutscenes/Intro"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0098598, -0.177676, -0.909628)
 
-[node name="Hauptkoralle" type="StaticBody3D" parent="."]
-script = ExtResource("5_lwu0s")
+[node name="Camera3D" type="Camera3D" parent="Cutscenes/Intro/CameraPivot"]
+transform = Transform3D(0.999996, -0.00201155, -0.00220284, 0.00297753, 0.627988, 0.778217, -0.000182064, -0.77822, 0.627992, 0.0956552, 8.06025, 8.10154)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hauptkoralle"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
-shape = SubResource("CapsuleShape3D_yyube")
+[node name="Intro2" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+notes = "Man kann auch mehrere Cutscene-Szenen dem gleichen Level zuordnen. Sie werden dann hintereinander abgespielt.
+Level 0 ist übrigens der Spielstart."
+dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_50km6")])
 
-[node name="Hauptkoralle" parent="Hauptkoralle" instance=ExtResource("6_bw7sv")]
-transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, 0, 0, 0)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro2"]
+libraries = {
+"": SubResource("AnimationLibrary_dojoa")
+}
 
-[node name="WarningZone" type="Area3D" parent="Hauptkoralle"]
-transform = Transform3D(0.5, 0, 9.9476e-14, 0, 0.5, 0, -9.9476e-14, 0, 0.5, 0, 0.5, 0)
-collision_mask = 4
+[node name="WasteCamera3D" type="Camera3D" parent="Cutscenes/Intro2" node_paths=PackedStringArray("target")]
+transform = Transform3D(0.82707, -0.293669, 0.479285, 0, 0.852669, 0.522451, -0.562099, -0.432104, 0.705217, -35.8694, 20.017, 60.8963)
+environment = SubResource("Environment_frlvu")
+far = 120.0
+script = ExtResource("4_l7idg")
+target = NodePath("../WasteBottle")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hauptkoralle/WarningZone"]
-shape = SubResource("CylinderShape3D_iiswb")
+[node name="WasteBottle" parent="Cutscenes/Intro2" instance=ExtResource("11_6txyw")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -17, 0, 28)
 
-[node name="CameraRig" parent="." instance=ExtResource("2_5p4f6")]
+[node name="DialogTest" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+notes = "Ein \"Dialog\" ist immer nur eine Box. Man muss also mehrere Dialoge hinzufügen wenn man mehrere Boxen anzeigen will.
+Die muss man aber auch einzeln dann aufrufen über den Animation Player.
+var1 = index des dialogs, var2 = pause oder nicht.
+Wenn pausiert, pausiert der Animation player und es geht weiter sobald der spieler klickt, wenn nicht kann der spieler nicht klicken und der dialog muss selbst im animationplayer geschlossen werden."
+level = 1
+dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_fp2j3"), SubResource("Resource_1yx07")])
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/DialogTest"]
+libraries = {
+"": SubResource("AnimationLibrary_ugflx")
+}
+
+[node name="UILayer" parent="." instance=ExtResource("8_1c5e8")]
+
+[node name="DialogLayer" parent="." instance=ExtResource("2_8us54")]
+unique_name_in_owner = true
+
+[node name="WasteManager" type="Node" parent="." node_paths=PackedStringArray("spawn_area")]
+script = ExtResource("12_6cekn")
+spawn_interval_from = 5.0
+spawn_interval_to = 7.0
+spawn_area = NodePath("SpawnAreas")
+waste_scenes = Array[PackedScene]([ExtResource("11_6txyw")])
+
+[node name="WasteSpawnTimer" type="Timer" parent="WasteManager"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="SpawnAreas" type="Area3D" parent="WasteManager"]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WasteManager/SpawnAreas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.88519, 60, -48.8295)
+shape = SubResource("BoxShape3D_vu0t2")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="WasteManager/SpawnAreas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.9241, 60, -17.2262)
+shape = SubResource("BoxShape3D_4c76j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="WasteManager/SpawnAreas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.662, 60, 23.321)
+shape = SubResource("BoxShape3D_s8q8j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="WasteManager/SpawnAreas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.647, 60, -11.491)
+shape = SubResource("BoxShape3D_747s5")
+
+[node name="PlayerInterface" parent="." instance=ExtResource("2_roycu")]
+
+[node name="CameraRig" parent="PlayerInterface" instance=ExtResource("2_5p4f6")]
+process_mode = 3
 left_border = -25.0
 right_border = 40.0
 top_border = -60.0
 bottom_border = 10.0
+can_pan = false
 pan_margin = 40.0
 zoom_minimum = 8.0
 zoom_maximum = 30.0
@@ -210,58 +574,50 @@ zoom_step = 2.0
 zoom_speed = 2.0
 can_rotate = false
 
-[node name="StaticCamera" type="Camera3D" parent="."]
-transform = Transform3D(0.997564, -0.0604109, 0.0348782, 0, 0.5, 0.866025, -0.0697565, -0.863916, 0.498782, 20, 50, 30)
-
 [node name="WaveSpawners" type="Node3D" parent="."]
 
 [node name="WaveSpawner" parent="WaveSpawners" node_paths=PackedStringArray("target") instance=ExtResource("3_hpkie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105.535, 0, 36.7901)
-target = NodePath("../../Hauptkoralle")
+target = NodePath("../../MainCoral")
 waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_38vb1"), SubResource("Resource_h5mx7"), SubResource("Resource_bnygh"), SubResource("Resource_jsccg"), SubResource("Resource_ewssn"), SubResource("Resource_ctve6")])
 
 [node name="WaveSpawner2" parent="WaveSpawners" node_paths=PackedStringArray("target") instance=ExtResource("3_hpkie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.404, 0, -82.5421)
-target = NodePath("../../Hauptkoralle")
+target = NodePath("../../MainCoral")
 waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_l817q"), SubResource("Resource_b50tf")])
 
 [node name="WaveSpawner3" parent="WaveSpawners" node_paths=PackedStringArray("target") instance=ExtResource("3_hpkie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -135)
-target = NodePath("../../Hauptkoralle")
-waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_n03ku")])
+target = NodePath("../../MainCoral")
+waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_n03ku"), SubResource("Resource_ngd6t"), SubResource("Resource_wyvxs"), SubResource("Resource_ic2s7")])
 
-[node name="Waste" type="Node" parent="." node_paths=PackedStringArray("spawn_area")]
-script = ExtResource("12_6cekn")
-spawn_interval_from = 3.0
-spawn_interval_to = 5.0
-spawn_area = NodePath("Areas")
-waste_scenes = Array[PackedScene]([ExtResource("11_6txyw")])
+[node name="Terrain" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_hrw7g")
 
-[node name="WasteSpawnTimer" type="Timer" parent="Waste"]
-unique_name_in_owner = true
-one_shot = true
+[node name="Level_v3" parent="Terrain" instance=ExtResource("4_osr67")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 85.2358, -36.1, -29.0508)
 
-[node name="Areas" type="Area3D" parent="Waste"]
-monitoring = false
-monitorable = false
+[node name="MainCoral" type="StaticBody3D" parent="."]
+script = ExtResource("5_lwu0s")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Waste/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.88519, 60, -48.8295)
-shape = SubResource("BoxShape3D_vu0t2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCoral"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+shape = SubResource("CapsuleShape3D_yyube")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Waste/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.9241, 60, -17.2262)
-shape = SubResource("BoxShape3D_4c76j")
+[node name="Hauptkoralle" parent="MainCoral" instance=ExtResource("6_bw7sv")]
+transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, 0, 0, 0)
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="Waste/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.662, 60, 23.321)
-shape = SubResource("BoxShape3D_s8q8j")
+[node name="WarningZone" type="Area3D" parent="MainCoral"]
+transform = Transform3D(0.5, 0, 9.9476e-14, 0, 0.5, 0, -9.9476e-14, 0, 0.5, 0, 0.5, 0)
+collision_mask = 4
 
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="Waste/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.647, 60, -11.491)
-shape = SubResource("BoxShape3D_747s5")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCoral/WarningZone"]
+shape = SubResource("CylinderShape3D_iiswb")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Bubbles" type="GPUParticles3D" parent="Environment"]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9153, 0, -20.2068)
 amount = 100
 lifetime = 5.0
@@ -269,8 +625,17 @@ visibility_aabb = AABB(-50.3809, -0.698052, -49.7851, 100.372, 26.8409, 99.3045)
 process_material = SubResource("ParticleProcessMaterial_ij08r")
 draw_pass_1 = SubResource("SphereMesh_ix62e")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_mjvrr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 17, 0)
+light_color = Color(0.59221, 0.726099, 1, 1)
+light_energy = 0.6
+shadow_enabled = true
+
 [connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
 [connection signal="timeout" from="GameManager/BuildTimer" to="GameManager" method="_on_build_timer_timeout"]
-[connection signal="took_damage" from="Hauptkoralle" to="GameManager" method="_on_base_took_damage"]
-[connection signal="body_entered" from="Hauptkoralle/WarningZone" to="GameManager" method="_on_warning_zone_body_entered"]
-[connection signal="timeout" from="Waste/WasteSpawnTimer" to="Waste" method="_on_waste_spawn_timer_timeout"]
+[connection signal="timeout" from="WasteManager/WasteSpawnTimer" to="WasteManager" method="_on_waste_spawn_timer_timeout"]
+[connection signal="took_damage" from="MainCoral" to="GameManager" method="_on_base_took_damage"]
+[connection signal="body_entered" from="MainCoral/WarningZone" to="GameManager" method="_on_warning_zone_body_entered"]

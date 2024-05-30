@@ -59,10 +59,10 @@ theme_override_fonts/font = ExtResource("1_qvqyr")
 text = "Restart
 "
 
-[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer/MainMenuButton" method="_on_pressed"]
-[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer/MainMenuButton" method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer/MainMenuButton" method="_on_MainMenuButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_pressed"]
-[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer/MainMenuButton" method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer/MainMenuButton" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_pressed"]

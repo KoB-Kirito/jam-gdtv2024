@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3qf40fcfvhc"]
+
+[ext_resource type="Script" path="res://game/cutscene/dialog.gd" id="1_7u4re"]
+[ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="2_ped4p"]
+
+[node name="DialogLayer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_7u4re")
+
+[node name="Dialog" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Dialog"]
+custom_minimum_size = Vector2(1000, 300)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -340.0
+offset_right = 500.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialog/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Image" type="TextureRect" parent="Dialog/Panel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_ped4p")
+expand_mode = 2
+
+[node name="Text" type="RichTextLabel" parent="Dialog/Panel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 36
+text = "Hello World. Lorem Ipsum bla bla bla ich bin Text der um die Ecke geht. Und wie der um die Ecke geht.
+Ist nur Platzhalter hier."
+visible_characters_behavior = 1
+
+[connection signal="gui_input" from="Dialog" to="." method="_on_dialog_gui_input"]

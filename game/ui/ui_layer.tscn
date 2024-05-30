@@ -1,5 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://b7r4d5s6guolp"]
+[gd_scene load_steps=33 format=3 uid="uid://b7r4d5s6guolp"]
 
+[ext_resource type="Script" path="res://game/ui/ui.gd" id="1_00sea"]
 [ext_resource type="Script" path="res://game/ui/top_label.gd" id="1_477hd"]
 [ext_resource type="Script" path="res://game/ui/coral_health_label.gd" id="2_xm52e"]
 [ext_resource type="Script" path="res://game/ui/game_over_label.gd" id="3_fhsar"]
@@ -91,6 +92,7 @@ active = ExtResource("23_1nb03")
 disabled = ExtResource("24_askwi")
 
 [node name="UILayer" type="CanvasLayer"]
+script = ExtResource("1_00sea")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

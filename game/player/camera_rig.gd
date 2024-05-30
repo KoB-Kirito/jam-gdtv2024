@@ -39,6 +39,8 @@ func _ready() -> void:
 	home_position = global_position
 	zoom_target = zoom_maximum
 	%Tilt.position = Vector3(0, zoom_target, zoom_target)
+	
+	Events.cutscene_ended.connect(func(): %Camera.current = true)
 
 
 func _process(delta: float) -> void:
@@ -67,7 +69,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# drag via mouse
 	if can_drag:
 		var mouse_motion := event as InputEventMouseMotion
-		if mouse_motion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		if mouse_motion and (Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) or Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE)):
 			position.x -= mouse_motion.relative.x * drag_speed
 			position.z -= mouse_motion.relative.y * drag_speed
 	
@@ -76,7 +78,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# back to base
 	if event.is_action_pressed("camera_home"):
-		global_position = home_position
+		center_on_coral()
+
+
+func center_on_coral() -> void:
+	global_position = home_position
 
 
 func move_base(delta: float) -> void:

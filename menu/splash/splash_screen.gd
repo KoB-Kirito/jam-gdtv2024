@@ -27,4 +27,4 @@ func _ready() -> void:
 	
 	#TODO: Team splash, Best played with controller?, ...
 	
-	tween.tween_callback(func(): SceneTransition.change_scene(next_scene, SceneTransition.FADE, 1.0, Color.BLACK))
+	tween.tween_callback(func(): SceneTransition.change_scene(next_scene, SceneTransition.FADE, 0.5, Color(0.14, 0.14, 0.14)))

@@ -1,14 +1,23 @@
 extends CanvasLayer
 
-const LEFT = -3850
-const MIDDLE = -960
-const RIGHT = 1930.0
+
+const MARGIN = 10
 
 enum {SLIDE, FADE}
 
 
+func get_right_position() -> float:
+	return get_viewport().size.x + MARGIN
+
+func get_middle_position() -> float:
+	return - %Fade.size.x * 0.2
+
+func get_left_position() -> float:
+	return - %Fade.size.x - MARGIN 
+
+
 func _ready() -> void:
-	%Fade.position.x = RIGHT
+	%Fade.position.x = get_right_position()
 
 
 func change_scene(scene_path: String, animation: int, duration: float, color: Color) -> void:
@@ -21,15 +30,15 @@ func change_scene(scene_path: String, animation: int, duration: float, color: Co
 	match animation:
 		SLIDE:
 			%Fade.modulate = Color.WHITE
-			%Fade.position.x = RIGHT
+			%Fade.position.x = get_viewport().size.x + MARGIN
 			
-			tween.tween_property(%Fade, "position:x", MIDDLE, duration / 2)
+			tween.tween_property(%Fade, "position:x", get_middle_position(), duration / 2)
 			tween.tween_callback(func(): get_tree().change_scene_to_file(scene_path))
-			tween.tween_property(%Fade, "position:x", LEFT, duration / 2)
+			tween.tween_property(%Fade, "position:x", get_left_position(), duration / 2)
 		
 		FADE:
 			%Fade.modulate = Color.TRANSPARENT
-			%Fade.position.x = MIDDLE
+			%Fade.position.x = get_middle_position()
 			
 			tween.tween_property(%Fade, "modulate", Color.WHITE, duration / 2)
 			tween.tween_callback(func(): get_tree().change_scene_to_file(scene_path))

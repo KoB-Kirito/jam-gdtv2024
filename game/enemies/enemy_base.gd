@@ -92,7 +92,8 @@ func _on_velocity_computed(safe_velocity: Vector3):
 		return
 	
 	velocity = safe_velocity
-	look_at(global_position + velocity)
+	if velocity:
+		look_at(global_position + velocity)
 	move_and_slide()
 
 
@@ -137,7 +138,10 @@ func _on_attack_cooldown_timer_timeout() -> void:
 	attack_current_target()
 
 func attack_current_target() -> void:
+	look_at(current_target.global_position)
+	
 	#TODO: play windup sound?
+	
 	if %AnimationPlayer.has_animation(&"attack"):
 		%AnimationPlayer.play(&"attack")
 	else:

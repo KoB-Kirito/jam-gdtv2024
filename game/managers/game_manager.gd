@@ -1,25 +1,41 @@
 extends Node
+## Central manager for game logic
 
 
+## Main building life points
 @export var coral_health: int = 100
 @export var starting_resources: int = 10
+
+## Will parse all cutscenes under that node
+@export var cutscenes_parent: Node
+
+var cutscenes: Array[Cutscene]
 
 var current_round: int = 0
 var current_enemy_count: int = 0
 
 
 func _ready() -> void:
+	# connect global signals
 	Events.enemy_spawned.connect(func(): current_enemy_count += 1)
 	Events.enemy_died.connect(on_enemy_died)
 	
 	Events.waste_collected.connect(on_waste_collected)
 	
+	# parse cutscenes
+	for node in cutscenes_parent.get_children():
+		if node is Cutscene:
+			cutscenes.append(node)
+	
 	await get_tree().process_frame # wait one frame for ui to connect signals
 	
-	# start game
-	Globals.resource = starting_resources
-	start_build_phase()
+	# init values
 	Events.coral_health_changed.emit(coral_health)
+
+	Globals.resource = starting_resources
+	
+	# start game cycle
+	start_build_phase()
 
 
 func on_enemy_died() -> void:
@@ -30,6 +46,14 @@ func on_enemy_died() -> void:
 
 func start_build_phase() -> void:
 	%RoundTimer.stop()
+	
+	# play cutscenes
+	print_debug("playing cutscenes for level ", current_round)
+	for cutscene in cutscenes:
+		if cutscene.level == current_round:
+			cutscene.play_cutscene()
+			await cutscene.finished
+	
 	%BuildTimer.start()
 	Events.build_phase_started.emit(%BuildTimer.time_left)
 	print_debug("Build phase started")

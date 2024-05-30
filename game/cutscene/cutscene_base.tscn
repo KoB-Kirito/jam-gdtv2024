@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdrenewe4topk"]
+
+[ext_resource type="Script" path="res://game/cutscene/cutscene.gd" id="1_tt7d1"]
+
+[node name="CutsceneBase" type="Node3D"]
+script = ExtResource("1_tt7d1")
+notes = null

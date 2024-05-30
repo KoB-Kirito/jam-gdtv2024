@@ -19,3 +19,6 @@ signal build_mode_exited
 
 signal waste_collected(value: int)
 signal resource_changed(new_value: int)
+
+signal cutscene_started
+signal cutscene_ended
