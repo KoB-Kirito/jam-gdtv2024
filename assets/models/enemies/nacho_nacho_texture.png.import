@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bw2otjldgmf4i"
 path.s3tc="res://.godot/imported/nacho_nacho_texture.png-9b0cfdf717f8732286310aca5680681c.s3tc.ctex"
+path.etc2="res://.godot/imported/nacho_nacho_texture.png-9b0cfdf717f8732286310aca5680681c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/enemies/nacho_nacho_texture.png"
-dest_files=["res://.godot/imported/nacho_nacho_texture.png-9b0cfdf717f8732286310aca5680681c.s3tc.ctex"]
+dest_files=["res://.godot/imported/nacho_nacho_texture.png-9b0cfdf717f8732286310aca5680681c.s3tc.ctex", "res://.godot/imported/nacho_nacho_texture.png-9b0cfdf717f8732286310aca5680681c.etc2.ctex"]
 
 [params]
 

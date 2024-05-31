@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cp0jrn6713e50"
 path.s3tc="res://.godot/imported/Boden_Seesternkanone.png-d21acc860607639e34270165e98eb7f0.s3tc.ctex"
+path.etc2="res://.godot/imported/Boden_Seesternkanone.png-d21acc860607639e34270165e98eb7f0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/towers/Seesternkanone/Boden_Seesternkanone.png"
-dest_files=["res://.godot/imported/Boden_Seesternkanone.png-d21acc860607639e34270165e98eb7f0.s3tc.ctex"]
+dest_files=["res://.godot/imported/Boden_Seesternkanone.png-d21acc860607639e34270165e98eb7f0.s3tc.ctex", "res://.godot/imported/Boden_Seesternkanone.png-d21acc860607639e34270165e98eb7f0.etc2.ctex"]
 
 [params]
 

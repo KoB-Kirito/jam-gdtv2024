@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cq13rcfma3glm"
 path.s3tc="res://.godot/imported/Anemobe.png-b7a300bc7d8b66784de716f3674c4d17.s3tc.ctex"
+path.etc2="res://.godot/imported/Anemobe.png-b7a300bc7d8b66784de716f3674c4d17.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/towers/Anemone_Clownfisch/Anemobe.png"
-dest_files=["res://.godot/imported/Anemobe.png-b7a300bc7d8b66784de716f3674c4d17.s3tc.ctex"]
+dest_files=["res://.godot/imported/Anemobe.png-b7a300bc7d8b66784de716f3674c4d17.s3tc.ctex", "res://.godot/imported/Anemobe.png-b7a300bc7d8b66784de716f3674c4d17.etc2.ctex"]
 
 [params]
 
