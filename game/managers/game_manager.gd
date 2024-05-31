@@ -8,6 +8,7 @@ extends Node
 
 ## Will parse all cutscenes under that node
 @export var cutscenes_parent: Node
+@export var game_over_cutscene: Cutscene
 
 var cutscenes: Array[Cutscene]
 
@@ -87,7 +88,12 @@ func _on_base_took_damage(amount: Variant) -> void:
 		#TODO
 		print_debug("GAME OVER")
 		Events.game_over.emit()
+		game_over_cutscene.play_cutscene()
 	Events.coral_health_changed.emit(coral_health)
+
+
+func restart_level() -> void:
+	get_tree().reload_current_scene()
 
 
 func _on_warning_zone_body_entered(body: Node3D) -> void:

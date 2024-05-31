@@ -19,8 +19,9 @@ func spawn_random_waste() -> void:
 	#TODO: weighted pick
 	var waste: Waste = waste_scenes.pick_random().instantiate()
 	waste.position = get_random_spawn_point()
+	waste.life_time = life_time
 	
-	waste.scale = Vector3(randf_range(1.0, 2.0), randf_range(1.0, 2.0), randf_range(1.0, 2.0))
+	waste.scale = Vector3(randf_range(1.0, 1.5), randf_range(1.0, 1.5), randf_range(1.0, 1.5))
 	waste.rotate_y(randf_range(0.0, TAU))
 	
 	owner.add_child(waste)

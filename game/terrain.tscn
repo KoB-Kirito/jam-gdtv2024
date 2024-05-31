@@ -12,6 +12,9 @@ width = 2048
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eh5s8"]
 render_priority = 0
 shader = ExtResource("2_glrow")
+shader_parameter/travel_length = 4.0
+shader_parameter/travel_speed = 2.0
+shader_parameter/sharpness = 0.9
 shader_parameter/color_ramp = SubResource("GradientTexture1D_5qgoa")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lkc5k"]
@@ -139,7 +142,7 @@ material_overlay = SubResource("ShaderMaterial_eh5s8")
 material_overlay = SubResource("ShaderMaterial_eh5s8")
 
 [node name="Muschel_halb03" parent="." index="37"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1981, 0)
 material_overlay = SubResource("ShaderMaterial_eh5s8")
 
 [node name="Muschel_halb_klein01" parent="." index="38"]

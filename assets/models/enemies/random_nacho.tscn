@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuu1u2pma151f"]
+
+[ext_resource type="PackedScene" uid="uid://bdjlgf4r46l5r" path="res://assets/models/enemies/nacho.glb" id="1_pi8fa"]
+[ext_resource type="Script" path="res://nacho.gd" id="2_28a80"]
+
+[node name="nacho" instance=ExtResource("1_pi8fa")]
+script = ExtResource("2_28a80")
+
+[node name="Nacho2" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303292, 0, 0)
+
+[node name="Nacho3" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0316387, 0, 0)

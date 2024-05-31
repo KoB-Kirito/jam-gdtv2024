@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://fy8tnppujugi"]
+[gd_scene load_steps=20 format=3 uid="uid://fy8tnppujugi"]
 
 [ext_resource type="PackedScene" uid="uid://dq6gytyu1pppy" path="res://game/waste/_base/waste_base.tscn" id="1_cwqr6"]
 [ext_resource type="Shader" path="res://game/waste/glass.gdshader" id="2_gcott"]
+[ext_resource type="PackedScene" uid="uid://bhcsiryqeppvb" path="res://game/waste/beer_bottle_with_glass.tscn" id="2_xbt3w"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xdvrb"]
 height = 1.8
@@ -80,13 +81,19 @@ bottom_radius = 0.1
 height = 0.5
 
 [node name="WasteBottle" instance=ExtResource("1_cwqr6")]
+float_height = 0.0
+float_speed = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.3, 0)
 shape = SubResource("CylinderShape3D_xdvrb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+[node name="beer-bottle" parent="." index="1" instance=ExtResource("2_xbt3w")]
+transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0.292721, 0.104425)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.3, -0.4)
+visible = false
 mesh = SubResource("CylinderMesh_kcegd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" index="0"]
@@ -96,5 +103,3 @@ mesh = SubResource("CylinderMesh_otbyf")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 mesh = SubResource("CylinderMesh_bt23i")
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]

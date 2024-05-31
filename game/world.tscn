@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://l8llvurtljav"]
+[gd_scene load_steps=68 format=3 uid="uid://l8llvurtljav"]
 
 [ext_resource type="PackedScene" uid="uid://coi0xwbhi6u46" path="res://game/player/camera_rig.tscn" id="2_5p4f6"]
 [ext_resource type="PackedScene" uid="uid://d3qf40fcfvhc" path="res://game/cutscene/dialog.tscn" id="2_8us54"]
@@ -17,8 +17,11 @@
 [ext_resource type="Script" path="res://game/managers/game_manager.gd" id="6_tuwt1"]
 [ext_resource type="PackedScene" uid="uid://b7r4d5s6guolp" path="res://game/ui/ui_layer.tscn" id="8_1c5e8"]
 [ext_resource type="PackedScene" uid="uid://fy8tnppujugi" path="res://game/waste/waste_bottle.tscn" id="11_6txyw"]
+[ext_resource type="PackedScene" uid="uid://pbrr3t0gyos" path="res://game/waste/waste_bag.tscn" id="11_35x77"]
 [ext_resource type="Script" path="res://game/managers/waste_manager.gd" id="12_6cekn"]
+[ext_resource type="PackedScene" uid="uid://cya6to7jkxbac" path="res://game/waste/waste_chips_bag.tscn" id="12_fpvyr"]
 [ext_resource type="Shader" path="res://game/environment/bubble.gdshader" id="13_qkb78"]
+[ext_resource type="PackedScene" uid="uid://dt78kn6ssbqdq" path="res://game/enemies/nacho/nacho.tscn" id="17_0pfdp"]
 
 [sub_resource type="Resource" id="Resource_fxpov"]
 script = ExtResource("4_v66uw")
@@ -300,6 +303,82 @@ _data = {
 "cutscene": SubResource("Animation_2pnon")
 }
 
+[sub_resource type="Animation" id="Animation_2hy4h"]
+resource_name = "cutscene"
+length = 10.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Intro/CameraPivot/Camera3D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Intro/CameraPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.02974, 0), Vector3(0, 6.26573, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../GameManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(10),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart_level"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ppb2p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Intro/CameraPivot/Camera3D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Intro/CameraPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kqmwk"]
+_data = {
+"RESET": SubResource("Animation_ppb2p"),
+"cutscene": SubResource("Animation_2hy4h")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_vu0t2"]
 size = Vector3(57.9507, 1, 19.9331)
 
@@ -315,9 +394,9 @@ size = Vector3(23.0206, 1, 54.4637)
 [sub_resource type="Resource" id="Resource_38vb1"]
 script = ExtResource("4_i3pi2")
 wave = 1
-enemy = ExtResource("5_hmo02")
-amount = 1
-seperation = 0.5
+enemy = ExtResource("17_0pfdp")
+amount = 3
+seperation = 3.0
 
 [sub_resource type="Resource" id="Resource_h5mx7"]
 script = ExtResource("4_i3pi2")
@@ -465,13 +544,14 @@ fog_depth_end = 150.0
 
 [node name="World" type="Node3D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("cutscenes_parent")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("cutscenes_parent", "game_over_cutscene")]
 script = ExtResource("6_tuwt1")
 cutscenes_parent = NodePath("../Cutscenes")
+game_over_cutscene = NodePath("../Cutscenes/GameOver")
 
 [node name="RoundTimer" type="Timer" parent="GameManager"]
 unique_name_in_owner = true
-wait_time = 60.0
+wait_time = 120.0
 one_shot = true
 
 [node name="BuildTimer" type="Timer" parent="GameManager"]
@@ -509,14 +589,20 @@ libraries = {
 }
 
 [node name="WasteCamera3D" type="Camera3D" parent="Cutscenes/Intro2" node_paths=PackedStringArray("target")]
-transform = Transform3D(0.867429, 0.232255, -0.440027, 0, 0.88437, 0.466788, 0.49756, -0.404906, 0.767128, -35.8694, 20.017, 60.8963)
+transform = Transform3D(0.867429, 0.19901, -0.456027, 0, 0.916528, 0.399972, 0.49756, -0.346948, 0.795023, -35.8694, 20.017, 60.8963)
 environment = SubResource("Environment_frlvu")
 far = 120.0
 script = ExtResource("4_l7idg")
 target = NodePath("../WasteBottle")
 
 [node name="WasteBottle" parent="Cutscenes/Intro2" instance=ExtResource("11_6txyw")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -17, 0, 28)
+transform = Transform3D(1.03923, 0, -0.6, 0, 1.2, 0, 0.6, 0, 1.03923, -17, 3.46703, 28)
+
+[node name="WasteBag" parent="Cutscenes/Intro2" instance=ExtResource("11_35x77")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -22.638, 2.04782, 27.9717)
+
+[node name="WasteChipsBag" parent="Cutscenes/Intro2" instance=ExtResource("12_fpvyr")]
+transform = Transform3D(1.1165, 0, 0.439801, 0, 1.2, 0, -0.439801, 0, 1.1165, -12.4799, 3.51648, 25.3054)
 
 [node name="DialogTest" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
 notes = "Ein \"Dialog\" ist immer nur eine Box. Man muss also mehrere Dialoge hinzufügen wenn man mehrere Boxen anzeigen will.
@@ -531,6 +617,16 @@ libraries = {
 "": SubResource("AnimationLibrary_ugflx")
 }
 
+[node name="GameOver" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+notes = "-1 = never played
+played by script when game over"
+level = -1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_kqmwk")
+}
+
 [node name="UILayer" parent="." instance=ExtResource("8_1c5e8")]
 
 [node name="DialogLayer" parent="." instance=ExtResource("2_8us54")]
@@ -541,7 +637,7 @@ script = ExtResource("12_6cekn")
 spawn_interval_from = 5.0
 spawn_interval_to = 7.0
 spawn_area = NodePath("SpawnAreas")
-waste_scenes = Array[PackedScene]([ExtResource("11_6txyw")])
+waste_scenes = Array[PackedScene]([ExtResource("11_6txyw"), ExtResource("11_35x77"), ExtResource("12_fpvyr")])
 
 [node name="WasteSpawnTimer" type="Timer" parent="WasteManager"]
 unique_name_in_owner = true

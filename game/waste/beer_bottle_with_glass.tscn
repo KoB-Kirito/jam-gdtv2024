@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhcsiryqeppvb"]
+
+[ext_resource type="PackedScene" uid="uid://djcylcp7r6ali" path="res://assets/models/enemies/beer-bottle.gltf" id="1_7wxe1"]
+[ext_resource type="Shader" path="res://game/waste/glass.gdshader" id="2_6bm5p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpft7"]
+render_priority = 0
+shader = ExtResource("2_6bm5p")
+shader_parameter/tint_color = Color(0, 0.403922, 0.172549, 1)
+shader_parameter/backlight_color = Color(0.366054, 0.695633, 1, 1)
+shader_parameter/noise_strenght = 0.005
+shader_parameter/roughness = 0.0
+shader_parameter/normal_strenght = 0.0
+
+[node name="beer-bottle" instance=ExtResource("1_7wxe1")]
+
+[node name="Cylinder" parent="." index="0"]
+material_override = SubResource("ShaderMaterial_qpft7")

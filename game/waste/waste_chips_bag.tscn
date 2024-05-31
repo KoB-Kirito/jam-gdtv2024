@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cya6to7jkxbac"]
+
+[ext_resource type="PackedScene" uid="uid://dq6gytyu1pppy" path="res://game/waste/_base/waste_base.tscn" id="1_0bxgb"]
+[ext_resource type="PackedScene" uid="uid://cky25wg1ncqiv" path="res://assets/models/enemies/chips_bag.glb" id="2_ag0ds"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6dk3p"]
+size = Vector3(1, 0.5, 1.5)
+
+[node name="WasteChipsBag" instance=ExtResource("1_0bxgb")]
+float_height = 0.6
+float_frequency = 0.9
+float_amplitude = 0.4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, 0.25, 0)
+shape = SubResource("BoxShape3D_6dk3p")
+
+[node name="chips_bag2" parent="." index="1" instance=ExtResource("2_ag0ds")]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0.25, 0)
