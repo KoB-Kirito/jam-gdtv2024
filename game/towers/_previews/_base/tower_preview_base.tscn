@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b51tc8xoo7usd"]
+
+[ext_resource type="Script" path="res://game/towers/_previews/_base/tower_preview_base.gd" id="1_u72uy"]
+[ext_resource type="PackedScene" uid="uid://dep4cfddxnbi" path="res://game/components/hub_detector.tscn" id="2_s4e0e"]
+
+[node name="TowerPreview" type="Node3D"]
+script = ExtResource("1_u72uy")
+
+[node name="HubDetector" parent="." instance=ExtResource("2_s4e0e")]
+unique_name_in_owner = true
+
+[node name="BlockedDetector" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_mask = 31

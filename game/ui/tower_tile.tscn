@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6fqm1nwvw5yw"]
 
-[ext_resource type="Texture2D" uid="uid://cs3iburmkhxlj" path="res://game/towers/icons/coral_hub_icon.png" id="1_1olwv"]
+[ext_resource type="Texture2D" uid="uid://cs3iburmkhxlj" path="res://game/towers/_icons/coral_hub_icon.png" id="1_1olwv"]
 [ext_resource type="Script" path="res://game/ui/tower_tile.gd" id="2_eme3w"]
 
 [node name="TowerTile" type="TextureButton"]

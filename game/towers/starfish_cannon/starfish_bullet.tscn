@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2k2m330u630y"]
+
+[ext_resource type="Script" path="res://game/towers/starfish_cannon/starfish_bullet.gd" id="1_wrj7m"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5a6lg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bhxey"]
+
+[node name="StarfishBullet" type="Area3D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_wrj7m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.296718, 0, 0, 0, 0.296718, 0, 0, 0, 0.296718, 0, 0, 0)
+mesh = SubResource("SphereMesh_5a6lg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_bhxey")
+
+[node name="TimeoutTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="TimeoutTimer" to="." method="_on_timeout_timer_timeout"]

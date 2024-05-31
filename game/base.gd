@@ -1,4 +1,6 @@
 extends Node3D
+## Makes the coral attackable
+#TODO: move to health component
 
 
 signal took_damage(amount)

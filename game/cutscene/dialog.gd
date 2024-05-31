@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 
+var text_tween: Tween
+
+
 func _ready() -> void:
 	hide()
 
@@ -12,9 +15,11 @@ func play(dialog: DialogData, pause: bool) -> void:
 	%Image.texture = dialog.image
 	%Text.text = dialog.text
 	
+	if text_tween and text_tween.is_running():
+		text_tween.stop()
 	%Text.visible_ratio = 0.0
-	var tween = create_tween()
-	tween.tween_property(%Text, "visible_ratio", 1.0, 0.1 + dialog.text.length() * 0.03)
+	text_tween = create_tween()
+	text_tween.tween_property(%Text, "visible_ratio", 1.0, 0.1 + dialog.text.length() * 0.03)
 	
 	# pause game
 	if pause:

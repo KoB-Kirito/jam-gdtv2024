@@ -3,6 +3,7 @@ extends Node
 
 @export var spawn_interval_from: float = 0.5
 @export var spawn_interval_to: float = 2.0
+@export var life_time: float = 10.0
 @export var spawn_area: Area3D
 @export var waste_scenes: Array[PackedScene]
 

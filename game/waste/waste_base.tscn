@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq6gytyu1pppy"]
-
-[ext_resource type="Script" path="res://game/waste/waste_base.gd" id="1_5og72"]
-
-[node name="WasteBase" type="CharacterBody3D"]
-collision_layer = 64
-collision_mask = 91
-script = ExtResource("1_5og72")

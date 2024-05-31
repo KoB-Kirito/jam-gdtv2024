@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7x3ngcflda7v"]
+
+[ext_resource type="PackedScene" uid="uid://b51tc8xoo7usd" path="res://game/towers/_previews/_base/tower_preview_base.tscn" id="1_owvub"]
+[ext_resource type="ArrayMesh" uid="uid://bsvdmth884uln" path="res://game/towers/starfish_cannon/test_tower_model.res" id="2_bae8k"]
+[ext_resource type="Shader" path="res://game/towers/_previews/building_preview.gdshader" id="2_fcf5d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ed46f"]
+render_priority = 0
+shader = ExtResource("2_fcf5d")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fowyt"]
+height = 1.1
+radius = 0.85
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gedtw"]
+transparency = 1
+albedo_color = Color(1, 1, 0, 0.701961)
+
+[sub_resource type="TorusMesh" id="TorusMesh_cprn7"]
+material = SubResource("StandardMaterial3D_gedtw")
+inner_radius = 9.9
+outer_radius = 10.0
+
+[node name="StarfishCannonPreview" instance=ExtResource("1_owvub")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
+material_override = SubResource("ShaderMaterial_ed46f")
+mesh = ExtResource("2_bae8k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockedDetector" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("CylinderShape3D_fowyt")
+
+[node name="RangeIndicator" type="MeshInstance3D" parent="." index="3"]
+mesh = SubResource("TorusMesh_cprn7")

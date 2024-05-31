@@ -115,9 +115,9 @@ func die() -> void:
 
 func _on_tower_detector_body_entered(body: Node3D) -> void:
 	if body is Tower and body.can_be_damaged:
-		print("test")
 		tower_in_range.append(body)
 		if current_target == target:
+			print_debug("found tower, should switch target now")
 			current_target = body
 			target_in_range = false
 			%NavigationAgent3D.set_target_position(current_target.global_position)
