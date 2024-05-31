@@ -4,13 +4,18 @@ extends Node
 @export var spawn_interval_from: float = 0.5
 @export var spawn_interval_to: float = 2.0
 @export var life_time: float = 10.0
+## Life time reduces at this rate * level
+@export var per_level_reduction: float = 0.0
 @export var spawn_area: Area3D
 @export var waste_scenes: Array[PackedScene]
 
 var children_count: int
 
+var current_round: int
+
 
 func _ready() -> void:
+	Events.round_started.connect(func(): current_round += 1)
 	children_count = spawn_area.get_child_count()
 	%WasteSpawnTimer.start(randf_range(spawn_interval_from, spawn_interval_to))
 
@@ -19,7 +24,7 @@ func spawn_random_waste() -> void:
 	#TODO: weighted pick
 	var waste: Waste = waste_scenes.pick_random().instantiate()
 	waste.position = get_random_spawn_point()
-	waste.life_time = life_time
+	waste.life_time = life_time + current_round * per_level_reduction
 	
 	waste.scale = Vector3(randf_range(1.0, 1.5), randf_range(1.0, 1.5), randf_range(1.0, 1.5))
 	waste.rotate_y(randf_range(0.0, TAU))

@@ -1,18 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dojjcw8633wvn"]
+[gd_scene load_steps=7 format=3 uid="uid://dojjcw8633wvn"]
 
 [ext_resource type="PackedScene" uid="uid://drpx64vwtj8ty" path="res://game/towers/_base/tower_base.tscn" id="1_nu5na"]
 [ext_resource type="Script" path="res://game/towers/sea_urchin/sea_urchin.gd" id="2_oo1nm"]
-[ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="3_o6wdl"]
+[ext_resource type="PackedScene" uid="uid://8vi27lucbb6v" path="res://assets/models/towers/Seeigel/Seeigel.gltf" id="4_rxdcw"]
 [ext_resource type="PackedScene" uid="uid://c2ocwx4wxj1q6" path="res://game/components/healthbar_component.tscn" id="4_yxmsc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ml77c"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ojtw8"]
-albedo_color = Color(0.979337, 0, 0.182688, 1)
-albedo_texture = ExtResource("3_o6wdl")
-
-[sub_resource type="SphereMesh" id="SphereMesh_g85h2"]
-material = SubResource("StandardMaterial3D_ojtw8")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3ocp7"]
 height = 1.0
@@ -28,12 +21,7 @@ max_health = 30.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_ml77c")
 
-[node name="Model" type="MeshInstance3D" parent="." index="1"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("SphereMesh_g85h2")
-
-[node name="DamageArea" type="Area3D" parent="." index="2"]
+[node name="DamageArea" type="Area3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_mask = 4
 
@@ -44,8 +32,14 @@ shape = SubResource("CylinderShape3D_3ocp7")
 unique_name_in_owner = true
 wait_time = 2.0
 
-[node name="Healthbar" parent="." index="3" instance=ExtResource("4_yxmsc")]
+[node name="Healthbar" parent="." index="2" instance=ExtResource("4_yxmsc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Pivot" type="Node3D" parent="." index="3"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Model" parent="Pivot" index="0" instance=ExtResource("4_rxdcw")]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]

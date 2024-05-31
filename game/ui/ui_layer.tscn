@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b7r4d5s6guolp"]
+[gd_scene load_steps=27 format=3 uid="uid://b7r4d5s6guolp"]
 
 [ext_resource type="Script" path="res://game/ui/ui.gd" id="1_00sea"]
 [ext_resource type="Script" path="res://game/ui/top_label.gd" id="1_477hd"]
@@ -58,6 +58,12 @@ active = ExtResource("23_1nb03")
 disabled = ExtResource("24_askwi")
 preview_scene = ExtResource("26_vpy88")
 scene = ExtResource("27_b8i56")
+
+[sub_resource type="Resource" id="Resource_eusk0"]
+script = ExtResource("5_o0f5a")
+cost = 10
+name = ""
+description = ""
 
 [node name="UILayer" type="CanvasLayer"]
 script = ExtResource("1_00sea")
@@ -143,7 +149,7 @@ offset_bottom = -20.0
 grow_vertical = 0
 script = ExtResource("4_0h1iq")
 tower_tile_scene = ExtResource("16_g2rwn")
-towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_ca1id"), SubResource("Resource_a6hyf"), SubResource("Resource_ywsbj")])
+towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_ca1id"), SubResource("Resource_a6hyf"), SubResource("Resource_ywsbj"), SubResource("Resource_eusk0")])
 
 [node name="TowerTile" parent="UI/TowerPanel" instance=ExtResource("16_g2rwn")]
 layout_mode = 2

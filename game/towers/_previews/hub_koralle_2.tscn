@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6iewkn312akf"]
+
+[ext_resource type="PackedScene" uid="uid://b4t47877p7b2r" path="res://assets/models/towers/Hub_koralle/Hub_koralle.gltf" id="1_iu67u"]
+[ext_resource type="Shader" path="res://game/towers/_previews/_base/building_preview.gdshader" id="2_27vj6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_evtqg"]
+render_priority = 0
+shader = ExtResource("2_27vj6")
+
+[node name="Hub_koralle2" instance=ExtResource("1_iu67u")]
+
+[node name="Hub_koralle" parent="." index="0"]
+material_override = SubResource("ShaderMaterial_evtqg")

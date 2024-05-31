@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b51tc8xoo7usd" path="res://game/towers/_previews/_base/tower_preview_base.tscn" id="1_owvub"]
 [ext_resource type="ArrayMesh" uid="uid://bsvdmth884uln" path="res://game/towers/starfish_cannon/test_tower_model.res" id="2_bae8k"]
-[ext_resource type="Shader" path="res://game/towers/_previews/building_preview.gdshader" id="2_fcf5d"]
+[ext_resource type="Shader" path="res://game/towers/_previews/_base/building_preview.gdshader" id="2_fcf5d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ed46f"]
 render_priority = 0
