@@ -1,0 +1,12 @@
+[gd_resource type="Environment" format=3 uid="uid://bt6llckn3do6n"]
+
+[resource]
+background_mode = 1
+background_color = Color(0.215686, 0.580392, 0.952941, 1)
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.215686, 0.580392, 0.952941, 1)
+fog_density = 1.0
+fog_depth_curve = 2.21914
+fog_depth_begin = 0.0
+fog_depth_end = 122.9
