@@ -27,6 +27,9 @@ Globals="*res://autoloads/globals.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="res://assets/sprites/Mauszeiger.png"
+mouse_cursor/custom_image_hotspot=Vector2(26, 5)
+mouse_cursor/tooltip_position_offset=Vector2(100, 10)
 
 [input]
 
