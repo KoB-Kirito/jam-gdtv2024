@@ -2,6 +2,7 @@ extends Resource
 class_name TowerData
 
 
+@export var level: int = 0
 @export var cost: int = 10
 @export var name: String
 @export_multiline var description: String
