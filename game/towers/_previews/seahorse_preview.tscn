@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://xk4qxs177wdl"]
+
+[ext_resource type="PackedScene" uid="uid://b51tc8xoo7usd" path="res://game/towers/_previews/_base/tower_preview_base.tscn" id="1_dmelo"]
+[ext_resource type="PackedScene" uid="uid://yfpcndnrfbii" path="res://game/towers/_previews/seahorse_prewie_model.tscn" id="2_58y66"]
+
+[node name="seahorse_preview" instance=ExtResource("1_dmelo")]
+
+[node name="Seepferdchen3" parent="." index="2" instance=ExtResource("2_58y66")]

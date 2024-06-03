@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://yyeoxqrv8vc4"]
+
+[ext_resource type="PackedScene" uid="uid://ui2u7rxqx62m" path="res://game/enemies/enemy_base.tscn" id="1_tkweq"]
+[ext_resource type="PackedScene" uid="uid://djcylcp7r6ali" path="res://assets/models/enemies/beer-bottle.gltf" id="2_3hj56"]
+[ext_resource type="Script" path="res://game/enemies/bottle/bottle.gd" id="2_a20fm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pn8u4"]
+radius = 0.7
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4vi7e"]
+size = Vector3(2.18359, 1, 1)
+
+[node name="Enemy" instance=ExtResource("1_tkweq")]
+script = ExtResource("2_a20fm")
+speed = 1.0
+max_health = 15.0
+damage = 2.0
+attack_cooldown = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRangeDetector" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.199518, 0)
+shape = SubResource("SphereShape3D_pn8u4")
+
+[node name="beer-bottle" parent="." index="6" instance=ExtResource("2_3hj56")]
+transform = Transform3D(-8.74228e-08, 2, 8.74228e-08, 0, -8.74228e-08, 2, 2, 8.74228e-08, 3.82137e-15, 0.0733223, 0.201517, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="7"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2.58683e-08, 0.79269, 0)
+shape = SubResource("BoxShape3D_4vi7e")
+
+[editable path="beer-bottle"]

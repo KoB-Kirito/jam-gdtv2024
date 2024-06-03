@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdrwdxg8ip08i"]
+
+[ext_resource type="Script" path="res://game/towers/seahorse/seahorse_bullet.gd" id="1_2p2et"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bhxey"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wbmvc"]
+radius = 0.25
+height = 0.5
+
+[node name="seahorse_bullet" type="Area3D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_2p2et")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_bhxey")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_wbmvc")
+
+[node name="TimeoutTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="TimeoutTimer" to="." method="_on_timeout_timer_timeout"]

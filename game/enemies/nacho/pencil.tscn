@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://d384i3b84q0rm"]
+
+[ext_resource type="PackedScene" uid="uid://ui2u7rxqx62m" path="res://game/enemies/enemy_base.tscn" id="1_grulg"]
+[ext_resource type="PackedScene" uid="uid://cdevnolxb42id" path="res://assets/models/enemies/pencil.gltf" id="2_isnnm"]
+
+[sub_resource type="Animation" id="Animation_mfo5x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nuq0r"]
+resource_name = "attack"
+length = 2.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.75, 2.5),
+"transitions": PackedFloat32Array(-2, 6.72717, 6.72717),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 4.799), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0be47"]
+_data = {
+"RESET": SubResource("Animation_mfo5x"),
+"attack": SubResource("Animation_nuq0r")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_stkgh"]
+radius = 2.7
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4r71g"]
+height = 3.0
+
+[node name="pencil" instance=ExtResource("1_grulg")]
+motion_mode = 1
+speed = 20.0
+max_health = 20.0
+attack_range = 3.0
+attack_windup = 2.5
+attack_cooldown = 2.5
+
+[node name="NavigationAgent3D" parent="." index="0"]
+avoidance_enabled = true
+
+[node name="HealthbarComponent" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_0be47")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRangeDetector" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9918, 0)
+shape = SubResource("SphereShape3D_stkgh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_4r71g")
+
+[node name="pivot" type="Node3D" parent="." index="7"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="pencil" parent="pivot" index="0" instance=ExtResource("2_isnnm")]
+transform = Transform3D(0.55, -4.80825e-08, 2.10175e-15, 0, -2.40413e-08, -0.55, 4.80825e-08, 0.55, -2.40413e-08, 0, 1.77478, 0)

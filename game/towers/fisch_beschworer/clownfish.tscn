@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcgp3b5v70md0"]
+
+[ext_resource type="Script" path="res://game/towers/fisch_beschworer/clownfish.gd" id="1_tbj2l"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7bve8"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0u5q6"]
+radius = 1.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b1i4q"]
+radius = 0.3
+
+[node name="Clownfish" type="StaticBody3D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_tbj2l")
+damage = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_7bve8")
+
+[node name="AttackZone" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackZone"]
+shape = SubResource("CylinderShape3D_0u5q6")
+
+[node name="DamageTimer" type="Timer" parent="AttackZone"]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_b1i4q")
+
+[node name="DeathTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="AttackZone" to="." method="_on_attack_zone_body_entered"]
+[connection signal="body_exited" from="AttackZone" to="." method="_on_attack_zone_body_exited"]
+[connection signal="timeout" from="AttackZone/DamageTimer" to="." method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

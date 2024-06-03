@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://c7vjcgh1yry06"]
+
+[ext_resource type="PackedScene" uid="uid://drpx64vwtj8ty" path="res://game/towers/_base/tower_base.tscn" id="1_iby66"]
+[ext_resource type="PackedScene" uid="uid://c4ddnf6e0k7rm" path="res://assets/models/towers/Zitteraal/Gegner.gltf" id="2_87fem"]
+[ext_resource type="Script" path="res://game/towers/zitteral/zitteraal.gd" id="2_is76d"]
+[ext_resource type="PackedScene" uid="uid://c2ocwx4wxj1q6" path="res://game/components/healthbar_component.tscn" id="3_p6ilf"]
+[ext_resource type="ArrayMesh" uid="uid://cfkfau03i0nkv" path="res://game/towers/zitteral/thunder_editable.tres" id="5_q41w1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_do7tr"]
+radius = 11.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q7081"]
+size = Vector3(4, 4.5, 4)
+
+[sub_resource type="Gradient" id="Gradient_kx3ag"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nk3kh"]
+gradient = SubResource("Gradient_kx3ag")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bcigl"]
+lifetime_randomness = 0.1
+particle_flag_rotate_y = true
+emission_shape = 3
+emission_box_extents = Vector3(7, 0, 7)
+angle_min = -180.0
+angle_max = 180.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_nk3kh")
+
+[node name="zitteraal" instance=ExtResource("1_iby66")]
+script = ExtResource("2_is76d")
+damage = 0.5
+interval = 0.1
+
+[node name="Patrolzone" type="Area3D" parent="." index="0"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Patrolzone" index="0"]
+shape = SubResource("SphereShape3D_do7tr")
+
+[node name="DamageTimer" type="Timer" parent="Patrolzone" index="1"]
+unique_name_in_owner = true
+
+[node name="Healthbar" parent="." index="1" instance=ExtResource("3_p6ilf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.33058, 0.357527)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36978, 0)
+shape = SubResource("BoxShape3D_q7081")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="3"]
+amount = 3
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_bcigl")
+draw_pass_1 = ExtResource("5_q41w1")
+
+[node name="Gegner" parent="." index="4" instance=ExtResource("2_87fem")]
+
+[connection signal="body_entered" from="Patrolzone" to="." method="_on_patrolzone_body_entered"]
+[connection signal="body_exited" from="Patrolzone" to="." method="_on_patrolzone_body_exited"]
+[connection signal="timeout" from="Patrolzone/DamageTimer" to="." method="_on_damage_timer_timeout"]

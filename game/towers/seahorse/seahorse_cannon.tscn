@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq7h7fvn8nxg0"]
+
+[ext_resource type="PackedScene" uid="uid://drpx64vwtj8ty" path="res://game/towers/_base/tower_base.tscn" id="1_8w715"]
+[ext_resource type="Script" path="res://game/towers/seahorse/seahorse_cannon.gd" id="2_fh3p7"]
+[ext_resource type="PackedScene" uid="uid://bdrwdxg8ip08i" path="res://game/towers/seahorse/seahorse_bullet.tscn" id="3_1a0la"]
+[ext_resource type="PackedScene" uid="uid://c2ocwx4wxj1q6" path="res://game/components/healthbar_component.tscn" id="4_3gqsc"]
+[ext_resource type="PackedScene" uid="uid://b60ucjxwhomkc" path="res://assets/models/towers/Seahorse/Seepferdchen.gltf" id="5_hxw7g"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6a4v7"]
+radius = 19.259
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hy8ek"]
+size = Vector3(2.10358, 1.46031, 1.745)
+
+[node name="seahorse_cannon" instance=ExtResource("1_8w715")]
+script = ExtResource("2_fh3p7")
+fire_rate = 3.2
+damage = 1.0
+bullet_scene = ExtResource("3_1a0la")
+
+[node name="PatrolZone" type="Area3D" parent="." index="0"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PatrolZone" index="0"]
+shape = SubResource("SphereShape3D_6a4v7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.79086e-09, 0.699174, -0.155357)
+shape = SubResource("BoxShape3D_hy8ek")
+
+[node name="Healthbar" parent="." index="2" instance=ExtResource("4_3gqsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.65168, 0.00377223)
+
+[node name="Muzzle" type="Marker3D" parent="." index="3"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.00889814, 2.75892, -1.01698)
+
+[node name="Seepferdchen2" parent="." index="4" instance=ExtResource("5_hxw7g")]
+
+[node name="Skeleton3D" parent="Seepferdchen2/Seepferdchen" index="0"]
+bones/0/rotation = Quaternion(0.0891399, 2.00228e-05, 0.00367992, 0.996012)
+bones/1/rotation = Quaternion(-0.545495, -0.00418561, 0.044228, 0.836936)
+bones/2/rotation = Quaternion(-0.658917, -6.04352e-09, -0.00498272, 0.752199)
+
+[connection signal="body_entered" from="PatrolZone" to="." method="_on_patrol_zone_body_entered"]
+[connection signal="body_exited" from="PatrolZone" to="." method="_on_patrol_zone_body_exited"]
+
+[editable path="Seepferdchen2"]

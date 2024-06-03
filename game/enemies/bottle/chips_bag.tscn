@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://byrdopln568mu"]
+
+[ext_resource type="PackedScene" uid="uid://ui2u7rxqx62m" path="res://game/enemies/enemy_base.tscn" id="1_u8gf1"]
+[ext_resource type="PackedScene" uid="uid://cky25wg1ncqiv" path="res://assets/models/enemies/chips_bag.glb" id="2_6dh0m"]
+[ext_resource type="Script" path="res://game/enemies/bottle/chips_bag.gd" id="2_gph71"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eov4t"]
+radius = 1.119
+height = 4.33243
+
+[node name="Enemy" instance=ExtResource("1_u8gf1")]
+script = ExtResource("2_gph71")
+speed = 0.5
+max_health = 50.0
+damage = 3.0
+attack_cooldown = 0.5
+
+[node name="HealthbarComponent" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86125, 0)
+
+[node name="chips_bag2" parent="." index="6" instance=ExtResource("2_6dh0m")]
+transform = Transform3D(0.540095, -0.301564, 0.182706, 0.352594, 0.461929, -0.279864, 0, 0.334224, 0.551652, 0, 1.49193, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0786743, 2.2988, 0.0757065)
+shape = SubResource("CapsuleShape3D_eov4t")

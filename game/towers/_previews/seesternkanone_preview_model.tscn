@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmrsceqe2d5lp"]
+
+[ext_resource type="PackedScene" uid="uid://g25f11dqdhrm" path="res://game/towers/starfish_cannon/Seesternkanone/Seesternkanone.gltf" id="1_lvyfc"]
+[ext_resource type="Shader" path="res://game/towers/_previews/_base/building_preview.gdshader" id="2_ukjdh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgmrm"]
+render_priority = 0
+shader = ExtResource("2_ukjdh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w2wk3"]
+render_priority = 0
+shader = ExtResource("2_ukjdh")
+
+[node name="seesternkanone_preview_model" instance=ExtResource("1_lvyfc")]
+
+[node name="Plane" parent="Wurfalge/Skeleton3D" index="0"]
+material_override = SubResource("ShaderMaterial_bgmrm")
+
+[node name="Cube" parent="Algen_Boden/Skeleton3D" index="0"]
+material_override = SubResource("ShaderMaterial_w2wk3")

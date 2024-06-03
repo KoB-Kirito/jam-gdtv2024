@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvehisd0pld51"]
+
+[ext_resource type="ArrayMesh" uid="uid://cfkfau03i0nkv" path="res://game/towers/zitteral/thunder_editable.tres" id="1_0ai3y"]
+
+[sub_resource type="Gradient" id="Gradient_kx3ag"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nk3kh"]
+gradient = SubResource("Gradient_kx3ag")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bcigl"]
+lifetime_randomness = 0.1
+particle_flag_rotate_y = true
+emission_shape = 3
+emission_box_extents = Vector3(7, 0, 7)
+angle_min = -180.0
+angle_max = 180.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_nk3kh")
+
+[node name="thunder" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(2.385, 0, 0, 0, 2.385, 0, 0, 0, 2.385, 0, 0, 0)
+amount = 2
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_bcigl")
+draw_pass_1 = ExtResource("1_0ai3y")

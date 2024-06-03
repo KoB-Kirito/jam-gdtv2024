@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn0ijy7plfyxo"]
+
+[ext_resource type="PackedScene" uid="uid://drpx64vwtj8ty" path="res://game/towers/_base/tower_base.tscn" id="1_7hxqt"]
+[ext_resource type="Script" path="res://game/towers/heiler/heiler.gd" id="2_fw1ei"]
+[ext_resource type="ArrayMesh" uid="uid://bsvdmth884uln" path="res://game/towers/starfish_cannon/test_tower_model.res" id="2_go332"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gcyoi"]
+size = Vector3(2.09508, 1.18, 1.75)
+
+[node name="Heiler" instance=ExtResource("1_7hxqt")]
+script = ExtResource("2_fw1ei")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
+mesh = ExtResource("2_go332")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.157539, 0.565443, 0)
+shape = SubResource("BoxShape3D_gcyoi")

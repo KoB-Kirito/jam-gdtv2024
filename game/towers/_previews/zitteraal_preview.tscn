@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cse2v1yl4qby4"]
+
+[ext_resource type="PackedScene" uid="uid://b51tc8xoo7usd" path="res://game/towers/_previews/_base/tower_preview_base.tscn" id="1_ccs73"]
+[ext_resource type="PackedScene" uid="uid://cedr6yimal7wu" path="res://game/towers/_previews/zitteraal_prewie_model.tscn" id="2_ehugo"]
+
+[node name="ZitteraalPreview" instance=ExtResource("1_ccs73")]
+
+[node name="Gegner" parent="." index="2" instance=ExtResource("2_ehugo")]

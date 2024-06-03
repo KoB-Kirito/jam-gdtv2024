@@ -1,33 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://dikgl6mg5ebq3"]
+[gd_scene load_steps=8 format=3 uid="uid://cpp6emmfkrpda"]
 
 [ext_resource type="PackedScene" uid="uid://drpx64vwtj8ty" path="res://game/towers/_base/tower_base.tscn" id="1_j2x5x"]
 [ext_resource type="Script" path="res://game/towers/starfish_cannon/starfish_cannon.gd" id="2_d5641"]
-[ext_resource type="ArrayMesh" uid="uid://bsvdmth884uln" path="res://game/towers/starfish_cannon/test_tower_model.res" id="3_24fqh"]
-[ext_resource type="PackedScene" uid="uid://d2k2m330u630y" path="res://game/towers/starfish_cannon/starfish_bullet.tscn" id="3_twtl1"]
+[ext_resource type="PackedScene" uid="uid://g25f11dqdhrm" path="res://game/towers/starfish_cannon/Seesternkanone/Seesternkanone.gltf" id="3_ndwhl"]
+[ext_resource type="PackedScene" uid="uid://cb2cmey2k31oo" path="res://game/towers/starfish_cannon/starfish_bullet.tscn" id="3_twtl1"]
 [ext_resource type="PackedScene" uid="uid://c2ocwx4wxj1q6" path="res://game/components/healthbar_component.tscn" id="4_np3yc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6a4v7"]
-radius = 10.0
+radius = 19.259
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hy8ek"]
-size = Vector3(2.02686, 1.162, 1.745)
+size = Vector3(2.10358, 1.46031, 1.745)
 
 [node name="StarfishCannon" instance=ExtResource("1_j2x5x")]
 script = ExtResource("2_d5641")
-fire_rate = 0.5
+fire_rate = 2.0
 damage = 2.0
 bullet_scene = ExtResource("3_twtl1")
+burst_count = 3
+burst_interval = 0.1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
+[node name="Seesternkanone" parent="." index="0" instance=ExtResource("3_ndwhl")]
+
+[node name="Muzzle" type="Marker3D" parent="." index="1"]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-mesh = ExtResource("3_24fqh")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0125261, 0.887736, 0.0147877)
 
-[node name="Muzzle" type="Marker3D" parent="MeshInstance3D" index="0"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18073, 0.887736, 0.00123876)
-
-[node name="PatrolZone2" type="Area3D" parent="." index="1"]
+[node name="PatrolZone2" type="Area3D" parent="." index="2"]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
@@ -35,12 +34,12 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PatrolZone2" index="0"]
 shape = SubResource("SphereShape3D_6a4v7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.36365e-09, 0.550017, -0.191338)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.36365e-09, 0.699174, -0.191338)
 shape = SubResource("BoxShape3D_hy8ek")
 
-[node name="Healthbar" parent="." index="3" instance=ExtResource("4_np3yc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45447, 0)
+[node name="Healthbar" parent="." index="4" instance=ExtResource("4_np3yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.28732, 0.357527)
 
 [connection signal="body_entered" from="PatrolZone2" to="." method="_on_patrol_zone_body_entered"]
 [connection signal="body_exited" from="PatrolZone2" to="." method="_on_patrol_zone_body_exited"]

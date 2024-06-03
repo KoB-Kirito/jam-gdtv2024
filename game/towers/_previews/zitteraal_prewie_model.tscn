@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cedr6yimal7wu"]
+
+[ext_resource type="PackedScene" uid="uid://c4ddnf6e0k7rm" path="res://assets/models/towers/Zitteraal/Gegner.gltf" id="1_h80bi"]
+[ext_resource type="Shader" path="res://game/towers/_previews/_base/building_preview.gdshader" id="2_vvvje"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8fff3"]
+render_priority = 0
+shader = ExtResource("2_vvvje")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5owd"]
+render_priority = 0
+shader = ExtResource("2_vvvje")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3k67"]
+render_priority = 0
+shader = ExtResource("2_vvvje")
+
+[node name="Gegner" instance=ExtResource("1_h80bi")]
+
+[node name="Boden" parent="." index="0"]
+material_override = SubResource("ShaderMaterial_8fff3")
+
+[node name="Vert_003" parent="Zitteraal1/Skeleton3D" index="0"]
+material_override = SubResource("ShaderMaterial_t5owd")
+
+[node name="Vert_010" parent="Zitteraal2/Skeleton3D" index="0"]
+material_overlay = SubResource("ShaderMaterial_m3k67")

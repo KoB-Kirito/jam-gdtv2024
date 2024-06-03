@@ -4,4 +4,3 @@
 
 [node name="CutsceneBase" type="Node3D"]
 script = ExtResource("1_tt7d1")
-notes = null

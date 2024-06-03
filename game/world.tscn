@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://l8llvurtljav"]
+[gd_scene load_steps=78 format=3 uid="uid://l8llvurtljav"]
 
 [ext_resource type="PackedScene" uid="uid://coi0xwbhi6u46" path="res://game/player/camera_rig.tscn" id="2_5p4f6"]
 [ext_resource type="PackedScene" uid="uid://d3qf40fcfvhc" path="res://game/cutscene/dialog.tscn" id="2_8us54"]
@@ -21,7 +21,37 @@
 [ext_resource type="Script" path="res://game/managers/waste_manager.gd" id="12_6cekn"]
 [ext_resource type="PackedScene" uid="uid://cya6to7jkxbac" path="res://game/waste/waste_chips_bag.tscn" id="12_fpvyr"]
 [ext_resource type="Shader" path="res://game/environment/bubble.gdshader" id="13_qkb78"]
+[ext_resource type="PackedScene" uid="uid://byrdopln568mu" path="res://game/enemies/bottle/chips_bag.tscn" id="17_0bl2l"]
 [ext_resource type="PackedScene" uid="uid://dt78kn6ssbqdq" path="res://game/enemies/nacho/nacho.tscn" id="17_0pfdp"]
+[ext_resource type="PackedScene" uid="uid://d384i3b84q0rm" path="res://game/enemies/nacho/pencil.tscn" id="17_rx37r"]
+[ext_resource type="PackedScene" uid="uid://yyeoxqrv8vc4" path="res://game/enemies/bottle/bottle.tscn" id="17_ttnto"]
+
+[sub_resource type="Animation" id="Animation_ppb2p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Intro/CameraPivot/Camera3D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Intro/CameraPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_2hy4h"]
 resource_name = "cutscene"
@@ -66,33 +96,6 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_ppb2p"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Intro/CameraPivot/Camera3D:current")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Intro/CameraPivot:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kqmwk"]
 _data = {
 "RESET": SubResource("Animation_ppb2p"),
@@ -109,7 +112,7 @@ Exposition, epic story, bla bla bla..."
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("CameraPivot/Camera3D:current")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -381,14 +384,30 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_htwf4"]
 script = ExtResource("4_v66uw")
-text = "Test"
+text = "Dialoge die man in der Cutscene verwenden will kommen auch hier rein."
 
 [sub_resource type="Resource" id="Resource_k7ock"]
 script = ExtResource("4_v66uw")
 text = "Hallo"
 
+[sub_resource type="Animation" id="Animation_hrf6x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(95.1809, 7.533, 11.6767)]
+}
+
 [sub_resource type="Animation" id="Animation_ixk6w"]
 resource_name = "cutscene"
+length = 4.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -396,25 +415,44 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333),
+"times": PackedFloat32Array(0, 3.996),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [0, true],
+"args": [false],
 "method": &"show_dialog"
 }, {
 "args": [1, true],
 "method": &"show_dialog"
 }]
 }
-
-[sub_resource type="Animation" id="Animation_hrf6x"]
-length = 0.001
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.996),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(95.1809, 7.533, 11.6767), Vector3(73.2839, 7.533, 26.4958)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iolkk"]
 _data = {
 "RESET": SubResource("Animation_hrf6x"),
 "cutscene": SubResource("Animation_ixk6w")
 }
+
+[sub_resource type="Environment" id="Environment_7cjwy"]
+background_mode = 1
+background_color = Color(0.215686, 0.580392, 0.952941, 1)
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.215686, 0.580392, 0.952941, 1)
+fog_density = 1.0
+fog_depth_curve = 2.21914
+fog_depth_end = 142.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vu0t2"]
 size = Vector3(57.9507, 1, 19.9331)
@@ -431,16 +469,16 @@ size = Vector3(23.0206, 1, 54.4637)
 [sub_resource type="Resource" id="Resource_38vb1"]
 script = ExtResource("4_i3pi2")
 wave = 1
-enemy = ExtResource("17_0pfdp")
+enemy = ExtResource("17_rx37r")
 amount = 3
 seperation = 3.0
 
 [sub_resource type="Resource" id="Resource_h5mx7"]
 script = ExtResource("4_i3pi2")
 wave = 2
-enemy = ExtResource("5_hmo02")
-amount = 10
-seperation = 2.0
+enemy = ExtResource("17_ttnto")
+amount = 3
+seperation = 3.0
 
 [sub_resource type="Resource" id="Resource_bnygh"]
 script = ExtResource("4_i3pi2")
@@ -452,7 +490,7 @@ seperation = 2.0
 [sub_resource type="Resource" id="Resource_jsccg"]
 script = ExtResource("4_i3pi2")
 wave = 4
-enemy = ExtResource("5_hmo02")
+enemy = ExtResource("17_0bl2l")
 amount = 20
 seperation = 1.0
 
@@ -645,7 +683,7 @@ libraries = {
 }
 
 [node name="WasteCamera3D" type="Camera3D" parent="Cutscenes/Intro2" node_paths=PackedStringArray("target")]
-transform = Transform3D(0.867429, 0.19901, -0.456027, 0, 0.916528, 0.399972, 0.49756, -0.346948, 0.795023, -35.8694, 20.017, 60.8963)
+transform = Transform3D(0.827067, -0.101502, 0.552863, 0, 0.983562, 0.180576, -0.562103, -0.149348, 0.813471, -35.8694, 20.017, 60.8963)
 environment = SubResource("Environment_frlvu")
 far = 120.0
 script = ExtResource("4_l7idg")
@@ -665,7 +703,7 @@ notes = "Ein \"Dialog\" ist immer nur eine Box. Man muss also mehrere Dialoge hi
 Die muss man aber auch einzeln dann aufrufen über den Animation Player.
 var1 = index des dialogs, var2 = pause oder nicht.
 Wenn pausiert, pausiert der Animation player und es geht weiter sobald der spieler klickt, wenn nicht kann der spieler nicht klicken und der dialog muss selbst im animationplayer geschlossen werden."
-level = 1
+level = -1
 dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_fp2j3"), SubResource("Resource_1yx07")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/DialogTest"]
@@ -674,13 +712,26 @@ libraries = {
 }
 
 [node name="Test" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
-notes = ""
 dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_htwf4"), SubResource("Resource_k7ock")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Test"]
 libraries = {
 "": SubResource("AnimationLibrary_iolkk")
 }
+
+[node name="Opening2" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+level = -1
+dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_htwf4")])
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Opening2"]
+libraries = {
+"": SubResource("AnimationLibrary_iolkk")
+}
+
+[node name="Camera3D" type="Camera3D" parent="Cutscenes/Opening2"]
+transform = Transform3D(0.510543, 0, 0.859852, 0, 1, 0, -0.859852, 0, 0.510543, 95.1809, 7.533, 11.6767)
+environment = SubResource("Environment_7cjwy")
+fov = 39.375
 
 [node name="UILayer" parent="." instance=ExtResource("8_1c5e8")]
 

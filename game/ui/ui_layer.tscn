@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b7r4d5s6guolp"]
+[gd_scene load_steps=34 format=3 uid="uid://b7r4d5s6guolp"]
 
 [ext_resource type="Script" path="res://game/ui/ui.gd" id="1_00sea"]
 [ext_resource type="Script" path="res://game/ui/top_label.gd" id="1_477hd"]
@@ -6,32 +6,38 @@
 [ext_resource type="Script" path="res://game/ui/game_over_label.gd" id="3_fhsar"]
 [ext_resource type="Script" path="res://game/ui/tower_panel.gd" id="4_0h1iq"]
 [ext_resource type="Script" path="res://game/towers/tower_data.gd" id="5_o0f5a"]
-[ext_resource type="Texture2D" uid="uid://e8xwwm1y323e" path="res://game/towers/_icons/coral_hub_icon_active.png" id="6_cktv7"]
-[ext_resource type="Texture2D" uid="uid://cs3iburmkhxlj" path="res://game/towers/_icons/coral_hub_icon.png" id="6_dwjeh"]
-[ext_resource type="Texture2D" uid="uid://ck2fqu4847m1p" path="res://game/towers/_icons/coral_hub_icon_disabled.png" id="7_6li3c"]
-[ext_resource type="Texture2D" uid="uid://bat16pts3mdal" path="res://game/towers/_icons/coral_hub_icon_hover.png" id="7_blwwf"]
 [ext_resource type="PackedScene" uid="uid://ctmbreysvihjo" path="res://game/towers/_previews/coral_hub_preview.tscn" id="7_w7ayi"]
+[ext_resource type="Texture2D" uid="uid://d1fb6hk0kg0by" path="res://game/ui/BuildingplaceActive.png" id="8_qbku6"]
 [ext_resource type="PackedScene" uid="uid://deq3at8el7ycu" path="res://game/towers/_previews/sea_urchin_preview.tscn" id="9_dbvo8"]
+[ext_resource type="Texture2D" uid="uid://dmgdhncva8lxc" path="res://game/ui/Buildingplace.png" id="9_rtod3"]
 [ext_resource type="PackedScene" uid="uid://drdpxo65tcqob" path="res://game/towers/coral_hub/coral_hub.tscn" id="10_urm36"]
 [ext_resource type="Texture2D" uid="uid://b234tf8xskd2e" path="res://game/towers/_icons/SeeigelSelected.jpg" id="13_6yi1q"]
 [ext_resource type="Texture2D" uid="uid://ckryw2wvj67am" path="res://game/towers/_icons/Seeigel.jpg" id="14_6kovp"]
 [ext_resource type="PackedScene" uid="uid://dojjcw8633wvn" path="res://game/towers/sea_urchin/sea_urchin.tscn" id="15_ihiys"]
 [ext_resource type="Script" path="res://game/ui/resource_label.gd" id="16_1qe3b"]
 [ext_resource type="PackedScene" uid="uid://b6fqm1nwvw5yw" path="res://game/ui/tower_tile.tscn" id="16_g2rwn"]
+[ext_resource type="Texture2D" uid="uid://ddushv0haaygn" path="res://game/towers/_icons/EelSelected.jpg" id="22_3ch50"]
+[ext_resource type="PackedScene" uid="uid://cse2v1yl4qby4" path="res://game/towers/_previews/zitteraal_preview.tscn" id="22_54yb2"]
+[ext_resource type="PackedScene" uid="uid://c7vjcgh1yry06" path="res://game/towers/zitteral/zitteraal.tscn" id="22_mhj28"]
 [ext_resource type="Texture2D" uid="uid://bv1sdh34amykj" path="res://game/towers/_icons/StarfishSelected.jpg" id="23_1nb03"]
+[ext_resource type="Texture2D" uid="uid://bbq87rhrw5r5i" path="res://game/towers/_icons/Eel.jpg" id="23_bw07a"]
 [ext_resource type="Texture2D" uid="uid://db4wg2yjr4n6p" path="res://game/towers/_icons/Starfish.jpg" id="24_askwi"]
-[ext_resource type="PackedScene" uid="uid://b7x3ngcflda7v" path="res://game/towers/_previews/starfish_cannon_preview.tscn" id="26_vpy88"]
-[ext_resource type="PackedScene" uid="uid://dikgl6mg5ebq3" path="res://game/towers/starfish_cannon/starfish_cannon.tscn" id="27_b8i56"]
+[ext_resource type="PackedScene" uid="uid://xk4qxs177wdl" path="res://game/towers/_previews/seahorse_preview.tscn" id="25_akmbi"]
+[ext_resource type="Texture2D" uid="uid://brshy2oyrb2ds" path="res://game/towers/_icons/SeahorseSelected.jpg" id="26_pgwn4"]
+[ext_resource type="PackedScene" uid="uid://byy40mksbem1y" path="res://game/towers/_previews/starfish_cannon_preview.tscn" id="26_vpy88"]
+[ext_resource type="PackedScene" uid="uid://bq7h7fvn8nxg0" path="res://game/towers/seahorse/seahorse_cannon.tscn" id="26_xpvvi"]
+[ext_resource type="PackedScene" uid="uid://cpp6emmfkrpda" path="res://game/towers/starfish_cannon/starfish_cannon.tscn" id="27_b8i56"]
+[ext_resource type="Texture2D" uid="uid://di4k6cp37jxff" path="res://game/towers/_icons/Seahorse.jpg" id="27_nxxyu"]
 
 [sub_resource type="Resource" id="Resource_ca1id"]
 script = ExtResource("5_o0f5a")
 cost = 10
 name = "Coral Hub"
 description = "Serves as a hub for your units. You can only build units in range of the hub. One hub can only server three units."
-normal = ExtResource("6_dwjeh")
-hover = ExtResource("7_blwwf")
-active = ExtResource("6_cktv7")
-disabled = ExtResource("7_6li3c")
+normal = ExtResource("9_rtod3")
+hover = ExtResource("8_qbku6")
+active = ExtResource("8_qbku6")
+disabled = ExtResource("9_rtod3")
 preview_scene = ExtResource("7_w7ayi")
 scene = ExtResource("10_urm36")
 
@@ -58,6 +64,30 @@ active = ExtResource("23_1nb03")
 disabled = ExtResource("24_askwi")
 preview_scene = ExtResource("26_vpy88")
 scene = ExtResource("27_b8i56")
+
+[sub_resource type="Resource" id="Resource_i8rls"]
+script = ExtResource("5_o0f5a")
+cost = 10
+name = "Zitteraal"
+description = "Zitteraal"
+normal = ExtResource("23_bw07a")
+hover = ExtResource("22_3ch50")
+active = ExtResource("22_3ch50")
+disabled = ExtResource("23_bw07a")
+preview_scene = ExtResource("22_54yb2")
+scene = ExtResource("22_mhj28")
+
+[sub_resource type="Resource" id="Resource_5wy5e"]
+script = ExtResource("5_o0f5a")
+cost = 10
+name = "Seahorse"
+description = "Seahorse"
+normal = ExtResource("27_nxxyu")
+hover = ExtResource("26_pgwn4")
+active = ExtResource("26_pgwn4")
+disabled = ExtResource("27_nxxyu")
+preview_scene = ExtResource("25_akmbi")
+scene = ExtResource("26_xpvvi")
 
 [node name="UILayer" type="CanvasLayer"]
 script = ExtResource("1_00sea")
@@ -143,7 +173,7 @@ offset_bottom = -20.0
 grow_vertical = 0
 script = ExtResource("4_0h1iq")
 tower_tile_scene = ExtResource("16_g2rwn")
-towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_ca1id"), SubResource("Resource_a6hyf"), SubResource("Resource_ywsbj")])
+towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_ca1id"), SubResource("Resource_a6hyf"), SubResource("Resource_ywsbj"), SubResource("Resource_i8rls"), SubResource("Resource_5wy5e")])
 
 [node name="TowerTile" parent="UI/TowerPanel" instance=ExtResource("16_g2rwn")]
 layout_mode = 2
