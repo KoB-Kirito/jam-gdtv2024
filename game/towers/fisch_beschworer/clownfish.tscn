@@ -1,43 +1,133 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcgp3b5v70md0"]
+[gd_scene load_steps=10 format=3 uid="uid://bcgp3b5v70md0"]
 
 [ext_resource type="Script" path="res://game/towers/fisch_beschworer/clownfish.gd" id="1_tbj2l"]
+[ext_resource type="PackedScene" uid="uid://cs6qg0t317num" path="res://assets/models/towers/Anemone_Clownfisch/Clownfisch.gltf" id="2_ewbsk"]
+[ext_resource type="PackedScene" uid="uid://c2ocwx4wxj1q6" path="res://game/components/healthbar_component.tscn" id="3_f1nh7"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_7bve8"]
-radius = 0.25
-height = 0.5
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_0u5q6"]
-radius = 1.2
+[sub_resource type="PrismMesh" id="PrismMesh_3vly0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b1i4q"]
-radius = 0.3
+radius = 0.674152
 
-[node name="Clownfish" type="StaticBody3D"]
-collision_layer = 0
-collision_mask = 4
+[sub_resource type="SphereShape3D" id="SphereShape3D_4nvs3"]
+radius = 1.5
+
+[sub_resource type="Animation" id="Animation_1tjs3"]
+resource_name = "attack"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Pivot/Clownfisch:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 2),
+"transitions": PackedFloat32Array(2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1),
+"update": 0,
+"values": [Vector3(0, 1.3, 0), Vector3(-1.65175, 1.3, 0), Vector3(-1.92885, 1.5141, -0.137503), Vector3(-1.49289, 1.5141, -0.544179), Vector3(-2.1791, 1.5141, -0.412792), Vector3(-1.76593, 1.27453, -0.216539), Vector3(-2.16895, 1.27453, -0.625119), Vector3(-1.44638, 1.1595, 0.217865), Vector3(-1.86344, 1.71362, -0.37335), Vector3(-0.948012, 1.33867, 0.225021), Vector3(-1.64568, 1.25882, -0.298364), Vector3(-1.37382, 1.3, 0), Vector3(0, 1.3, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Pivot/Clownfisch:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 2.40855, 0), Vector3(0, -2.06647, 0), Vector3(0, 0.703368, 0), Vector3(0, 2.56563, 0), Vector3(0, -2.75064, 0), Vector3(0, -0.513127, 0), Vector3(0, 1.15017, 0), Vector3(0, -2.1293, 0), Vector3(0, 2.31256, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3s2md"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Pivot/Clownfisch:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.3, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Pivot/Clownfisch:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vvyw"]
+_data = {
+"RESET": SubResource("Animation_3s2md"),
+"attack": SubResource("Animation_1tjs3")
+}
+
+[node name="Clownfish" type="CharacterBody3D"]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tbj2l")
-damage = 2.0
+decay_interval = 4.0
+decay_rate = 1.0
+max_health = 10.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_7bve8")
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="AttackZone" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 4
+[node name="Clownfisch" parent="Pivot" instance=ExtResource("2_ewbsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackZone"]
-shape = SubResource("CylinderShape3D_0u5q6")
-
-[node name="DamageTimer" type="Timer" parent="AttackZone"]
-unique_name_in_owner = true
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, -3.74168, 2.22309, 0.11105)
+visible = false
+mesh = SubResource("PrismMesh_3vly0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59307, 0)
 shape = SubResource("SphereShape3D_b1i4q")
 
-[node name="DeathTimer" type="Timer" parent="."]
+[node name="DecayTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
-[connection signal="body_entered" from="AttackZone" to="." method="_on_attack_zone_body_entered"]
-[connection signal="body_exited" from="AttackZone" to="." method="_on_attack_zone_body_exited"]
-[connection signal="timeout" from="AttackZone/DamageTimer" to="." method="_on_damage_timer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[node name="Healthbar" parent="." instance=ExtResource("3_f1nh7")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.28961, 0)
+
+[node name="AttackRangeDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5381, 0)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRangeDetector"]
+shape = SubResource("SphereShape3D_4nvs3")
+
+[node name="AttackWindupTimer" type="Timer" parent="AttackRangeDetector"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="AttackCooldownTimer" type="Timer" parent="AttackRangeDetector"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../AttackRangeDetector")
+libraries = {
+"": SubResource("AnimationLibrary_3vvyw")
+}
+
+[connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]
+[connection signal="body_entered" from="AttackRangeDetector" to="." method="_on_attack_range_detector_body_entered"]
+[connection signal="body_exited" from="AttackRangeDetector" to="." method="_on_attack_range_detector_body_exited"]
+[connection signal="timeout" from="AttackRangeDetector/AttackWindupTimer" to="." method="_on_attack_windup_timer_timeout"]
+[connection signal="timeout" from="AttackRangeDetector/AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

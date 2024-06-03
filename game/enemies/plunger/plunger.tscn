@@ -45,17 +45,15 @@ _data = {
 "attack": SubResource("Animation_i1wlg")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_kiaay"]
-radius = 0.8
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bgblg"]
+height = 3.0
+radius = 0.9
 
 [node name="Plunger" instance=ExtResource("1_jl15a")]
 script = ExtResource("2_kiskn")
-speed = 0.5
 max_health = 30.0
-damage = 5.0
 attack_range = 0.8
 attack_windup = 0.1
-attack_cooldown = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -85,4 +83,5 @@ libraries = {
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRangeDetector" index="0"]
-shape = SubResource("SphereShape3D_kiaay")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_bgblg")

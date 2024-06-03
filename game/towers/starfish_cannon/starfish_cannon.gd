@@ -14,6 +14,8 @@ var shooting_timer: Timer
 var burst_timer: Timer #salve
 var shots_fired_in_burst: int = 0 #salve
 
+@onready var animation_player: AnimationPlayer = $Seesternkanone/AnimationPlayer
+
 
 func _ready() -> void:
 	#%PatrolZone2.body_entered.connect(_on_patrol_zone_body_entered) # is already connected via editor
@@ -29,6 +31,8 @@ func _ready() -> void:
 	burst_timer.wait_time = burst_interval #salve
 	burst_timer.timeout.connect(_shoot) #salve
 	add_child(burst_timer) #salve
+	
+	animation_player.play(&"Seekanone_idle")
 
 
 func _process(_delta: float) -> void:
@@ -70,16 +74,18 @@ func _start_burst() -> void: #salve
 	if current_enemy:
 		shots_fired_in_burst = 0
 		burst_timer.start()
+		animation_player.play(&"Seesternkanone_werfen")
+		animation_player.animation_finished.connect(func(): animation_player.play(&"Seekanone_idle"), CONNECT_ONE_SHOT)
 
 func _shoot() -> void:
 	if current_enemy and shots_fired_in_burst < burst_count: #salve
 		var bullet: StarfishBullet = bullet_scene.instantiate()
-		bullet.global_position = global_transform.origin #salve
 		bullet.direction = (current_enemy.global_position - global_transform.origin).normalized()
 		bullet.damage = damage
 		
 		#print("Schieße Bullit in Richtung:", direction)
 		get_parent().add_child(bullet)
+		bullet.global_position = global_transform.origin #salve
 		shots_fired_in_burst += 1 #salve
 		if shots_fired_in_burst >= burst_count: #salve
 			burst_timer.stop() #salve

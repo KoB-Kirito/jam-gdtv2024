@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdrwdxg8ip08i"]
+[gd_scene load_steps=7 format=3 uid="uid://bdrwdxg8ip08i"]
 
 [ext_resource type="Script" path="res://game/towers/seahorse/seahorse_bullet.gd" id="1_2p2et"]
+[ext_resource type="Shader" path="res://game/environment/bubble.gdshader" id="2_1x01a"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bhxey"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7me2"]
+render_priority = 0
+shader = ExtResource("2_1x01a")
+shader_parameter/smoothness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vson"]
+transparency = 1
+albedo_color = Color(0.510914, 1, 0.952593, 0.772549)
+
 [sub_resource type="SphereMesh" id="SphereMesh_wbmvc"]
+material = SubResource("StandardMaterial3D_6vson")
 radius = 0.25
 height = 0.5
 
@@ -19,6 +30,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("SphereShape3D_bhxey")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_overlay = SubResource("ShaderMaterial_n7me2")
 mesh = SubResource("SphereMesh_wbmvc")
 
 [node name="TimeoutTimer" type="Timer" parent="."]

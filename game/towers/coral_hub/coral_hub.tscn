@@ -24,8 +24,8 @@ albedo_color = Color(0, 1, 0, 0.501961)
 
 [sub_resource type="TorusMesh" id="TorusMesh_evdlh"]
 material = SubResource("StandardMaterial3D_mnp0p")
-inner_radius = 4.9
-outer_radius = 5.0
+inner_radius = 7.9
+outer_radius = 8.0
 
 [node name="CoralHub" instance=ExtResource("1_tm4st")]
 collision_layer = 8

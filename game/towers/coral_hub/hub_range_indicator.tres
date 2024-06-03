@@ -8,5 +8,5 @@ shader = ExtResource("1_7en32")
 
 [resource]
 material = SubResource("ShaderMaterial_3y34n")
-inner_radius = 4.9
-outer_radius = 5.0
+inner_radius = 7.9
+outer_radius = 8.0

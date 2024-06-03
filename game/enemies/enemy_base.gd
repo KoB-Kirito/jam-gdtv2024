@@ -21,10 +21,12 @@ signal health_changed(new_health: float)
 
 var target: Node3D
 var current_target: Node3D
-var tower_in_range: Array[Tower]
+var towers_in_range: Array[Node3D]
 var target_in_range: bool = false
 
 var is_dead: bool = false
+
+var last_position: Vector3
 
 
 func _ready() -> void:
@@ -50,16 +52,16 @@ func _physics_process(delta: float) -> void:
 		current_target = null
 		target_in_range = false
 		var to_remove: Array[int] = []
-		for i in tower_in_range.size():
-			if not is_instance_valid(tower_in_range[i]):
+		for i in towers_in_range.size():
+			if not is_instance_valid(towers_in_range[i]):
 				to_remove.append(i)
 				continue
-			current_target = tower_in_range[i]
+			current_target = towers_in_range[i]
 			break
 		
 		to_remove.reverse()
 		for i in to_remove:
-			tower_in_range.remove_at(i)
+			towers_in_range.remove_at(i)
 		
 		# reset to default target if no tower is in range
 		if current_target == null:
@@ -91,8 +93,14 @@ func _on_velocity_computed(safe_velocity: Vector3):
 	if target_in_range:
 		return
 	
+	#if position == last_position:
+		#print_debug("trying to unstuck")
+		## force unstuck
+		#position += safe_velocity
+	#last_position = position
+	
 	velocity = safe_velocity
-	if velocity:
+	if velocity.length_squared() > 10.0:
 		look_at(global_position + velocity)
 	move_and_slide()
 
@@ -106,6 +114,19 @@ func take_damage(amount: float) -> void:
 	if health <= 0:
 		is_dead = true
 		die()
+		return
+	
+	# change aggro
+	if current_target == target:
+		var closest_target: Node3D
+		for t in towers_in_range:
+			if closest_target == null:
+				closest_target = t
+				continue
+			if global_position.distance_squared_to(t.global_position) < global_position.distance_squared_to(closest_target.global_position):
+				closest_target = t
+		if closest_target:
+			current_target = closest_target
 
 func die() -> void:
 	#TODO: animation
@@ -114,8 +135,8 @@ func die() -> void:
 
 
 func _on_tower_detector_body_entered(body: Node3D) -> void:
-	if body is Tower and body.can_be_damaged:
-		tower_in_range.append(body)
+	if body is Spawn or (body is Tower and body.can_be_damaged):
+		towers_in_range.append(body)
 		if current_target == target:
 			print_debug("found tower, should switch target now")
 			current_target = body
@@ -138,6 +159,9 @@ func _on_attack_cooldown_timer_timeout() -> void:
 	attack_current_target()
 
 func attack_current_target() -> void:
+	if not current_target:
+		return
+	
 	look_at(current_target.global_position)
 	
 	#TODO: play windup sound?

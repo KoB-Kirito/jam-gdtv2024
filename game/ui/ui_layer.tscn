@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b7r4d5s6guolp"]
+[gd_scene load_steps=39 format=3 uid="uid://b7r4d5s6guolp"]
 
 [ext_resource type="Script" path="res://game/ui/ui.gd" id="1_00sea"]
 [ext_resource type="Script" path="res://game/ui/top_label.gd" id="1_477hd"]
@@ -28,6 +28,10 @@
 [ext_resource type="PackedScene" uid="uid://bq7h7fvn8nxg0" path="res://game/towers/seahorse/seahorse_cannon.tscn" id="26_xpvvi"]
 [ext_resource type="PackedScene" uid="uid://cpp6emmfkrpda" path="res://game/towers/starfish_cannon/starfish_cannon.tscn" id="27_b8i56"]
 [ext_resource type="Texture2D" uid="uid://di4k6cp37jxff" path="res://game/towers/_icons/Seahorse.jpg" id="27_nxxyu"]
+[ext_resource type="Texture2D" uid="uid://ccirn0b17e7vk" path="res://game/ui/FishtowerActive.png" id="28_43p54"]
+[ext_resource type="Texture2D" uid="uid://cqhomdebka4q1" path="res://game/ui/Fishtower.png" id="29_2x5ge"]
+[ext_resource type="PackedScene" uid="uid://bxpa2vlhsus71" path="res://game/towers/_previews/fish_spawner_preview.tscn" id="30_gp6og"]
+[ext_resource type="PackedScene" uid="uid://q5sbjvosbnrn" path="res://game/towers/fisch_beschworer/fisch_spawner.tscn" id="31_y43a7"]
 
 [sub_resource type="Resource" id="Resource_ca1id"]
 script = ExtResource("5_o0f5a")
@@ -88,6 +92,18 @@ active = ExtResource("26_pgwn4")
 disabled = ExtResource("27_nxxyu")
 preview_scene = ExtResource("25_akmbi")
 scene = ExtResource("26_xpvvi")
+
+[sub_resource type="Resource" id="Resource_1oo6n"]
+script = ExtResource("5_o0f5a")
+cost = 10
+name = "Fish"
+description = ""
+normal = ExtResource("29_2x5ge")
+hover = ExtResource("28_43p54")
+active = ExtResource("28_43p54")
+disabled = ExtResource("29_2x5ge")
+preview_scene = ExtResource("30_gp6og")
+scene = ExtResource("31_y43a7")
 
 [node name="UILayer" type="CanvasLayer"]
 script = ExtResource("1_00sea")
@@ -173,7 +189,7 @@ offset_bottom = -20.0
 grow_vertical = 0
 script = ExtResource("4_0h1iq")
 tower_tile_scene = ExtResource("16_g2rwn")
-towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_ca1id"), SubResource("Resource_a6hyf"), SubResource("Resource_ywsbj"), SubResource("Resource_i8rls"), SubResource("Resource_5wy5e")])
+towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_ca1id"), SubResource("Resource_a6hyf"), SubResource("Resource_ywsbj"), SubResource("Resource_i8rls"), SubResource("Resource_5wy5e"), SubResource("Resource_1oo6n")])
 
 [node name="TowerTile" parent="UI/TowerPanel" instance=ExtResource("16_g2rwn")]
 layout_mode = 2

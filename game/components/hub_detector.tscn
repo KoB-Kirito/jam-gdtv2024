@@ -2,7 +2,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_kxoff"]
 height = 1.0
-radius = 5.0
+radius = 8.0
 
 [node name="HubDetector" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

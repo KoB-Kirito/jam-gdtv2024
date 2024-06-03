@@ -1,60 +1,60 @@
 extends Tower
+class_name FischSpawner
 
 
-
-@export_range(0.1, 10.0, 0.1) var spawn_rate: float = 10
+@export_range(0.1, 30.0, 0.1) var spawn_rate: float = 10.0
 @export var spawn_scene: PackedScene
 
-var enemies_in_range: Array[Node3D] = []
-var current_enemy: Enemy
-var shooting_timer: Timer
+var spawns: Array[Spawn]
+var enemies_in_range: Array[Enemy] = []
 
-# Called when the node enters the scene tree for the first time.
+var current_target: Enemy:
+	set(value):
+		current_target = value
+		# update target spawns
+		for spawn in spawns:
+			if is_instance_valid(spawn):
+				#TODO: remove dead spawns
+				spawn.current_target = current_target
+
+
 func _ready() -> void:
-	shooting_timer = Timer.new()
-	shooting_timer.wait_time = spawn_rate # Beispiel-Spawnrate
-	shooting_timer.timeout.connect(_on_timer_timeout)
-	add_child(shooting_timer)
+	%SpawnTimer.start(spawn_rate)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+func _spawn() -> void:
+	assert(spawn_scene, "No spawn scene assigned!")
+	
+	var spawn: Spawn = spawn_scene.instantiate()
+	add_child(spawn)
+	spawn.global_position = %Spawnpoint.global_position
+	spawn.spawn_position = %Spawnpoint.global_position
+	spawn.get_new_wander_target()
+	
+	spawn.current_target = current_target
+	spawns.append(spawn)
+
+
+func _on_spawn_timer_timeout() -> void:
+	_spawn()
+
 
 func _on_patrol_zone_body_entered(body: Node3D) -> void:
 	if body is Enemy:
-		# Gegner hinzufügen
-		if current_enemy == null:
-			current_enemy = body
 		enemies_in_range.append(body)
-		if enemies_in_range.size() == 1: # Starten des Timers, wenn dies der erste Gegner ist
-			shooting_timer.start()
+		
+		# Gegner hinzufügen
+		if current_target == null:
+			current_target = body
+
 
 func _on_patrol_zone_body_exited(body: Node3D) -> void:
 	if body is Enemy:
-		# Gegner entfernen
 		enemies_in_range.erase(body)
-		if current_enemy == body:
-			if enemies_in_range.size() > 0:
-				current_enemy = enemies_in_range[0]
+		
+		if body == current_target:
+			# get new enemy
+			if enemies_in_range:
+				current_target = enemies_in_range[0]
 			else:
-				current_enemy = null
-		if enemies_in_range.size() == 0: # Timer stoppen, wenn keine Gegner mehr da sind
-			shooting_timer.stop()
-
-func _on_timer_timeout() -> void:
-	if enemies_in_range.size() > 0:
-		_spawn()
-
-func _spawn() -> void:
-	if spawn_scene:
-		var unit: Node3D = spawn_scene.instantiate()
-		unit.global_transform.origin = self.global_transform.origin + Vector3(1, 0, 1) # Beispiel-Position
-		get_parent().add_child(unit)
-
-		if unit is Spawneinheit:
-			var spawn_unit = unit as Spawneinheit
-			spawn_unit.target_enemy = current_enemy # Setze das Ziel des Einheit auf den aktuellen Gegner
-		else:
-			print("Spawned unit is not of type SpawnUnit!")
-	else:
-		print("No spawn scene assigned!")
+				current_target = null

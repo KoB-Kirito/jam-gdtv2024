@@ -13,9 +13,10 @@ radius = 19.259
 size = Vector3(2.10358, 1.46031, 1.745)
 
 [node name="seahorse_cannon" instance=ExtResource("1_8w715")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_fh3p7")
-fire_rate = 3.2
-damage = 1.0
+fire_rate = 4.0
+damage = 10.0
 bullet_scene = ExtResource("3_1a0la")
 
 [node name="PatrolZone" type="Area3D" parent="." index="0"]
@@ -40,9 +41,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0088
 [node name="Seepferdchen2" parent="." index="4" instance=ExtResource("5_hxw7g")]
 
 [node name="Skeleton3D" parent="Seepferdchen2/Seepferdchen" index="0"]
-bones/0/rotation = Quaternion(0.0891399, 2.00228e-05, 0.00367992, 0.996012)
-bones/1/rotation = Quaternion(-0.545495, -0.00418561, 0.044228, 0.836936)
-bones/2/rotation = Quaternion(-0.658917, -6.04352e-09, -0.00498272, 0.752199)
+bones/0/rotation = Quaternion(-0.441872, 0.00193096, 0.00313266, 0.897071)
+bones/1/rotation = Quaternion(-0.253233, -0.020002, 0.0395614, 0.966389)
+bones/2/rotation = Quaternion(-0.472917, -0.00210904, -0.0261765, 0.880715)
 
 [connection signal="body_entered" from="PatrolZone" to="." method="_on_patrol_zone_body_entered"]
 [connection signal="body_exited" from="PatrolZone" to="." method="_on_patrol_zone_body_exited"]

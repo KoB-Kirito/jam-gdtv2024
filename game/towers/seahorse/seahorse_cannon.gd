@@ -19,9 +19,7 @@ func _ready() -> void:
 	shooting_timer.wait_time = fire_rate # Beispiel-Feuerrate, 1 Schuss pro Sekunde
 	shooting_timer.timeout.connect(_shoot)
 	add_child(shooting_timer)
-	shooting_timer.start()
-	
-	$Seepferdchen2/AnimationPlayer.play("ArmatureAction")
+	#shooting_timer.start()
 
 
 func _process(_delta: float) -> void:
@@ -34,9 +32,11 @@ func _process(_delta: float) -> void:
 
 func _on_patrol_zone_body_entered(body: Node3D) -> void:
 	if body is Enemy:
-		print_debug(body, "entered")
+		#print_debug(body, "entered")
 		if current_enemy == null:
 			current_enemy = body
+			_shoot()
+			shooting_timer.start()
 		enemies_in_range.append(body)
 		#print(enemies_in_range.size())
 		#print(body.global_position)
@@ -45,13 +45,14 @@ func _on_patrol_zone_body_entered(body: Node3D) -> void:
 
 func _on_patrol_zone_body_exited(body: Node3D) -> void:
 	if body is Enemy:
-		print(body, "exited")
+		#print(body, "exited")
 		enemies_in_range.erase(body)
 		if current_enemy == body:
 			if enemies_in_range.size() > 0:
 				current_enemy = enemies_in_range[0]
 			else:
 				current_enemy = null
+				shooting_timer.stop()
 		#print(enemies_in_range.size())
 
 
@@ -65,7 +66,9 @@ func look_at_2d(target_position: Vector3) -> void:
 func _shoot() -> void:
 	if current_enemy:
 		
-		$Seepferdchen2/AnimationPlayer.play("ArmatureAction")
+		animation_player.play("ArmatureAction")
+		
+		await get_tree().create_timer(1.5).timeout
 		
 		var bullet: SeahorseBullet = bullet_scene.instantiate()
 		

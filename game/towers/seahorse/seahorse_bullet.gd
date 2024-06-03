@@ -3,7 +3,7 @@ class_name SeahorseBullet
 
 @onready var collision_shape_3d = %CollisionShape3D
 
-var speed: float = 22.5
+var speed: float = 8.5
 var direction: Vector3
 var damage: float
 
