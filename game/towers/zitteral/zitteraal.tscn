@@ -10,7 +10,7 @@
 radius = 11.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q7081"]
-size = Vector3(4, 4.5, 4)
+size = Vector3(3.03131, 1.13184, 2.92377)
 
 [sub_resource type="Gradient" id="Gradient_kx3ag"]
 
@@ -30,7 +30,7 @@ color_ramp = SubResource("GradientTexture1D_nk3kh")
 [node name="zitteraal" instance=ExtResource("1_iby66")]
 script = ExtResource("2_is76d")
 damage = 0.5
-interval = 0.1
+interval = 0.5
 
 [node name="Patrolzone" type="Area3D" parent="." index="0"]
 collision_layer = 0
@@ -46,7 +46,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.33058, 0.357527)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36978, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00888062, 0.685698, 0.00283813)
 shape = SubResource("BoxShape3D_q7081")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." index="3"]
@@ -56,6 +56,7 @@ process_material = SubResource("ParticleProcessMaterial_bcigl")
 draw_pass_1 = ExtResource("5_q41w1")
 
 [node name="Gegner" parent="." index="4" instance=ExtResource("2_87fem")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [connection signal="body_entered" from="Patrolzone" to="." method="_on_patrolzone_body_entered"]
 [connection signal="body_exited" from="Patrolzone" to="." method="_on_patrolzone_body_exited"]

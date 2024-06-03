@@ -1,8 +1,98 @@
-[gd_scene load_steps=6 format=3 uid="uid://byrdopln568mu"]
+[gd_scene load_steps=11 format=3 uid="uid://byrdopln568mu"]
 
 [ext_resource type="PackedScene" uid="uid://ui2u7rxqx62m" path="res://game/enemies/enemy_base.tscn" id="1_u8gf1"]
 [ext_resource type="PackedScene" uid="uid://cky25wg1ncqiv" path="res://assets/models/enemies/chips_bag.glb" id="2_6dh0m"]
 [ext_resource type="Script" path="res://game/enemies/bottle/chips_bag.gd" id="2_gph71"]
+[ext_resource type="PackedScene" uid="uid://dt78kn6ssbqdq" path="res://game/enemies/nacho/nacho.tscn" id="3_h6qu2"]
+
+[sub_resource type="Animation" id="Animation_g8ykb"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chips_bag2:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1998, 0.5994, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.448815, 0.319828, 0.651964), Vector3(0, 1.5708, -0.785398), Vector3(0, 1.5708, -12.5664), Vector3(0.448815, 0.319828, 0.651964)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("chips_bag2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.49193, 0), Vector3(0, 1.49193, -0.884992), Vector3(0, 1.49193, -2.83685), Vector3(0, 1.49193, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5n22i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chips_bag2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.448815, 0.319828, 0.651964)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("chips_bag2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.49193, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("chips_bag2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.645, 0.645, 0.645)]
+}
+
+[sub_resource type="Animation" id="Animation_6lsm1"]
+resource_name = "poof"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chips_bag2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1998),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0.645, 0.645, 0.645), Vector3(2, 2, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_whesw"]
+_data = {
+"RESET": SubResource("Animation_5n22i"),
+"attack": SubResource("Animation_g8ykb"),
+"poof": SubResource("Animation_6lsm1")
+}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ea747"]
 height = 3.0
@@ -14,20 +104,31 @@ height = 4.33243
 
 [node name="Enemy" instance=ExtResource("1_u8gf1")]
 script = ExtResource("2_gph71")
-max_health = 50.0
+nacho_scene = ExtResource("3_h6qu2")
+nacho_amount = 3
+max_health = 20.0
 damage = 3.0
-attack_cooldown = 0.5
+attack_cooldown = 5.0
 
 [node name="HealthbarComponent" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86125, 0)
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_whesw")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRangeDetector" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CylinderShape3D_ea747")
 
 [node name="chips_bag2" parent="." index="6" instance=ExtResource("2_6dh0m")]
-transform = Transform3D(0.540095, -0.301564, 0.182706, 0.352594, 0.461929, -0.279864, 0, 0.334224, 0.551652, 0, 1.49193, 0)
+transform = Transform3D(0.540095, -0.301564, 0.182706, 0.352594, 0.461929, -0.279865, -3.8445e-08, 0.334224, 0.551651, 0, 1.49193, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0786743, 2.2988, 0.0757065)
 shape = SubResource("CapsuleShape3D_eov4t")
+
+[node name="SpawnPosition" type="Marker3D" parent="." index="8"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0125089, 1.57413, -0.0500353)

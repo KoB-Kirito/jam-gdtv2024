@@ -31,6 +31,10 @@ mouse_cursor/custom_image="res://assets/sprites/Mauszeiger.png"
 mouse_cursor/custom_image_hotspot=Vector2(26, 5)
 mouse_cursor/tooltip_position_offset=Vector2(100, 10)
 
+[global_group]
+
+coral=""
+
 [input]
 
 camera_forward={

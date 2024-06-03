@@ -1,0 +1,105 @@
+[gd_scene load_steps=15 format=3 uid="uid://70xy3lgye8p0"]
+
+[ext_resource type="PackedScene" uid="uid://ui2u7rxqx62m" path="res://game/enemies/enemy_base.tscn" id="1_5owmp"]
+[ext_resource type="Script" path="res://game/enemies/boss/boss_bag.gd" id="2_bo5d7"]
+[ext_resource type="PackedScene" uid="uid://cuowi1sbbunlk" path="res://assets/models/enemies/trash-bag.glb" id="2_h3qox"]
+[ext_resource type="PackedScene" uid="uid://yyeoxqrv8vc4" path="res://game/enemies/bottle/bottle.tscn" id="3_gcwfu"]
+[ext_resource type="PackedScene" uid="uid://dt78kn6ssbqdq" path="res://game/enemies/nacho/nacho.tscn" id="4_su21o"]
+[ext_resource type="PackedScene" uid="uid://d384i3b84q0rm" path="res://game/enemies/nacho/pencil.tscn" id="5_bh4eb"]
+[ext_resource type="PackedScene" uid="uid://ddhd5qtphiv5t" path="res://game/enemies/plunger/plunger.tscn" id="6_njml4"]
+[ext_resource type="PackedScene" uid="uid://byrdopln568mu" path="res://game/enemies/bottle/chips_bag.tscn" id="7_s0gn3"]
+
+[sub_resource type="Animation" id="Animation_8j4b3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("trash-bag:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(8, 8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_g2arn"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("trash-bag:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1998, 0.4, 0.6993, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(8, 8, 8), Vector3(6, 10, 8), Vector3(8, 8, 8), Vector3(5, 11, 8), Vector3(8, 8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_3xyp3"]
+resource_name = "attack"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("trash-bag:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector3(8, 8, 8), Vector3(8, 8, 2), Vector3(8, 8, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8d880"]
+_data = {
+"RESET": SubResource("Animation_8j4b3"),
+"attack": SubResource("Animation_3xyp3"),
+"spawn": SubResource("Animation_g2arn")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_shoae"]
+radius = 8.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b7urm"]
+radius = 2.0
+
+[node name="BossBag" instance=ExtResource("1_5owmp")]
+collision_mask = 20
+script = ExtResource("2_bo5d7")
+enemies = Array[PackedScene]([ExtResource("3_gcwfu"), ExtResource("4_su21o"), ExtResource("5_bh4eb"), ExtResource("6_njml4"), ExtResource("7_s0gn3")])
+speed = 2.0
+max_health = 100.0
+attack_range = 8.0
+attack_cooldown = 6.0
+
+[node name="trash-bag" parent="." index="0" instance=ExtResource("2_h3qox")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 4.75, 0)
+
+[node name="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_8d880")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRangeDetector" index="0"]
+shape = SubResource("SphereShape3D_shoae")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.167, 0)
+shape = SubResource("SphereShape3D_b7urm")
+
+[node name="SpawnPosition" type="Marker3D" parent="." index="8"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34275, 4.83422, 0.157498)
+
+[node name="SpawnTimer" type="Timer" parent="." index="9"]
+unique_name_in_owner = true
+wait_time = 8.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

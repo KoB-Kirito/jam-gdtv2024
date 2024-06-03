@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cedr6yimal7wu"]
+[gd_scene load_steps=7 format=3 uid="uid://cedr6yimal7wu"]
 
 [ext_resource type="PackedScene" uid="uid://c4ddnf6e0k7rm" path="res://assets/models/towers/Zitteraal/Gegner.gltf" id="1_h80bi"]
 [ext_resource type="Shader" path="res://game/towers/_previews/_base/building_preview.gdshader" id="2_vvvje"]
@@ -11,7 +11,11 @@ shader = ExtResource("2_vvvje")
 render_priority = 0
 shader = ExtResource("2_vvvje")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3k67"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x88c6"]
+render_priority = 0
+shader = ExtResource("2_vvvje")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p332b"]
 render_priority = 0
 shader = ExtResource("2_vvvje")
 
@@ -24,4 +28,16 @@ material_override = SubResource("ShaderMaterial_8fff3")
 material_override = SubResource("ShaderMaterial_t5owd")
 
 [node name="Vert_010" parent="Zitteraal2/Skeleton3D" index="0"]
-material_overlay = SubResource("ShaderMaterial_m3k67")
+material_override = SubResource("ShaderMaterial_x88c6")
+
+[node name="Vert_006" parent="Zitteraal3/Skeleton3D" index="0"]
+material_override = SubResource("ShaderMaterial_p332b")
+
+[node name="Vert_011" parent="Zitteraal4/Skeleton3D" index="0"]
+material_override = SubResource("ShaderMaterial_p332b")
+
+[node name="Vert_012" parent="Zitteraal5/Skeleton3D" index="0"]
+material_override = SubResource("ShaderMaterial_p332b")
+
+[node name="Vert_013" parent="Zitteraal6/Skeleton3D" index="0"]
+material_override = SubResource("ShaderMaterial_p332b")

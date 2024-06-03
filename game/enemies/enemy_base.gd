@@ -100,7 +100,7 @@ func _on_velocity_computed(safe_velocity: Vector3):
 	#last_position = position
 	
 	velocity = safe_velocity
-	if velocity.length_squared() > 10.0:
+	if is_zero_approx(velocity.y) and velocity.length_squared() > 10.0:
 		look_at(global_position + velocity)
 	move_and_slide()
 
