@@ -26,7 +26,7 @@ func spawn_random_waste() -> void:
 	waste.position = get_random_spawn_point()
 	waste.life_time = life_time + current_round * per_level_reduction
 	
-	waste.scale = Vector3(randf_range(1.0, 1.5), randf_range(1.0, 1.5), randf_range(1.0, 1.5))
+	waste.scale = Vector3(randf_range(1.2, 1.8), randf_range(1.2, 1.8), randf_range(1.2, 1.8))
 	waste.rotate_y(randf_range(0.0, TAU))
 	
 	owner.add_child(waste)

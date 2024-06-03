@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd1ealdpgdnb3"]
+[gd_scene load_steps=4 format=3 uid="uid://dd1ealdpgdnb3"]
 
 [ext_resource type="Script" path="res://menu/title_menu.gd" id="1_1vcfh"]
 [ext_resource type="FontFile" uid="uid://cxkhfcmf5mquo" path="res://assets/fonts/ProtestStrike-Regular.ttf" id="1_04xxk"]
+[ext_resource type="PackedScene" uid="uid://bdw233li11voo" path="res://menu/pause_menu.tscn" id="3_eicq0"]
 
 [node name="TitleMenu" type="Control"]
 layout_mode = 3
@@ -30,7 +31,7 @@ offset_right = 674.0
 offset_bottom = 201.0
 theme_override_fonts/font = ExtResource("1_04xxk")
 theme_override_font_sizes/font_size = 75
-text = "Game Title"
+text = "The Last Coral"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -72,6 +73,11 @@ offset_bottom = 553.0
 theme_override_fonts/font = ExtResource("1_04xxk")
 text = "Quit Game
 "
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_eicq0")]
+unique_name_in_owner = true
+visible = false
+script = null
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
