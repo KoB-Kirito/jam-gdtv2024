@@ -7,7 +7,7 @@ enum {SLIDE, FADE}
 
 
 func get_right_position() -> float:
-	return get_viewport().size.x + MARGIN
+	return get_viewport().get_visible_rect().size.x + MARGIN
 
 func get_middle_position() -> float:
 	return - %Fade.size.x * 0.2
@@ -24,13 +24,14 @@ func change_scene(scene_path: String, animation: int, duration: float, color: Co
 	# set gradient color
 	%Fade.texture.gradient.set_color(1, Color(color, 1.0))
 	%Fade.texture.gradient.set_color(2, Color(color, 1.0))
+	%Fade.show()
 	
 	var tween = create_tween()
 	
 	match animation:
 		SLIDE:
 			%Fade.modulate = Color.WHITE
-			%Fade.position.x = get_viewport().size.x + MARGIN
+			%Fade.position.x = get_right_position()
 			
 			tween.tween_property(%Fade, "position:x", get_middle_position(), duration / 2)
 			tween.tween_callback(func(): get_tree().change_scene_to_file(scene_path))
@@ -43,3 +44,5 @@ func change_scene(scene_path: String, animation: int, duration: float, color: Co
 			tween.tween_property(%Fade, "modulate", Color.WHITE, duration / 2)
 			tween.tween_callback(func(): get_tree().change_scene_to_file(scene_path))
 			tween.tween_property(%Fade, "modulate", Color.TRANSPARENT, duration / 2)
+	
+	tween.tween_callback(func(): %Fade.hide())
