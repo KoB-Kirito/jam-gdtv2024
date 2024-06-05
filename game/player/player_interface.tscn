@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://1bj00urgbi5u"]
+[gd_scene load_steps=4 format=3 uid="uid://1bj00urgbi5u"]
 
 [ext_resource type="Script" path="res://game/player/player_interface.gd" id="1_yx3k1"]
+[ext_resource type="AudioStream" uid="uid://bq8075im6x72r" path="res://assets/sounds/ActionNotAvaiable.wav" id="2_67ivv"]
+[ext_resource type="AudioStream" uid="uid://pef232wy4ker" path="res://assets/sounds/PlaceSomething.wav" id="2_nrdxk"]
 
 [node name="PlayerInterface" type="Node"]
 script = ExtResource("1_yx3k1")
+
+[node name="snd_place" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_nrdxk")
+bus = &"Sounds"
+
+[node name="snd_blocked" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_67ivv")
+volume_db = -6.0
+bus = &"Sounds"

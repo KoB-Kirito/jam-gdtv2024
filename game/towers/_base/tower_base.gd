@@ -11,8 +11,20 @@ signal died
 @onready var health: float = max_health
 
 
+func _enter_tree() -> void:
+	#HACK
+	Events.build_phase_started.connect(_on_round_started)
+
+func _on_round_started(duration: float) -> void:
+	# heal when clam is activated #HACK
+	if Globals.current_level >= 4:
+		take_damage(-20.0)
+
+
 func take_damage(amount: float) -> void:
 	health -= amount
+	if health > max_health:
+		health = max_health
 	health_changed.emit(health)
 	if health <= 0:
 		die()

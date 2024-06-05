@@ -46,6 +46,9 @@ func _physics_process(delta: float) -> void:
 	if %NavigationAgent3D.is_navigation_finished():
 		return
 	
+	if global_position.y < 0:
+		global_position.y = 0
+	
 	# check target
 	if not is_instance_valid(current_target):
 		# get new target
@@ -118,9 +121,9 @@ func take_damage(amount: float) -> void:
 	
 	# change aggro
 	if current_target == target:
-		var closest_target: Node3D
+		var closest_target: Node3D = null
 		for t in towers_in_range:
-			if closest_target == null:
+			if not closest_target:
 				closest_target = t
 				continue
 			if global_position.distance_squared_to(t.global_position) < global_position.distance_squared_to(closest_target.global_position):
@@ -138,7 +141,7 @@ func _on_tower_detector_body_entered(body: Node3D) -> void:
 	if body is Spawn or (body is Tower and body.can_be_damaged):
 		towers_in_range.append(body)
 		if current_target == target:
-			print_debug("found tower, should switch target now")
+			#print_debug("found tower, should switch target now")
 			current_target = body
 			target_in_range = false
 			%NavigationAgent3D.set_target_position(current_target.global_position)

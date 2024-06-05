@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://mpn2ego6iman"]
+[gd_scene load_steps=3 format=3 uid="uid://mpn2ego6iman"]
 
 [ext_resource type="FontFile" uid="uid://cxkhfcmf5mquo" path="res://assets/fonts/ProtestStrike-Regular.ttf" id="1_qvqyr"]
+[ext_resource type="Script" path="res://menu/win_title.gd" id="1_vxguq"]
 
 [node name="win_title" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vxguq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -53,16 +55,4 @@ theme_override_fonts/font = ExtResource("1_qvqyr")
 text = "Main Menu
 "
 
-[node name="RestartButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_qvqyr")
-text = "Restart
-"
-
-[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer/MainMenuButton" method="_on_MainMenuButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer/MainMenuButton" method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer/MainMenuButton" method="_on_pressed"]
-[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_MainMenuButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/RestartButton" to="VBoxContainer/RestartButton" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

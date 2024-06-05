@@ -20,6 +20,7 @@ func _ready() -> void:
 	#TODO: Custom tooltip panel
 	
 	%CostLabel.text = str(tower_data.cost)
+	on_resource_changed(Globals.resource)
 	
 	Events.resource_changed.connect(on_resource_changed)
 

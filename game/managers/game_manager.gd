@@ -49,7 +49,7 @@ func start_build_phase() -> void:
 	%RoundTimer.stop()
 	
 	# play cutscenes
-	print_debug("playing cutscenes for level ", current_round)
+	#print_debug("playing cutscenes for level ", current_round)
 	for cutscene in cutscenes:
 		if cutscene.level == current_round:
 			cutscene.play_cutscene()
@@ -60,11 +60,22 @@ func start_build_phase() -> void:
 	print_debug("Build phase started")
 
 
+func win_game() -> void:
+	print_debug("Starting win transition..")
+	var t := SceneTransition.Options.new("res://menu/win_title.tscn")
+	t.duration = 3.0
+	t.new_bgm = load("res://menu/Jingle.ogg")
+	t.volume = -6.0
+	SceneTransition.change_scene(t)
+
+
 func start_next_round() -> void:
 	current_round += 1
-	Events.round_started.emit(current_round)
+	Globals.current_level = current_round
 	%RoundTimer.start()
 	print_debug("Round ", current_round, " started")
+	%snd_round_started.play()
+	Events.round_started.emit(current_round)
 
 
 func _on_death_zone_body_entered(body: Node3D) -> void:
@@ -92,7 +103,11 @@ func _on_base_took_damage(amount: Variant) -> void:
 	Events.coral_health_changed.emit(coral_health)
 
 
+func stop_music() -> void:
+	Bgm.fade_out(3.0)
+
 func restart_level() -> void:
+	Bgm.fade_to(load("res://assets/sounds/MenuTheme.mp3"), -20.0, 1.0)
 	get_tree().reload_current_scene()
 
 
@@ -105,3 +120,4 @@ func _on_warning_zone_body_entered(body: Node3D) -> void:
 
 func on_waste_collected(value: int) -> void:
 	Globals.resource += value
+	%snd_collect.play()

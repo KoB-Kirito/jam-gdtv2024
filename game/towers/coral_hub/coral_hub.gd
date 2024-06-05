@@ -28,7 +28,13 @@ func _ready() -> void:
 func on_build_mode_entered() -> void:
 	build_mode_active = true
 	if free_connections > 0:
-		%RangeIndicator.show()
+		%RangeIndicator.mesh.surface_get_material(0).albedo_color = Color(0.0, 1.0, 0.0, 0.5)
+		#%RangeIndicator.mesh.material.albedo_color = Color(0.0, 1.0, 0.0, 0.5)
+	else:
+		%RangeIndicator.mesh.surface_get_material(0).albedo_color = Color(1.0, 0.8, 0.0, 0.5)
+		#%RangeIndicator.mesh.material.albedo_color = Color(1.0, 0.8, 0.0, 0.5)
+	
+	%RangeIndicator.show()
 
 
 func on_build_mode_exited() -> void:
@@ -50,5 +56,4 @@ func on_connected_tower_died(tower: Tower) -> void:
 func update_label() -> void:
 	%ConnectionsLabel.text = str(current_connections) + " / " + str(max_connections)
 	
-	if build_mode_active:
-		%RangeIndicator.visible = free_connections > 0
+	%ConnectionsLabel.visible = free_connections > 0

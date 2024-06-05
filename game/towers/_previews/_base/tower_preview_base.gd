@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 func on_hub_detector_body_entered(body: Node3D) -> void:
-	print("body entered hub detector: ", body)
+	#print_debug("body entered hub detector: ", body)
 	
 	if body is CoralHub:
 		hubs_in_range.append(body)

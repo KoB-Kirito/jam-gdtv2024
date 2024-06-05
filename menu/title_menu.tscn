@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dd1ealdpgdnb3"]
+[gd_scene load_steps=8 format=3 uid="uid://dd1ealdpgdnb3"]
 
 [ext_resource type="Script" path="res://menu/title_menu.gd" id="1_1vcfh"]
 [ext_resource type="FontFile" uid="uid://cxkhfcmf5mquo" path="res://assets/fonts/ProtestStrike-Regular.ttf" id="1_04xxk"]
-[ext_resource type="PackedScene" uid="uid://bdw233li11voo" path="res://menu/pause_menu.tscn" id="3_eicq0"]
+[ext_resource type="Texture2D" uid="uid://yl25r5mlki30" path="res://menu/StartScreenV1.png" id="2_8jkrx"]
+[ext_resource type="Texture2D" uid="uid://d1ouhpnsjfmls" path="res://menu/BubbleSelectNewGame.png" id="3_hws3n"]
+[ext_resource type="Texture2D" uid="uid://cpvinlj62el4j" path="res://menu/BubbleSelectRules.png" id="4_k7dd4"]
+[ext_resource type="Texture2D" uid="uid://c0y62pcnqbs0v" path="res://menu/BubbleSelectCredits.png" id="5_m1f1r"]
+[ext_resource type="Texture2D" uid="uid://cvy53m82qnbwm" path="res://menu/CreditScreen.png" id="6_imxly"]
 
 [node name="TitleMenu" type="Control"]
 layout_mode = 3
@@ -14,72 +18,124 @@ grow_vertical = 2
 script = ExtResource("1_1vcfh")
 first_level = "res://game/world.tscn"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.164, 0.238733, 0.4, 1)
+texture = ExtResource("2_8jkrx")
 
-[node name="Label" type="Label" parent="."]
+[node name="StartButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 339.0
-offset_top = 88.0
-offset_right = 674.0
-offset_bottom = 201.0
-theme_override_fonts/font = ExtResource("1_04xxk")
-theme_override_font_sizes/font_size = 75
-text = "The Last Coral"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 48.0
+offset_top = 596.0
+offset_right = 474.0
+offset_bottom = 1027.0
+texture_pressed = ExtResource("3_hws3n")
+texture_hover = ExtResource("3_hws3n")
+texture_focused = ExtResource("3_hws3n")
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="RulesButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 368.0
-offset_right = 218.0
-offset_bottom = 403.0
-theme_override_fonts/font = ExtResource("1_04xxk")
-text = "Play"
+offset_left = 1436.0
+offset_top = 121.0
+offset_right = 1760.0
+offset_bottom = 451.0
+texture_pressed = ExtResource("4_k7dd4")
+texture_hover = ExtResource("4_k7dd4")
+texture_focused = ExtResource("4_k7dd4")
 
-[node name="OptionsButton" type="Button" parent="."]
+[node name="CreditsButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 418.0
-offset_right = 218.0
-offset_bottom = 453.0
-theme_override_fonts/font = ExtResource("1_04xxk")
-text = "Options
-"
+offset_left = 1235.0
+offset_top = 536.0
+offset_right = 1767.0
+offset_bottom = 1069.0
+texture_pressed = ExtResource("5_m1f1r")
+texture_hover = ExtResource("5_m1f1r")
+texture_focused = ExtResource("5_m1f1r")
 
-[node name="CreditsButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 468.0
-offset_right = 218.0
-offset_bottom = 503.0
-theme_override_fonts/font = ExtResource("1_04xxk")
-text = "Credits
-"
-
-[node name="QuitGameButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 518.0
-offset_right = 218.0
-offset_bottom = 553.0
-theme_override_fonts/font = ExtResource("1_04xxk")
-text = "Quit Game
-"
-
-[node name="PauseMenu" parent="." instance=ExtResource("3_eicq0")]
+[node name="Rules" type="TextureRect" parent="."]
 unique_name_in_owner = true
-visible = false
-script = null
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_imxly")
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[node name="RulesTextLabel" type="RichTextLabel" parent="Rules"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.0
+offset_top = -353.0
+offset_right = 391.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("1_04xxk")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Click on floating trash to remove it.
+
+Clean the ocean to earn reef power.
+With it you can place units to protect the coral.
+
+You can only place units near a reef root and one reef root can only supply three units.
+
+Survive waves and new units to place will come.
+
+[u]Controls:[/u]
+Pause/Options - P or O
+Move Camera - WASD
+Drag Camera - Hold RMB or MMB
+Zoom Camera - Mouse Wheel
+Select/Clean/Place - LMB
+Cancel - RMB
+Place Multiple Units - Hold SHIFT
+Quick Select Unit - 1, 2, 3, 4..."
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="CreditsTextLabel" type="RichTextLabel" parent="Rules"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -218.0
+offset_right = 281.0
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("1_04xxk")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]
+Kirito - Code
+
+Kipas - Code 
+
+Nahiavi - 3D Art
+
+Y-Wing - 2D art"
+fit_content = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="RulesButton" to="." method="_on_rules_button_pressed"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="QuitGameButton" to="." method="_on_quit_game_button_pressed"]
+[connection signal="gui_input" from="Rules" to="." method="_on_rules_gui_input"]

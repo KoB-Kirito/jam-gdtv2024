@@ -92,8 +92,8 @@ func _on_decay_timer_timeout() -> void:
 	current_health -= decay_rate
 
 
-func take_damage(damage: float) -> void:
-	current_health -= damage
+func take_damage(amount: float) -> void:
+	current_health -= amount
 
 
 func _on_attack_range_detector_body_entered(body: Node3D) -> void:
@@ -126,7 +126,7 @@ func _on_attack_cooldown_timer_timeout() -> void:
 
 func _on_attack_range_detector_body_exited(body: Node3D) -> void:
 	if body == current_target and not is_queued_for_deletion():
-		print_debug("target left area")
+		#print_debug("target left area")
 		state = State.HUNT
 		%AnimationPlayer.stop()
 		%AttackWindupTimer.stop()

@@ -75,7 +75,7 @@ func _start_burst() -> void: #salve
 		shots_fired_in_burst = 0
 		burst_timer.start()
 		animation_player.play(&"Seesternkanone_werfen")
-		animation_player.animation_finished.connect(func(): animation_player.play(&"Seekanone_idle"), CONNECT_ONE_SHOT)
+		animation_player.animation_finished.connect(func(anim_name: String): animation_player.play(&"Seekanone_idle"), CONNECT_ONE_SHOT)
 
 func _shoot() -> void:
 	if current_enemy and shots_fired_in_burst < burst_count: #salve

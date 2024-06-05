@@ -33,7 +33,7 @@ func _on_patrolzone_body_entered(body: Node3D) -> void:
 		enemies_in_range.append(body)
 		if len(enemies_in_range) == 1:  # Show particles when the first enemy enters the range
 			particles.show()
-		print("entered")
+		#print("entered")
 
 
 func _on_patrolzone_body_exited(body: Node3D) -> void:
@@ -41,4 +41,4 @@ func _on_patrolzone_body_exited(body: Node3D) -> void:
 		enemies_in_range.erase(body)
 		if len(enemies_in_range) == 0:  # Hide particles when the last enemy exits the range
 			particles.hide()
-		print("exited")
+		#print("exited")

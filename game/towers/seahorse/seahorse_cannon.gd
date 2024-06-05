@@ -70,6 +70,9 @@ func _shoot() -> void:
 		
 		await get_tree().create_timer(1.5).timeout
 		
+		if not current_enemy:
+			return
+		
 		var bullet: SeahorseBullet = bullet_scene.instantiate()
 		
 		bullet.direction = (current_enemy.global_position - global_transform.origin).normalized()

@@ -50,6 +50,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not enabled and not visible:
 		return
 	
+	# don't allow while paused
+	if not visible and get_tree().paused:
+		return
+	
 	if event.is_action_pressed("pause"):
 		toggle()
 		return
@@ -63,17 +67,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func toggle() -> void:
 	visible = !visible
-	#get_tree().paused = visible
+	get_tree().paused = visible
 	if visible:
 		pass
 		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		#game_paused.emit()
+		game_paused.emit()
 	else:
 		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		%snd_music.stop()
 		%snd_sounds.stop()
 		%snd_voices.stop()
-		#game_unpaused.emit()
+		game_unpaused.emit()
 
 
 # play a sample when value is changed
@@ -107,5 +111,4 @@ func _on_fullscreen_check_box_toggled(toggled_on: bool) -> void:
 
 
 func _on_button_pressed() -> void:
-	print("SJKFHDJEAHSFJ")
-	hide()
+	toggle()

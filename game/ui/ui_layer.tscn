@@ -1,8 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://b7r4d5s6guolp"]
+[gd_scene load_steps=40 format=3 uid="uid://b7r4d5s6guolp"]
 
 [ext_resource type="Script" path="res://game/ui/ui.gd" id="1_00sea"]
 [ext_resource type="Script" path="res://game/ui/top_label.gd" id="1_477hd"]
 [ext_resource type="Script" path="res://game/ui/coral_health_label.gd" id="2_xm52e"]
+[ext_resource type="FontFile" uid="uid://cxkhfcmf5mquo" path="res://assets/fonts/ProtestStrike-Regular.ttf" id="2_yla0w"]
 [ext_resource type="Script" path="res://game/ui/game_over_label.gd" id="3_fhsar"]
 [ext_resource type="Script" path="res://game/ui/tower_panel.gd" id="4_0h1iq"]
 [ext_resource type="Script" path="res://game/towers/tower_data.gd" id="5_o0f5a"]
@@ -68,7 +69,6 @@ description = "Although timid, this sea urchin defends its reef by punishing att
 normal = ExtResource("14_6kovp")
 hover = ExtResource("13_6yi1q")
 active = ExtResource("13_6yi1q")
-disabled = ExtResource("14_6kovp")
 preview_scene = ExtResource("9_dbvo8")
 scene = ExtResource("15_ihiys")
 
@@ -137,8 +137,10 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_yla0w")
 theme_override_font_sizes/font_size = 36
 text = "Next Wave Label"
+horizontal_alignment = 1
 script = ExtResource("1_477hd")
 
 [node name="NextRoundTimer" type="Timer" parent="UI/TopLabel"]
@@ -153,6 +155,7 @@ offset_right = 237.0
 offset_bottom = 70.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_yla0w")
 theme_override_font_sizes/font_size = 36
 text = "Coral Health"
 script = ExtResource("2_xm52e")
@@ -179,6 +182,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yla0w")
 theme_override_font_sizes/font_size = 128
 text = "GAME OVER"
 script = ExtResource("3_fhsar")
@@ -212,6 +216,7 @@ offset_bottom = 70.0
 grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_yla0w")
 theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 2

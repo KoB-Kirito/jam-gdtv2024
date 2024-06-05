@@ -18,6 +18,8 @@ extends Control
 
 
 func _ready() -> void:
+	PauseMenu.enabled = false
+	
 	var tween := create_tween()
 	
 	# godot
@@ -27,4 +29,10 @@ func _ready() -> void:
 	
 	#TODO: Team splash, Best played with controller?, ...
 	
-	tween.tween_callback(func(): SceneTransition.change_scene(next_scene, SceneTransition.FADE, 0.5, Color(0.14, 0.14, 0.14)))
+	var transition_options := SceneTransition.Options.new(next_scene)
+	transition_options.duration = 0.5
+	transition_options.color = Color(0.14, 0.14, 0.14)
+	transition_options.new_bgm = load("res://assets/sounds/MenuTheme.mp3")
+	transition_options.volume = -20.0
+	
+	tween.tween_callback(func(): SceneTransition.change_scene(transition_options))

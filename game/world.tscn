@@ -1,7 +1,8 @@
-[gd_scene load_steps=257 format=3 uid="uid://l8llvurtljav"]
+[gd_scene load_steps=262 format=3 uid="uid://l8llvurtljav"]
 
 [ext_resource type="PackedScene" uid="uid://coi0xwbhi6u46" path="res://game/player/camera_rig.tscn" id="2_5p4f6"]
 [ext_resource type="PackedScene" uid="uid://d3qf40fcfvhc" path="res://game/cutscene/dialog.tscn" id="2_8us54"]
+[ext_resource type="AudioStream" uid="uid://usywni7fbn2r" path="res://assets/sounds/NewWaveIncoming.wav" id="2_nwrwp"]
 [ext_resource type="PackedScene" uid="uid://1bj00urgbi5u" path="res://game/player/player_interface.tscn" id="2_roycu"]
 [ext_resource type="PackedScene" uid="uid://bdrenewe4topk" path="res://game/cutscene/cutscene_base.tscn" id="2_ujfu0"]
 [ext_resource type="PackedScene" uid="uid://i4b8ip8dk2fb" path="res://game/entities/wave_spawner.tscn" id="3_hpkie"]
@@ -46,6 +47,9 @@
 [ext_resource type="Texture2D" uid="uid://co8cydvj1resl" path="res://game/ui/CoralCrazy.png" id="26_fk1wr"]
 [ext_resource type="Texture2D" uid="uid://bi4htvisx02sn" path="res://game/ui/CoralHappyEnding.png" id="27_f3y8u"]
 [ext_resource type="Texture2D" uid="uid://dm0kmxmxs85n1" path="res://game/ui/trashbagafraid.png" id="27_rrolw"]
+[ext_resource type="AudioStream" uid="uid://bmjk0nyp5nfiv" path="res://assets/sounds/GatheringPearl.wav" id="34_3hbm1"]
+[ext_resource type="PackedScene" uid="uid://70xy3lgye8p0" path="res://game/enemies/boss/boss_bag.tscn" id="45_tkvpo"]
+[ext_resource type="PackedScene" uid="uid://drdpxo65tcqob" path="res://game/towers/coral_hub/coral_hub.tscn" id="50_0vsmy"]
 
 [sub_resource type="Resource" id="Resource_fp2j3"]
 script = ExtResource("4_v66uw")
@@ -169,9 +173,12 @@ tracks/2/path = NodePath("../../GameManager")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(10),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"stop_music"
+}, {
 "args": [],
 "method": &"restart_level"
 }]
@@ -830,6 +837,20 @@ tracks/1/keys = {
 "args": [],
 "method": &"hide"
 }, {
+"args": [],
+"method": &"show"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../StartingHub")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.999),
+"transitions": PackedFloat32Array(1),
+"values": [{
 "args": [],
 "method": &"show"
 }]
@@ -2068,10 +2089,10 @@ tracks/0/path = NodePath("Camera3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 17),
-"transitions": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
 "update": 0,
-"values": [Vector3(9.238, -0.805, 38.341), Vector3(70.342, 17.503, 33.021)]
+"values": [Vector3(9.238, -0.805, 38.341)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -2080,10 +2101,10 @@ tracks/1/path = NodePath("Camera3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 17),
-"transitions": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
 "update": 0,
-"values": [Vector3(0, 0.673697, 0), Vector3(-0.153589, 1.05767, 0)]
+"values": [Vector3(0, 0.673697, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -2092,7 +2113,7 @@ tracks/2/path = NodePath("Camera3D:current")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 17),
+"times": PackedFloat32Array(0, 16.9497),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -2133,14 +2154,11 @@ tracks/4/path = NodePath("../../UILayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 17),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"hide"
-}, {
-"args": [],
-"method": &"show"
 }]
 }
 tracks/5/type = "method"
@@ -2150,7 +2168,7 @@ tracks/5/path = NodePath("CanvasLayer/Label")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(12.2156, 17),
+"times": PackedFloat32Array(12.2156, 16.9497),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -2158,6 +2176,20 @@ tracks/5/keys = {
 }, {
 "args": [],
 "method": &"hide"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../GameManager")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(17),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"win_game"
 }]
 }
 
@@ -2201,7 +2233,7 @@ seperation = 2.0
 script = ExtResource("4_i3pi2")
 wave = 3
 enemy = ExtResource("5_hmo02")
-amount = 10
+amount = 5
 seperation = 1.6
 
 [sub_resource type="Resource" id="Resource_jsccg"]
@@ -2390,7 +2422,7 @@ seperation = 2.1
 script = ExtResource("4_i3pi2")
 wave = 4
 enemy = ExtResource("17_0pfdp")
-amount = 10
+amount = 5
 seperation = 1.0
 
 [sub_resource type="Resource" id="Resource_v4fpg"]
@@ -2539,6 +2571,13 @@ wave = 9
 enemy = ExtResource("17_0bl2l")
 amount = 2
 seperation = 3.0
+
+[sub_resource type="Resource" id="Resource_a72ji"]
+script = ExtResource("4_i3pi2")
+wave = 10
+enemy = ExtResource("45_tkvpo")
+amount = 1
+seperation = 1.0
 
 [sub_resource type="Resource" id="Resource_n03ku"]
 script = ExtResource("4_i3pi2")
@@ -2695,7 +2734,7 @@ agent_max_climb = 0.1
 agent_max_slope = 15.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yyube"]
-radius = 4.0
+radius = 3.5
 height = 12.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_iiswb"]
@@ -2770,6 +2809,12 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 20.0
 one_shot = true
+
+[node name="snd_round_started" type="AudioStreamPlayer" parent="GameManager"]
+unique_name_in_owner = true
+stream = ExtResource("2_nwrwp")
+volume_db = -6.0
+bus = &"Sounds"
 
 [node name="Cutscenes" type="Node" parent="."]
 
@@ -3089,6 +3134,12 @@ shape = SubResource("BoxShape3D_s8q8j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.647, 60, -11.491)
 shape = SubResource("BoxShape3D_747s5")
 
+[node name="snd_collect" type="AudioStreamPlayer" parent="WasteManager"]
+unique_name_in_owner = true
+stream = ExtResource("34_3hbm1")
+volume_db = -6.0
+bus = &"Sounds"
+
 [node name="PlayerInterface" parent="." instance=ExtResource("2_roycu")]
 
 [node name="CameraRig" parent="PlayerInterface" instance=ExtResource("2_5p4f6")]
@@ -3113,12 +3164,12 @@ target = NodePath("../../MainCoral")
 waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_38vb1"), SubResource("Resource_h5mx7"), SubResource("Resource_bnygh"), SubResource("Resource_jsccg"), SubResource("Resource_884ly"), SubResource("Resource_v6bda"), SubResource("Resource_koiw1"), SubResource("Resource_28nlm"), SubResource("Resource_qcum7"), SubResource("Resource_6viiv"), SubResource("Resource_riakp"), SubResource("Resource_mclgm"), SubResource("Resource_ioaio"), SubResource("Resource_t32t1"), SubResource("Resource_mueiu"), SubResource("Resource_ijffu"), SubResource("Resource_v8nfy"), SubResource("Resource_apxwe"), SubResource("Resource_k4dp8"), SubResource("Resource_v5hpo"), SubResource("Resource_606a4"), SubResource("Resource_skfm0"), SubResource("Resource_52lw2"), SubResource("Resource_m8vn6"), SubResource("Resource_4jdue"), SubResource("Resource_02rkt")])
 
 [node name="WaveSpawnerOR" parent="WaveSpawners" node_paths=PackedStringArray("target") instance=ExtResource("3_hpkie")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.694, 0, -92.6209)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.017, 0, -96.0311)
 target = NodePath("../../MainCoral")
-waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_b50tf"), SubResource("Resource_0d5sv"), SubResource("Resource_nj74k"), SubResource("Resource_5haso"), SubResource("Resource_v4fpg"), SubResource("Resource_afcl8"), SubResource("Resource_8tt5o"), SubResource("Resource_ltlnm"), SubResource("Resource_yporc"), SubResource("Resource_dveyw"), SubResource("Resource_egkx0"), SubResource("Resource_ajh3i"), SubResource("Resource_oeirf"), SubResource("Resource_rcsih"), SubResource("Resource_btcx8"), SubResource("Resource_kh0l6"), SubResource("Resource_att66"), SubResource("Resource_1qjad"), SubResource("Resource_j134x"), SubResource("Resource_6y5rc"), SubResource("Resource_tyd3v"), SubResource("Resource_fp85v"), SubResource("Resource_wp3y8"), SubResource("Resource_pl2ka"), SubResource("Resource_bx8kl")])
+waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_b50tf"), SubResource("Resource_0d5sv"), SubResource("Resource_nj74k"), SubResource("Resource_5haso"), SubResource("Resource_v4fpg"), SubResource("Resource_afcl8"), SubResource("Resource_8tt5o"), SubResource("Resource_ltlnm"), SubResource("Resource_yporc"), SubResource("Resource_dveyw"), SubResource("Resource_egkx0"), SubResource("Resource_ajh3i"), SubResource("Resource_oeirf"), SubResource("Resource_rcsih"), SubResource("Resource_btcx8"), SubResource("Resource_kh0l6"), SubResource("Resource_att66"), SubResource("Resource_1qjad"), SubResource("Resource_j134x"), SubResource("Resource_6y5rc"), SubResource("Resource_tyd3v"), SubResource("Resource_fp85v"), SubResource("Resource_wp3y8"), SubResource("Resource_pl2ka"), SubResource("Resource_bx8kl"), SubResource("Resource_a72ji")])
 
 [node name="WaveSpawnerOL" parent="WaveSpawners" node_paths=PackedStringArray("target") instance=ExtResource("3_hpkie")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -135)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.467, 0, -126.057)
 target = NodePath("../../MainCoral")
 waves = Array[ExtResource("4_i3pi2")]([SubResource("Resource_n03ku"), SubResource("Resource_kix0i"), SubResource("Resource_pgwg5"), SubResource("Resource_cxoqv"), SubResource("Resource_sugxl"), SubResource("Resource_g3366"), SubResource("Resource_qnr8s"), SubResource("Resource_2bi8b"), SubResource("Resource_kfp68"), SubResource("Resource_irjyx"), SubResource("Resource_1endi"), SubResource("Resource_6ikej"), SubResource("Resource_055px"), SubResource("Resource_kxs5a"), SubResource("Resource_6h34d"), SubResource("Resource_4dfjm"), SubResource("Resource_qmb3v"), SubResource("Resource_0v3ei"), SubResource("Resource_7rry3"), SubResource("Resource_a26m1"), SubResource("Resource_7bcsl")])
 
@@ -3128,11 +3179,11 @@ navigation_mesh = SubResource("NavigationMesh_hrw7g")
 [node name="Level_v3" parent="Terrain" instance=ExtResource("4_osr67")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 85.2358, -36.1, -29.0508)
 
-[node name="MainCoral" type="StaticBody3D" parent="."]
+[node name="MainCoral" type="StaticBody3D" parent="." groups=["coral"]]
 script = ExtResource("5_lwu0s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MainCoral"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0.5)
 shape = SubResource("CapsuleShape3D_yyube")
 
 [node name="Hauptkoralle" parent="MainCoral" instance=ExtResource("6_bw7sv")]
@@ -3164,6 +3215,10 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 light_color = Color(0.59221, 0.726099, 1, 1)
 light_energy = 0.6
 shadow_enabled = true
+
+[node name="StartingHub" parent="." instance=ExtResource("50_0vsmy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00162995, -0.0318761, -0.200487)
+visible = false
 
 [connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
 [connection signal="timeout" from="GameManager/BuildTimer" to="GameManager" method="_on_build_timer_timeout"]

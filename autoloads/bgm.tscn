@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3qbu1nkct428"]
+[gd_scene load_steps=2 format=3 uid="uid://d3qbu1nkct428"]
 
-[ext_resource type="AudioStream" uid="uid://b1iwv5x85gldd" path="res://assets/sounds/MenuTheme.mp3" id="1_gvfrf"]
 [ext_resource type="Script" path="res://autoloads/bgm.gd" id="2_j57m7"]
 
 [node name="Bgm" type="AudioStreamPlayer"]
 process_mode = 3
-stream = ExtResource("1_gvfrf")
 volume_db = -20.0
 autoplay = true
 bus = &"Music"

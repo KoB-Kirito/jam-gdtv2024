@@ -33,6 +33,7 @@ var zoom_target: float
 
 
 var home_position: Vector3
+var debug_enabled: bool = false
 
 
 func _ready() -> void:
@@ -49,6 +50,8 @@ func _process(delta: float) -> void:
 	zoom(delta)
 	
 	# limit position to border
+	if debug_enabled:
+		return
 	if position.x < left_border:
 		position.x = left_border
 	elif position.x > right_border:
@@ -64,7 +67,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("camera_zoom_in"):
 		zoom_target = clampf(zoom_target - zoom_step, zoom_minimum, zoom_maximum) 
 	elif event.is_action("camera_zoom_out"):
-		zoom_target = clampf(zoom_target + zoom_step, zoom_minimum, zoom_maximum)
+		if debug_enabled:
+			zoom_target = clampf(zoom_target + zoom_step, zoom_minimum, zoom_maximum * 5)
+		else:
+			zoom_target = clampf(zoom_target + zoom_step, zoom_minimum, zoom_maximum)
 	
 	# drag via mouse
 	if can_drag:
@@ -79,6 +85,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	# back to base
 	if event.is_action_pressed("camera_home"):
 		center_on_coral()
+	
+	# toggle debug
+	if event.is_action_pressed("debug"):
+		debug_enabled = !debug_enabled
 
 
 func center_on_coral() -> void:

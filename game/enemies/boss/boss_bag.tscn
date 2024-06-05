@@ -24,21 +24,6 @@ tracks/0/keys = {
 "values": [Vector3(8, 8, 8)]
 }
 
-[sub_resource type="Animation" id="Animation_g2arn"]
-resource_name = "attack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("trash-bag:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1998, 0.4, 0.6993, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(8, 8, 8), Vector3(6, 10, 8), Vector3(8, 8, 8), Vector3(5, 11, 8), Vector3(8, 8, 8)]
-}
-
 [sub_resource type="Animation" id="Animation_3xyp3"]
 resource_name = "attack"
 length = 0.5
@@ -54,6 +39,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 0.5, 1),
 "update": 0,
 "values": [Vector3(8, 8, 8), Vector3(8, 8, 2), Vector3(8, 8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_g2arn"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("trash-bag:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1998, 0.4, 0.6993, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(8, 8, 8), Vector3(6, 10, 8), Vector3(8, 8, 8), Vector3(5, 11, 8), Vector3(8, 8, 8)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8d880"]
@@ -74,12 +74,15 @@ collision_mask = 20
 script = ExtResource("2_bo5d7")
 enemies = Array[PackedScene]([ExtResource("3_gcwfu"), ExtResource("4_su21o"), ExtResource("5_bh4eb"), ExtResource("6_njml4"), ExtResource("7_s0gn3")])
 speed = 2.0
-max_health = 100.0
+max_health = 300.0
 attack_range = 8.0
 attack_cooldown = 6.0
 
 [node name="trash-bag" parent="." index="0" instance=ExtResource("2_h3qox")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 4.75, 0)
+
+[node name="HealthbarComponent" parent="." index="3"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 10.1706, 0)
 
 [node name="AnimationPlayer" parent="." index="5"]
 libraries = {
@@ -100,6 +103,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34275, 4.83422, 0.157498)
 [node name="SpawnTimer" type="Timer" parent="." index="9"]
 unique_name_in_owner = true
 wait_time = 8.0
+one_shot = true
 autostart = true
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

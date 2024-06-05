@@ -39,7 +39,7 @@ func play_cutscene() -> void:
 
 ## Displays the dialog with the given index
 func show_dialog(index: int, pause: bool) -> void:
-	print_debug("showind dialog ", index, ", pause: ", pause)
+	#print_debug("showing dialog ", index, ", pause: ", pause)
 	%DialogLayer.play(dialogs[index], pause)
 
 func close_dialog() -> void:

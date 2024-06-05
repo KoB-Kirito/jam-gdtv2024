@@ -18,6 +18,7 @@ var tower_is_placeable: bool = false:
 func _ready() -> void:
 	RenderingServer.global_shader_parameter_set("preview_color", Globals.RED)
 	Events.ui_tower_selected.connect(on_tower_selected)
+	Events.cutscene_started.connect(on_cutscene_started)
 
 
 func _physics_process(delta: float) -> void:
@@ -39,12 +40,19 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if current_tower == null or tower_preview == null:
+		return
+	
 	var mouse_button_event := event as InputEventMouseButton
 	if mouse_button_event and mouse_button_event.is_pressed():
 		if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
 			# left click
 			if tower_is_placeable:
 				place_tower()
+				%snd_place.play()
+				
+			else:
+				%snd_blocked.play()
 		
 		elif mouse_button_event.button_index == MOUSE_BUTTON_RIGHT:
 			if not current_tower == null:
@@ -61,7 +69,7 @@ func place_tower() -> void:
 	var tower: Tower = current_tower.scene.instantiate()
 	
 	# keep building if shift is held
-	if not Input.is_key_pressed(KEY_SHIFT):
+	if Globals.resource < current_tower.cost or not Input.is_key_pressed(KEY_SHIFT):
 		tower_preview.queue_free()
 		tower_preview = null
 		current_tower = null
@@ -75,12 +83,19 @@ func place_tower() -> void:
 
 
 func cancel_placement() -> void:
+	if current_tower == null or tower_preview == null:
+		return
+	
 	tower_preview.queue_free()
 	tower_preview = null
 	current_tower = null
 	tower_is_placeable = false
 	
 	Events.build_mode_exited.emit()
+
+
+func on_cutscene_started() -> void:
+	cancel_placement()
 
 
 func on_tower_selected(tower: TowerData) -> void:
