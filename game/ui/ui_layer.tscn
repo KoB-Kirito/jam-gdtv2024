@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://deq3at8el7ycu" path="res://game/towers/_previews/sea_urchin_preview.tscn" id="9_dbvo8"]
 [ext_resource type="Texture2D" uid="uid://dmgdhncva8lxc" path="res://game/ui/Buildingplace.png" id="9_rtod3"]
 [ext_resource type="PackedScene" uid="uid://drdpxo65tcqob" path="res://game/towers/coral_hub/coral_hub.tscn" id="10_urm36"]
+[ext_resource type="Texture2D" uid="uid://dql5lumxykjmt" path="res://game/towers/_icons/Fish.jpg" id="10_xy278"]
 [ext_resource type="Texture2D" uid="uid://b234tf8xskd2e" path="res://game/towers/_icons/SeeigelSelected.jpg" id="13_6yi1q"]
 [ext_resource type="Texture2D" uid="uid://ckryw2wvj67am" path="res://game/towers/_icons/Seeigel.jpg" id="14_6kovp"]
 [ext_resource type="PackedScene" uid="uid://dojjcw8633wvn" path="res://game/towers/sea_urchin/sea_urchin.tscn" id="15_ihiys"]
@@ -30,16 +31,30 @@
 [ext_resource type="PackedScene" uid="uid://cpp6emmfkrpda" path="res://game/towers/starfish_cannon/starfish_cannon.tscn" id="27_b8i56"]
 [ext_resource type="Texture2D" uid="uid://di4k6cp37jxff" path="res://game/towers/_icons/Seahorse.jpg" id="27_nxxyu"]
 [ext_resource type="Texture2D" uid="uid://ccirn0b17e7vk" path="res://game/ui/FishtowerActive.png" id="28_43p54"]
-[ext_resource type="Texture2D" uid="uid://cqhomdebka4q1" path="res://game/ui/Fishtower.png" id="29_2x5ge"]
 [ext_resource type="PackedScene" uid="uid://bxpa2vlhsus71" path="res://game/towers/_previews/fish_spawner_preview.tscn" id="30_gp6og"]
 [ext_resource type="PackedScene" uid="uid://q5sbjvosbnrn" path="res://game/towers/fisch_beschworer/fisch_spawner.tscn" id="31_y43a7"]
 
+[sub_resource type="Resource" id="Resource_1oo6n"]
+script = ExtResource("5_o0f5a")
+level = -1
+cost = 30
+name = "Clown Cove"
+description = "This coral hosts clownfish that swarm out and attack multiple enemies at once.
+Particularly effective against weaker but numerous foes."
+normal = ExtResource("10_xy278")
+hover = ExtResource("28_43p54")
+active = ExtResource("28_43p54")
+disabled = ExtResource("10_xy278")
+preview_scene = ExtResource("30_gp6og")
+scene = ExtResource("31_y43a7")
+
 [sub_resource type="Resource" id="Resource_ca1id"]
 script = ExtResource("5_o0f5a")
-level = 0
+level = 1
 cost = 10
 name = "Reef Root"
-description = "A small coral sprout that serves as a home for marine life. Although it can't do much on its own, you can place three additional units within its radius."
+description = "A small coral sprout that serves as a home for marine life.
+Although it can't do much on its own, you can place three additional units within its radius."
 normal = ExtResource("9_rtod3")
 hover = ExtResource("8_qbku6")
 active = ExtResource("8_qbku6")
@@ -47,25 +62,13 @@ disabled = ExtResource("9_rtod3")
 preview_scene = ExtResource("7_w7ayi")
 scene = ExtResource("10_urm36")
 
-[sub_resource type="Resource" id="Resource_1oo6n"]
-script = ExtResource("5_o0f5a")
-level = 0
-cost = 30
-name = "Clown Cove"
-description = "This coral hosts clownfish that swarm out and attack multiple enemies at once. Particularly effective against weaker but numerous foes."
-normal = ExtResource("29_2x5ge")
-hover = ExtResource("28_43p54")
-active = ExtResource("28_43p54")
-disabled = ExtResource("29_2x5ge")
-preview_scene = ExtResource("30_gp6og")
-scene = ExtResource("31_y43a7")
-
 [sub_resource type="Resource" id="Resource_a6hyf"]
 script = ExtResource("5_o0f5a")
 level = 1
 cost = 20
 name = "Spiky Stronghold"
-description = "Although timid, this sea urchin defends its reef by punishing attackers around it with its spines. Use it on the front line and support it with other units!"
+description = "Although timid, this sea urchin defends its reef by punishing attackers around it with its spines.
+Use it on the front line and support it with other units!"
 normal = ExtResource("14_6kovp")
 hover = ExtResource("13_6yi1q")
 active = ExtResource("13_6yi1q")
@@ -77,7 +80,8 @@ script = ExtResource("5_o0f5a")
 level = 4
 cost = 20
 name = "Star Sentry"
-description = "A brave seastar that attacks its enemies from a distance. This solid standard unit is always a worthwhile investment."
+description = "A brave seastar that attacks its enemies from a distance.
+This solid standard unit is always a worthwhile investment."
 normal = ExtResource("24_askwi")
 hover = ExtResource("23_1nb03")
 active = ExtResource("23_1nb03")
@@ -90,7 +94,8 @@ script = ExtResource("5_o0f5a")
 level = 5
 cost = 30
 name = "Eelectricuter"
-description = "This electrifying friend is slow but strong. Its lightning covers a large radius and deals massive aoe damage!"
+description = "This electrifying friend is weak, but fast.
+Its lightning covers a large radius and deals massive aoe damage!"
 normal = ExtResource("23_bw07a")
 hover = ExtResource("22_3ch50")
 active = ExtResource("22_3ch50")
@@ -103,7 +108,8 @@ script = ExtResource("5_o0f5a")
 level = 6
 cost = 30
 name = "Riding Riptide"
-description = "This seahorse relentlessly attacks by raining air bubbles on approaching enemies. A good investment against any foe."
+description = "This seahorse relentlessly attacks by raining air bubbles on approaching enemies.
+A good investment against strong foes."
 normal = ExtResource("27_nxxyu")
 hover = ExtResource("26_pgwn4")
 active = ExtResource("26_pgwn4")
@@ -139,7 +145,6 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_yla0w")
 theme_override_font_sizes/font_size = 36
-text = "Next Wave Label"
 horizontal_alignment = 1
 script = ExtResource("1_477hd")
 
@@ -199,7 +204,7 @@ offset_bottom = -20.0
 grow_vertical = 0
 script = ExtResource("4_0h1iq")
 tower_tile_scene = ExtResource("16_g2rwn")
-towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_ca1id"), SubResource("Resource_1oo6n"), SubResource("Resource_a6hyf"), SubResource("Resource_ywsbj"), SubResource("Resource_i8rls"), SubResource("Resource_5wy5e")])
+towers = Array[ExtResource("5_o0f5a")]([SubResource("Resource_1oo6n"), SubResource("Resource_ca1id"), SubResource("Resource_a6hyf"), SubResource("Resource_ywsbj"), SubResource("Resource_i8rls"), SubResource("Resource_5wy5e")])
 
 [node name="TowerTile" parent="UI/TowerPanel" instance=ExtResource("16_g2rwn")]
 layout_mode = 2

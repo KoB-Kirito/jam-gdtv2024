@@ -4,7 +4,7 @@ extends Node
 
 ## Main building life points
 @export var coral_health: int = 100
-@export var starting_resources: int = 10
+@export var starting_resources: int = 0
 
 ## Will parse all cutscenes under that node
 @export var cutscenes_parent: Node
@@ -15,6 +15,8 @@ var cutscenes: Array[Cutscene]
 var current_round: int = 0
 var current_enemy_count: int = 0
 
+var tutorial_played: bool = false
+
 
 func _ready() -> void:
 	# connect global signals
@@ -23,20 +25,38 @@ func _ready() -> void:
 	
 	Events.waste_collected.connect(on_waste_collected)
 	
-	# parse cutscenes
+	# wait for first tower placed to continue
+	Events.tower_placed.connect(on_first_tower_placed, CONNECT_ONE_SHOT)
+	
+	# parse cutscenes, play intro
 	for node in cutscenes_parent.get_children():
 		if node is Cutscene:
-			cutscenes.append(node)
+			if node.level < 0:
+				continue
+			elif node.level == 0:
+				node.play_cutscene()
+				await node.finished
+			else:
+				cutscenes.append(node)
 	
-	await get_tree().process_frame # wait one frame for ui to connect signals
+	#await get_tree().process_frame # wait one frame for ui to connect signals
 	
 	# init values
 	Events.coral_health_changed.emit(coral_health)
-
-	Globals.resource = starting_resources
 	
-	# start game cycle
-	start_build_phase()
+	Globals.resource = starting_resources
+
+
+## Wait for first tower placement to start waves and waste falling
+func on_first_tower_placed() -> void:
+	#HACK
+	%WasteManager.start()
+	
+	%EnemiesArrive.play_cutscene()
+	await %EnemiesArrive.finished
+	
+	%BuildTimer.start(20.0)
+	Events.build_phase_started.emit(%BuildTimer.time_left)
 
 
 func on_enemy_died() -> void:
@@ -46,8 +66,6 @@ func on_enemy_died() -> void:
 
 
 func start_build_phase() -> void:
-	%RoundTimer.stop()
-	
 	# play cutscenes
 	#print_debug("playing cutscenes for level ", current_round)
 	for cutscene in cutscenes:
@@ -72,7 +90,6 @@ func win_game() -> void:
 func start_next_round() -> void:
 	current_round += 1
 	Globals.current_level = current_round
-	%RoundTimer.start()
 	print_debug("Round ", current_round, " started")
 	%snd_round_started.play()
 	Events.round_started.emit(current_round)
@@ -81,11 +98,6 @@ func start_next_round() -> void:
 func _on_death_zone_body_entered(body: Node3D) -> void:
 	print_debug("Enemy reached coral")
 	#TODO: warn player
-
-
-func _on_round_timer_timeout() -> void:
-	# if the round takes too long, force start next round
-	start_build_phase()
 
 
 func _on_build_timer_timeout() -> void:
@@ -121,3 +133,14 @@ func _on_warning_zone_body_entered(body: Node3D) -> void:
 func on_waste_collected(value: int) -> void:
 	Globals.resource += value
 	%snd_collect.play()
+	
+	if tutorial_played:
+		return
+	
+	#HACK
+	if Globals.resource >= 30:
+		tutorial_played = true
+		
+		%FishArrives.play_cutscene()
+		await %FishArrives.finished
+		$"../UILayer".add_first_tower() #HACK

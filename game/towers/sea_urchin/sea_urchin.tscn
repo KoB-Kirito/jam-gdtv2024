@@ -13,7 +13,7 @@ radius = 3.5
 [node name="SeaUrchin" instance=ExtResource("1_nu5na")]
 script = ExtResource("2_oo1nm")
 damage = 3.0
-interval = 2.0
+interval = 4.0
 max_health = 50.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]

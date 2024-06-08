@@ -1,4 +1,4 @@
-[gd_scene load_steps=262 format=3 uid="uid://l8llvurtljav"]
+[gd_scene load_steps=257 format=3 uid="uid://l8llvurtljav"]
 
 [ext_resource type="PackedScene" uid="uid://coi0xwbhi6u46" path="res://game/player/camera_rig.tscn" id="2_5p4f6"]
 [ext_resource type="PackedScene" uid="uid://d3qf40fcfvhc" path="res://game/cutscene/dialog.tscn" id="2_8us54"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://be5jbsgk68moo" path="res://game/ui/CoralSad.png" id="4_yh0sw"]
 [ext_resource type="PackedScene" uid="uid://ddhd5qtphiv5t" path="res://game/enemies/plunger/plunger.tscn" id="5_hmo02"]
 [ext_resource type="Texture2D" uid="uid://c8dr8lpmxr6fe" path="res://game/ui/CoralLove.png" id="5_jlemx"]
-[ext_resource type="Texture2D" uid="uid://bme5pdkdrrjw8" path="res://icon.svg" id="5_lg4q7"]
 [ext_resource type="Script" path="res://game/base.gd" id="5_lwu0s"]
 [ext_resource type="Texture2D" uid="uid://dql5lumxykjmt" path="res://game/towers/_icons/Fish.jpg" id="6_3wyou"]
 [ext_resource type="PackedScene" uid="uid://cewgvmusqjfh7" path="res://game/environment/hauptkoralle.tscn" id="6_bw7sv"]
@@ -27,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cya6to7jkxbac" path="res://game/waste/waste_chips_bag.tscn" id="12_fpvyr"]
 [ext_resource type="Texture2D" uid="uid://bqy1yrxq7pgnh" path="res://game/ui/FishDialog.png" id="13_ithj3"]
 [ext_resource type="Shader" path="res://game/environment/bubble.gdshader" id="13_qkb78"]
+[ext_resource type="PackedScene" uid="uid://bcgp3b5v70md0" path="res://game/towers/fisch_beschworer/clownfish.tscn" id="14_5rdto"]
 [ext_resource type="Texture2D" uid="uid://bdh8hg7dduqxg" path="res://game/ui/CoralSurprised.png" id="14_n5xyo"]
 [ext_resource type="Texture2D" uid="uid://dwpw1abwpk6e6" path="res://game/ui/Urchin.png" id="16_ky4fx"]
 [ext_resource type="Texture2D" uid="uid://crowqhfra7plv" path="res://game/towers/_icons/Pearl.jpg" id="16_tyji4"]
@@ -51,72 +51,12 @@
 [ext_resource type="PackedScene" uid="uid://70xy3lgye8p0" path="res://game/enemies/boss/boss_bag.tscn" id="45_tkvpo"]
 [ext_resource type="PackedScene" uid="uid://drdpxo65tcqob" path="res://game/towers/coral_hub/coral_hub.tscn" id="50_0vsmy"]
 
-[sub_resource type="Resource" id="Resource_fp2j3"]
-script = ExtResource("4_v66uw")
-image = ExtResource("5_lg4q7")
-text = "Test - Text with icon.
-You have to click to close this. It will be followed by another dialog.
-"
-
-[sub_resource type="Resource" id="Resource_1yx07"]
-script = ExtResource("4_v66uw")
-image = ExtResource("6_3wyou")
-text = "This is another dialog box in the same cutscene.
-This one can't be closed by clicking because the game is not paused."
-
-[sub_resource type="Animation" id="Animation_2pnon"]
-resource_name = "cutscene"
-length = 8.0
-step = 0.1
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.025, 0.2, 8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [0, true],
-"method": &"show_dialog"
-}, {
-"args": [1, false],
-"method": &"show_dialog"
-}, {
-"args": [],
-"method": &"close_dialog"
-}]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../UILayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 8),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"hide"
-}, {
-"args": [],
-"method": &"show"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugflx"]
-_data = {
-"cutscene": SubResource("Animation_2pnon")
-}
-
 [sub_resource type="Animation" id="Animation_ppb2p"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Intro/CameraPivot/Camera3D:current")
+tracks/0/path = NodePath("../Intro2/CameraPivot/Camera3D:current")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -128,7 +68,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Intro/CameraPivot:rotation")
+tracks/1/path = NodePath("../Intro2/CameraPivot:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -145,7 +85,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Intro/CameraPivot/Camera3D:current")
+tracks/0/path = NodePath("../Intro2/CameraPivot/Camera3D:current")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -157,7 +97,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Intro/CameraPivot:rotation")
+tracks/1/path = NodePath("../Intro2/CameraPivot:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -195,7 +135,7 @@ script = ExtResource("4_v66uw")
 text = "It is the year 2048. The world's oceans are nearly destroyed by human ignorance."
 
 [sub_resource type="Animation" id="Animation_hrf6x"]
-length = 4.0
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -203,10 +143,10 @@ tracks/0/path = NodePath("Camera3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(95.1809, 7.533, 11.6767), Vector3(82.373, 7.533, 20.1359)]
+"values": [Vector3(95.1809, 7.533, 11.6767)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -215,10 +155,10 @@ tracks/1/path = NodePath("Camera3D:current")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -227,10 +167,10 @@ tracks/2/path = NodePath("Camera3D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 1.26362, 0), Vector3(-0.0767945, 1.18857, 0)]
+"values": [Vector3(0, 1.26362, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ixk6w"]
@@ -255,10 +195,10 @@ tracks/1/path = NodePath("Camera3D:current")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -279,14 +219,11 @@ tracks/3/path = NodePath("../../UILayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"hide"
-}, {
-"args": [],
-"method": &"show"
 }]
 }
 tracks/4/type = "method"
@@ -296,14 +233,11 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [0, false],
 "method": &"show_dialog"
-}, {
-"args": [],
-"method": &"close_dialog"
 }]
 }
 
@@ -325,7 +259,8 @@ fog_depth_end = 164.5
 
 [sub_resource type="Resource" id="Resource_fxpov"]
 script = ExtResource("4_v66uw")
-text = "Now the humans chemical fluids have caused the trash to become sentient, creating an even greater threat. A small coral reef stands as the last bastion to protect life in the ocean."
+text = "Now the humans chemical fluids have caused the trash to become sentient, creating an even greater threat.
+A small coral reef stands as the last bastion to protect life in the ocean."
 
 [sub_resource type="Animation" id="Animation_h0qrt"]
 length = 0.001
@@ -389,42 +324,11 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 15),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [0, false],
-"method": &"show_dialog"
-}, {
-"args": [],
-"method": &"close_dialog"
-}]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../UILayer")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"hide"
-}]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../../PlayerInterface/CameraRig")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(15),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"center_on_coral"
+"args": [0, false],
+"method": &"show_dialog"
 }]
 }
 
@@ -564,11 +468,6 @@ image = ExtResource("4_yh0sw")
 text = "When I remove trash like glass bottles, the reefs power increases. This way, I can gradually renew the reef!
 "
 
-[sub_resource type="Resource" id="Resource_pa4qo"]
-script = ExtResource("4_v66uw")
-image = ExtResource("5_jlemx")
-text = "Now i can use the reefs new power to place more corals. These provide a home for others."
-
 [sub_resource type="Animation" id="Animation_i1xck"]
 length = 0.001
 tracks/0/type = "value"
@@ -594,6 +493,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-35.8694, 20.017, 60.8963)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../FishArrives/Clownfish:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_cf86y"]
@@ -631,37 +542,14 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 5.99, 6, 12),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [0, false],
 "method": &"show_dialog"
 }, {
 "args": [],
 "method": &"close_dialog"
-}, {
-"args": [1, false],
-"method": &"show_dialog"
-}, {
-"args": [],
-"method": &"close_dialog"
-}]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../UILayer")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 12),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"hide"
-}, {
-"args": [],
-"method": &"show"
 }]
 }
 
@@ -684,7 +572,8 @@ fog_depth_curve = 2.82843
 script = ExtResource("4_v66uw")
 image = ExtResource("13_ithj3")
 text = "I can't believe it... a living, colorful coral?! Finally, a place where I can find shelter!
-(Click to continue)"
+
+[Click to continue]"
 
 [sub_resource type="Resource" id="Resource_uvbag"]
 script = ExtResource("4_v66uw")
@@ -693,8 +582,8 @@ text = "Great! New life is thriving in the reef. I am so happy..."
 
 [sub_resource type="Resource" id="Resource_uy5i7"]
 script = ExtResource("4_v66uw")
-image = ExtResource("14_n5xyo")
-text = "Oh no... I recognize this taste in the water... it's that chemical fluid. Soon, it will be swarming with intelligent trash. I must defend the reef!"
+image = ExtResource("23_3c63n")
+text = "I can supply up to three units. Place them near me!"
 
 [sub_resource type="Animation" id="Animation_mrkfj"]
 length = 0.001
@@ -713,6 +602,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_qehyb"]
 resource_name = "cutscene"
+step = 0.01
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -720,26 +610,17 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.152382, 0.281115, 0.425518, 0.536597, 0.739877),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.8, 0.87, 0.94),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [0, true],
 "method": &"show_dialog"
 }, {
-"args": [],
-"method": &"close_dialog"
-}, {
 "args": [1, true],
 "method": &"show_dialog"
 }, {
-"args": [],
-"method": &"close_dialog"
-}, {
 "args": [2, true],
 "method": &"show_dialog"
-}, {
-"args": [],
-"method": &"close_dialog"
 }]
 }
 tracks/1/type = "method"
@@ -749,7 +630,7 @@ tracks/1/path = NodePath("../../UILayer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0.8, 1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -766,10 +647,55 @@ tracks/2/path = NodePath("Camera3D:current")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0.8, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../PlayerInterface/CameraRig")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"center_on_coral"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Clownfish")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"show"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%FishArrives/../../StartingHub")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lx7x4"]
@@ -780,21 +706,19 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_5fx5f"]
 script = ExtResource("4_v66uw")
-image = ExtResource("9_wdngw")
-text = "Remove the glass bottles to gain reef power!"
+image = ExtResource("18_22ggl")
+text = "Oh no... I recognize this taste in the water... it's that chemical fluid.
+Soon, it will be swarming with intelligent trash. I must defend the reef!"
 
-[sub_resource type="Resource" id="Resource_51gx4"]
+[sub_resource type="Resource" id="Resource_xpwa7"]
 script = ExtResource("4_v66uw")
-image = ExtResource("9_wdngw")
-text = "Place a coral reef and position a unit within its radius."
-
-[sub_resource type="Resource" id="Resource_3khq0"]
-script = ExtResource("4_v66uw")
-image = ExtResource("9_wdngw")
-text = "Placing corals costs reef power. Spend it wisely. You can only have up to three units close to each coral, but use your ressources wisely to defend all three directions!"
+image = ExtResource("14_n5xyo")
+text = "They seem to throw even more trash down here. I should remove it to gather more reef power!"
 
 [sub_resource type="Animation" id="Animation_15du5"]
 resource_name = "cutscene"
+length = 0.1
+step = 0.01
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -802,69 +726,54 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.21208, 0.350777, 0.562857, 0.743064, 0.955144),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.05, 0.08),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [0, true],
 "method": &"show_dialog"
 }, {
-"args": [],
-"method": &"close_dialog"
-}, {
 "args": [1, true],
 "method": &"show_dialog"
-}, {
-"args": [],
-"method": &"close_dialog"
-}, {
-"args": [2, true],
-"method": &"show_dialog"
-}, {
-"args": [],
-"method": &"close_dialog"
 }]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../UILayer")
-tracks/1/interp = 1
+tracks/1/path = NodePath("%FishArrives/Camera3D:current")
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0.05, 0.1),
 "transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"hide"
-}, {
-"args": [],
-"method": &"show"
-}]
+"update": 1,
+"values": [true, false]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../StartingHub")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.999),
+
+[sub_resource type="Animation" id="Animation_ekqms"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%FishArrives/Camera3D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"show"
-}]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yrx4v"]
 _data = {
+"RESET": SubResource("Animation_ekqms"),
 "cutscene": SubResource("Animation_15du5")
 }
 
 [sub_resource type="Resource" id="Resource_dy8wh"]
 script = ExtResource("4_v66uw")
-image = ExtResource("4_yh0sw")
-text = "I can't believe it. This human food is now targeting our reef specifically. That was probably just the scouts...
+image = ExtResource("5_jlemx")
+text = "Good job! Now i can use the reefs new power to place more corals. These provide a home for others.
 "
 
 [sub_resource type="Resource" id="Resource_ieo78"]
@@ -2800,11 +2709,6 @@ script = ExtResource("6_tuwt1")
 cutscenes_parent = NodePath("../Cutscenes")
 game_over_cutscene = NodePath("../Cutscenes/GameOver")
 
-[node name="RoundTimer" type="Timer" parent="GameManager"]
-unique_name_in_owner = true
-wait_time = 120.0
-one_shot = true
-
 [node name="BuildTimer" type="Timer" parent="GameManager"]
 unique_name_in_owner = true
 wait_time = 20.0
@@ -2818,19 +2722,6 @@ bus = &"Sounds"
 
 [node name="Cutscenes" type="Node" parent="."]
 
-[node name="DialogTest" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
-notes = "Ein \"Dialog\" ist immer nur eine Box. Man muss also mehrere Dialoge hinzufügen wenn man mehrere Boxen anzeigen will.
-Die muss man aber auch einzeln dann aufrufen über den Animation Player.
-var1 = index des dialogs, var2 = pause oder nicht.
-Wenn pausiert, pausiert der Animation player und es geht weiter sobald der spieler klickt, wenn nicht kann der spieler nicht klicken und der dialog muss selbst im animationplayer geschlossen werden."
-level = -1
-dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_fp2j3"), SubResource("Resource_1yx07")])
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/DialogTest"]
-libraries = {
-"": SubResource("AnimationLibrary_ugflx")
-}
-
 [node name="GameOver" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
 notes = "-1 = never played
 played by script when game over"
@@ -2841,93 +2732,109 @@ libraries = {
 "": SubResource("AnimationLibrary_kqmwk")
 }
 
-[node name="Opening2" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+[node name="Intro1" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
 dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_htwf4")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Opening2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro1"]
 libraries = {
 "": SubResource("AnimationLibrary_iolkk")
 }
 
-[node name="Camera3D" type="Camera3D" parent="Cutscenes/Opening2"]
+[node name="Camera3D" type="Camera3D" parent="Cutscenes/Intro1"]
 transform = Transform3D(0.302369, 0, 0.953192, 0, 1, 0, -0.953192, 0, 0.302369, 95.1809, 7.533, 11.6767)
 environment = SubResource("Environment_eku8y")
-current = true
 fov = 39.375
 
-[node name="Intro" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+[node name="Intro2" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
 notes = "Eine Cutscene-Szene.
 Wichtig ist Level, das entscheidet wann die cutscene abgespielt wird.
 Dialoge die man in der Cutscene verwenden will kommen auch hier rein."
 dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_fxpov")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro2"]
 libraries = {
 "": SubResource("AnimationLibrary_fm0fq")
 }
 
-[node name="CameraPivot" type="Node3D" parent="Cutscenes/Intro"]
+[node name="CameraPivot" type="Node3D" parent="Cutscenes/Intro2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0098598, -0.177676, -0.909628)
 
-[node name="Camera3D" type="Camera3D" parent="Cutscenes/Intro/CameraPivot"]
+[node name="Camera3D" type="Camera3D" parent="Cutscenes/Intro2/CameraPivot"]
 transform = Transform3D(0.999996, -0.00201155, -0.00220284, 0.00297753, 0.627988, 0.778217, -0.000182064, -0.77822, 0.627992, 0.0956552, 8.06025, 8.10154)
 environment = ExtResource("4_slajc")
 
-[node name="Dialog01" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+[node name="Intro3" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
 dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_iy4sv")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Dialog01"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro3"]
 libraries = {
 "": SubResource("AnimationLibrary_fvt2i")
 }
 
-[node name="Camera3D" type="Camera3D" parent="Cutscenes/Dialog01"]
+[node name="Camera3D" type="Camera3D" parent="Cutscenes/Intro3"]
 transform = Transform3D(0.818149, 0.0441139, 0.573311, 0, 0.997053, -0.076719, -0.575005, 0.0627677, 0.815738, 5.27137, 1.29275, 6.41936)
 environment = ExtResource("4_slajc")
 fov = 52.1012
 
-[node name="Intro2" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+[node name="Intro4" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
 notes = "Man kann auch mehrere Cutscene-Szenen dem gleichen Level zuordnen. Sie werden dann hintereinander abgespielt.
 Level 0 ist übrigens der Spielstart."
-dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_50km6"), SubResource("Resource_pa4qo")])
+dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_50km6")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro4"]
 libraries = {
 "": SubResource("AnimationLibrary_dojoa")
 }
 
-[node name="WasteCamera3D" type="Camera3D" parent="Cutscenes/Intro2" node_paths=PackedStringArray("target")]
-transform = Transform3D(0.961944, 0.106125, -0.251795, 0, 0.921498, 0.388386, 0.273245, -0.373606, 0.886429, -35.8694, 20.017, 60.8963)
+[node name="WasteCamera3D" type="Camera3D" parent="Cutscenes/Intro4" node_paths=PackedStringArray("target")]
+transform = Transform3D(0.827067, -0.101502, 0.552863, 0, 0.983562, 0.180576, -0.562103, -0.149348, 0.813471, -35.8694, 20.017, 60.8963)
 environment = SubResource("Environment_frlvu")
 far = 120.0
 script = ExtResource("4_l7idg")
 target = NodePath("../WasteBottle")
 
-[node name="WasteBottle" parent="Cutscenes/Intro2" instance=ExtResource("11_6txyw")]
+[node name="WasteBottle" parent="Cutscenes/Intro4" instance=ExtResource("11_6txyw")]
 transform = Transform3D(1.03923, 0, -0.6, 0, 1.2, 0, 0.6, 0, 1.03923, -17, 3.46703, 28)
 
-[node name="WasteBag" parent="Cutscenes/Intro2" instance=ExtResource("11_35x77")]
+[node name="WasteBag" parent="Cutscenes/Intro4" instance=ExtResource("11_35x77")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -22.638, 2.04782, 27.9717)
 
-[node name="WasteChipsBag" parent="Cutscenes/Intro2" instance=ExtResource("12_fpvyr")]
+[node name="WasteBag2" parent="Cutscenes/Intro4" instance=ExtResource("11_35x77")]
+transform = Transform3D(1.08579, 0, -0.510935, 0, 1.2, 0, 0.510935, 0, 1.08579, 7.1851, 2.04782, -54.7492)
+
+[node name="WasteChipsBag" parent="Cutscenes/Intro4" instance=ExtResource("12_fpvyr")]
 transform = Transform3D(1.1165, 0, 0.439801, 0, 1.2, 0, -0.439801, 0, 1.1165, -12.4799, 3.51648, 25.3054)
 
-[node name="Dialog02" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+[node name="WasteChipsBag2" parent="Cutscenes/Intro4" instance=ExtResource("12_fpvyr")]
+transform = Transform3D(0.943027, 0, -0.742089, 0, 1.2, 0, 0.742089, 0, 0.943027, 73.4288, 3.51648, -16.4752)
+
+[node name="FishArrives" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+unique_name_in_owner = true
+level = -1
 dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_i0ssm"), SubResource("Resource_uvbag"), SubResource("Resource_uy5i7")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Dialog02"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/FishArrives"]
 libraries = {
 "": SubResource("AnimationLibrary_lx7x4")
 }
 
-[node name="Camera3D" type="Camera3D" parent="Cutscenes/Dialog02"]
+[node name="Camera3D" type="Camera3D" parent="Cutscenes/FishArrives"]
 transform = Transform3D(0.720551, 0, 0.693402, 0, 1, 0, -0.693402, 0, 0.720551, 3.38, 2.42, 3.172)
 environment = ExtResource("4_slajc")
 
-[node name="Tutorial" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
-dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_5fx5f"), SubResource("Resource_51gx4"), SubResource("Resource_3khq0")])
+[node name="Clownfish" parent="Cutscenes/FishArrives" instance=ExtResource("14_5rdto")]
+transform = Transform3D(0.710799, 0, -0.703395, 0, 1, 0, 0.703395, 0, 0.710799, 1.85514, 0.822137, 1.80526)
+visible = false
+decay_rate = 0.0
+wander_speed = 0.0
+wander_range = 0.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Tutorial"]
+[node name="EnemiesArrive" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
+unique_name_in_owner = true
+level = -1
+dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_5fx5f"), SubResource("Resource_xpwa7")])
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/EnemiesArrive"]
 libraries = {
 "": SubResource("AnimationLibrary_yrx4v")
 }
@@ -3068,7 +2975,7 @@ transform = Transform3D(0.720551, -0.158339, 0.675081, 0, 0.973579, 0.228351, -0
 environment = ExtResource("4_slajc")
 
 [node name="DialogEnd" parent="Cutscenes" instance=ExtResource("2_ujfu0")]
-level = 11
+level = 10
 dialogs = Array[ExtResource("4_v66uw")]([SubResource("Resource_sccxo"), SubResource("Resource_iw86w"), SubResource("Resource_xish1")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/DialogEnd"]
@@ -3101,6 +3008,7 @@ label_settings = SubResource("LabelSettings_61v7y")
 unique_name_in_owner = true
 
 [node name="WasteManager" type="Node" parent="." node_paths=PackedStringArray("spawn_area")]
+unique_name_in_owner = true
 script = ExtResource("12_6cekn")
 spawn_interval_from = 5.0
 spawn_interval_to = 7.0
@@ -3220,7 +3128,6 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00162995, -0.0318761, -0.200487)
 visible = false
 
-[connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
 [connection signal="timeout" from="GameManager/BuildTimer" to="GameManager" method="_on_build_timer_timeout"]
 [connection signal="timeout" from="WasteManager/WasteSpawnTimer" to="WasteManager" method="_on_waste_spawn_timer_timeout"]
 [connection signal="took_damage" from="MainCoral" to="GameManager" method="_on_base_took_damage"]

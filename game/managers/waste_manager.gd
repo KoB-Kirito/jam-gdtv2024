@@ -17,6 +17,9 @@ var current_round: int
 func _ready() -> void:
 	Events.round_started.connect(func(level: int): current_round = level)
 	children_count = spawn_area.get_child_count()
+
+
+func start() -> void:
 	%WasteSpawnTimer.start(randf_range(spawn_interval_from, spawn_interval_to))
 
 

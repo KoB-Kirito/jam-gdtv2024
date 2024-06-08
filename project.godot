@@ -41,6 +41,10 @@ mouse_cursor/tooltip_position_offset=Vector2(0, -90)
 
 coral=""
 
+[gui]
+
+timers/tooltip_delay_sec=0.0
+
 [input]
 
 camera_forward={

@@ -18,17 +18,28 @@ func _ready() -> void:
 
 
 func on_build_started(duration: float) -> void:
-	print_debug("checking towers for level", current_level)
+	add_towers(current_level)
+
+
+func add_towers(level: int) -> void:
+	#print_debug("checking towers for level", level)
 	for tower: TowerData in towers:
-		if tower.level == current_level:
-			print(tower.name, " added")
+		if tower.level == level:
+			print_debug("Adding ", tower.name)
 			var tile: TowerTile = tower_tile_scene.instantiate()
 			tile.tower_data = tower
 			
 			tile.pressed.connect(on_tower_button_pressed.bind(tile.tower_data))
 			add_child(tile)
 			
-			current_tiles.append(tile)
+			# hide reef root on the first level and show on second
+			if tower.name == "Reef Root":
+				current_tiles.push_front(tile)
+				move_child(tile, 0)
+				
+			else:
+				current_tiles.append(tile)
+
 
 
 func on_tower_button_pressed(tower_data: TowerData) -> void:

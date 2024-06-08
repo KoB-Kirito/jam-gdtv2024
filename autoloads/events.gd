@@ -22,3 +22,6 @@ signal resource_changed(new_value: int)
 
 signal cutscene_started
 signal cutscene_ended
+
+signal tower_placed
+signal hub_placed

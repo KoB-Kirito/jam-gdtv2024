@@ -19,6 +19,7 @@ var current_target: Enemy:
 
 
 func _ready() -> void:
+	_spawn()
 	%SpawnTimer.start(spawn_rate)
 
 

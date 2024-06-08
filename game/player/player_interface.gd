@@ -79,7 +79,11 @@ func place_tower() -> void:
 	tower.global_position = build_location
 	
 	if not tower is CoralHub:
+		Events.tower_placed.emit()
 		hub.connect_tower(tower)
+		
+	else:
+		Events.hub_placed.emit()
 
 
 func cancel_placement() -> void:
