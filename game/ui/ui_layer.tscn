@@ -106,7 +106,7 @@ scene = ExtResource("22_mhj28")
 [sub_resource type="Resource" id="Resource_5wy5e"]
 script = ExtResource("5_o0f5a")
 level = 6
-cost = 30
+cost = 50
 name = "Riding Riptide"
 description = "This seahorse relentlessly attacks by raining air bubbles on approaching enemies.
 A good investment against strong foes."

@@ -75,7 +75,7 @@ script = ExtResource("2_bo5d7")
 enemies = Array[PackedScene]([ExtResource("3_gcwfu"), ExtResource("4_su21o"), ExtResource("5_bh4eb"), ExtResource("6_njml4"), ExtResource("7_s0gn3")])
 speed = 2.0
 max_health = 300.0
-damage = 10.0
+damage = 20.0
 attack_range = 8.0
 attack_cooldown = 6.0
 

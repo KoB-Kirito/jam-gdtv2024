@@ -45,6 +45,8 @@ collision_layer = 4
 collision_mask = 17
 
 [connection signal="body_entered" from="TowerDetector" to="." method="_on_tower_detector_body_entered"]
+[connection signal="body_exited" from="TowerDetector" to="." method="_on_tower_detector_body_exited"]
 [connection signal="timeout" from="TowerDetector/AttackWindupTimer" to="." method="_on_attack_windup_timer_timeout"]
 [connection signal="timeout" from="TowerDetector/AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="body_entered" from="AttackRangeDetector" to="." method="_on_attack_range_detector_body_entered"]
+[connection signal="body_exited" from="AttackRangeDetector" to="." method="_on_attack_range_detector_body_exited"]

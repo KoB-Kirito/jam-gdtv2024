@@ -12,10 +12,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fgtng")
 next_scene = "res://menu/title_menu.tscn"
-fade_in_duration = 2.0
 fade_in_transition = 4
 stay_duration = 1.0
-fade_out_duration = 2.0
 fade_out_transition = 4
 fade_out_ease = 1
 

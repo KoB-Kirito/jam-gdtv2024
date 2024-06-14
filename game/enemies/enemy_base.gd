@@ -19,10 +19,10 @@ signal health_changed(new_health: float)
 ## Time after attack until it attacks again
 @export var attack_cooldown: float = 2.0
 
-var target: Node3D
+var main_target: Node3D
 var current_target: Node3D
-var towers_in_range: Array[Node3D]
-var target_in_range: bool = false
+var targets_in_sight: Array[Node3D]
+var targets_in_attack_range: Array[Node3D]
 
 var is_dead: bool = false
 
@@ -30,8 +30,8 @@ var last_position: Vector3
 
 
 func _ready() -> void:
-	assert(target, "target is not set")
-	current_target = target
+	assert(main_target, "main_target is not set")
+	current_target = main_target
 	
 	Events.enemy_spawned.emit()
 	%NavigationAgent3D.set_target_position(current_target.global_position)
@@ -43,46 +43,23 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		return
 	
-	if %NavigationAgent3D.is_navigation_finished():
-		return
-	
 	if global_position.y < 0:
 		global_position.y = 0
 	
-	# check target
+	# check main_target
 	if not is_instance_valid(current_target):
-		# get new target
-		current_target = null
-		target_in_range = false
-		var to_remove: Array[int] = []
-		for i in towers_in_range.size():
-			if not is_instance_valid(towers_in_range[i]):
-				to_remove.append(i)
-				continue
-			current_target = towers_in_range[i]
-			break
-		
-		to_remove.reverse()
-		for i in to_remove:
-			towers_in_range.remove_at(i)
-		
-		# reset to default target if no tower is in range
-		if current_target == null:
-			current_target = target
-		
-		%NavigationAgent3D.set_target_position(current_target.global_position)
+		change_aggro()
 	
 	# don't move if attacking
-	if target_in_range:
+	if current_target in targets_in_attack_range:
+		if %AttackWindupTimer.is_stopped() and %AttackCooldownTimer.is_stopped():
+			attack_current_target()
 		return
 	
-	# fallback
-	if global_position.distance_to(current_target.global_position) < attack_range:
-		target_in_range = true
-		attack_current_target()
+	if %NavigationAgent3D.is_navigation_finished():
 		return
 	
-	# move to target
+	# move to main_target
 	var next_path_position: Vector3 = %NavigationAgent3D.get_next_path_position()
 	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * speed
 	if %NavigationAgent3D.avoidance_enabled:
@@ -93,14 +70,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_velocity_computed(safe_velocity: Vector3):
 	# don't move if attacking
-	if target_in_range:
+	if current_target in targets_in_attack_range:
 		return
-	
-	#if position == last_position:
-		#print_debug("trying to unstuck")
-		## force unstuck
-		#position += safe_velocity
-	#last_position = position
 	
 	velocity = safe_velocity
 	if is_zero_approx(velocity.y) and velocity.length_squared() > 10.0:
@@ -120,16 +91,79 @@ func take_damage(amount: float) -> void:
 		return
 	
 	# change aggro
-	if current_target == target:
+	change_aggro()
+
+
+func change_aggro() -> void:
+	var distance_to_closest_target: float
+	
+	# try to get clostest target in attack range
+	if targets_in_attack_range:
 		var closest_target: Node3D = null
-		for t in towers_in_range:
-			if not closest_target:
-				closest_target = t
+		var to_remove: Array[int] = []
+		for i in targets_in_attack_range.size():
+			var target = targets_in_attack_range[i]
+			if not is_instance_valid(target):
+				to_remove.append(i)
 				continue
-			if global_position.distance_squared_to(t.global_position) < global_position.distance_squared_to(closest_target.global_position):
-				closest_target = t
+			
+			# skip coral if possible
+			if target == main_target:
+				continue
+			
+			if not closest_target:
+				closest_target = target
+				distance_to_closest_target = global_position.distance_squared_to(closest_target.global_position)
+				continue
+			
+			var distance = global_position.distance_squared_to(target.global_position)
+			if distance < distance_to_closest_target:
+				closest_target = target
+				distance_to_closest_target = distance
+			
 		if closest_target:
 			current_target = closest_target
+			if %AttackWindupTimer.is_stopped() and %AttackCooldownTimer.is_stopped():
+				attack_current_target()
+			return
+	
+	# try to get closest target in sight
+	if targets_in_sight:
+		var closest_target: Node3D = null
+		var to_remove: Array[int] = []
+		for i in targets_in_sight.size():
+			var target = targets_in_sight[i]
+			if not is_instance_valid(target):
+				to_remove.append(i)
+				continue
+			
+			# skip coral if possible
+			if target == main_target:
+				continue
+			
+			if not closest_target:
+				closest_target = target
+				distance_to_closest_target = global_position.distance_squared_to(closest_target.global_position)
+				continue
+			
+			var distance = global_position.distance_squared_to(target.global_position)
+			if distance < distance_to_closest_target:
+				closest_target = target
+				distance_to_closest_target = distance
+			
+		if closest_target:
+			current_target = closest_target
+			%NavigationAgent3D.set_target_position(current_target.global_position)
+			return
+	
+	current_target = main_target
+	if current_target in targets_in_attack_range:
+		if %AttackWindupTimer.is_stopped() and %AttackCooldownTimer.is_stopped():
+			attack_current_target()
+		
+	else:
+		%NavigationAgent3D.set_target_position(current_target.global_position)
+
 
 func die() -> void:
 	#TODO: animation
@@ -139,16 +173,16 @@ func die() -> void:
 
 func _on_tower_detector_body_entered(body: Node3D) -> void:
 	if body is Spawn or (body is Tower and body.can_be_damaged):
-		towers_in_range.append(body)
-		if current_target == target:
-			#print_debug("found tower, should switch target now")
-			current_target = body
-			target_in_range = false
-			%NavigationAgent3D.set_target_position(current_target.global_position)
+		targets_in_sight.append(body)
+		change_aggro()
+
+func _on_tower_detector_body_exited(body: Node3D) -> void:
+	if body is Spawn or (body is Tower and body.can_be_damaged):
+		targets_in_sight.erase(body)
 
 
 func _on_attack_windup_timer_timeout() -> void:
-	# check target
+	# check main_target
 	if not is_instance_valid(current_target):
 		return
 	
@@ -162,7 +196,10 @@ func _on_attack_cooldown_timer_timeout() -> void:
 	attack_current_target()
 
 func attack_current_target() -> void:
-	if not current_target:
+	if not is_instance_valid(current_target):
+		return
+	
+	if not current_target in targets_in_attack_range:
 		return
 	
 	look_at(current_target.global_position)
@@ -178,6 +215,20 @@ func attack_current_target() -> void:
 
 
 func _on_attack_range_detector_body_entered(body: Node3D) -> void:
+	if not ((body is Tower and body.can_be_damaged) or body is Spawn):
+		return
+	
+	targets_in_attack_range.append(body)
+	
+	if current_target == main_target:
+		current_target = body
+	
 	if body == current_target:
-		target_in_range = true
 		attack_current_target()
+
+
+func _on_attack_range_detector_body_exited(body: Node3D) -> void:
+	if not ((body is Tower and body.can_be_damaged) or body is Spawn):
+		return
+	
+	targets_in_attack_range.erase(body)

@@ -14,7 +14,7 @@ func die() -> void:
 	
 	for i in nacho_amount:
 		var nacho: Enemy = nacho_scene.instantiate()
-		nacho.target = coral
+		nacho.main_target = coral
 		get_parent().add_child(nacho)
 		nacho.global_position = %SpawnPosition.global_position + Vector3(i - 1, 0, 0)
 	
